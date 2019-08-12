@@ -1,0 +1,14 @@
+
+#开发环境
+
+#数据库连接
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///rms?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useUnicode=true&serverTimezone=UTC
+    username: root
+    password: root
+#mybatis配置
+mybatis:
+  type-aliases-package: com.sesc.rms.po
+  mapper-locations: /mapper/*.xml
