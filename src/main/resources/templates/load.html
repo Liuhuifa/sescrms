@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>loading...</title>
+</head>
+<body>
+    <div id="load"></div>
+</body>
+<script th:src="@{/static/js/libs/jquery-3.4.1.min.js}"></script>
+<!--<script src="/static/js/libs/jquery-3.4.1.min.js"></script>-->
+<script>
+    $(document).ready(function() {
+        $("#load").load("/index");
+    });
+</script>
+</html>

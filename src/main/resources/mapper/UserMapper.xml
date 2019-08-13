@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesc.rms.dao.UserDao">
+
+    <resultMap id="user_login" type="com.sesc.rms.po.SysUserPo">
+        <id column="uid" property="uid"></id>
+    </resultMap>
+    <select id="login" resultMap="">
+        SELECT
+            su.uname,
+            su.`password`,
+            su.email
+        FROM
+            sys_user AS su
+        WHERE
+            su.uname = #{uname}
+            AND su.is_del = 0
+    </select>
+</mapper>

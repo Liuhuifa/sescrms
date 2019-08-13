@@ -4,11 +4,26 @@
 #数据库连接
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///rms?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useUnicode=true&serverTimezone=UTC
     username: root
     password: root
+#    thymeleaf模板配置
+  thymeleaf:
+    cache: false
+    encoding: utf-8
+    mode: HTML
+#    mvc配置
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+#      静态资源
+    static-path-pattern: /static/**
 #mybatis配置
 mybatis:
   type-aliases-package: com.sesc.rms.po
   mapper-locations: /mapper/*.xml
+
+
+
