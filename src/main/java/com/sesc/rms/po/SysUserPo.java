@@ -21,8 +21,8 @@ public class SysUserPo implements Serializable {
     private String email;
 
 
-    private Date createDate;
-    private Date updateDate;
+    private Date createTime;
+    private Date updateTime;
     private int isDel;
 }
 

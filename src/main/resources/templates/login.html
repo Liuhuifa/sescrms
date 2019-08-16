@@ -3,7 +3,8 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 	<meta charset="utf-8">
 	<title>登录页面</title>
@@ -21,7 +22,9 @@
 	
 	<link rel="stylesheet" href="/static/css/application.css">
 
-	<script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
+	<link rel="stylesheet" href="/static/css/sweetalert2.min.css"/>
+
+
 
 </head>
 
@@ -33,7 +36,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="./index.html" method="post">
+		<form id="myform" onsubmit="return false">
 		
 			<h1>登录</h1>		
 			
@@ -60,7 +63,7 @@
 					<label class="choice" for="Field">保持登录</label>
 				</span>
 									
-				<button class="button btn btn-primary btn-large">登录</button>
+				<button class="button btn btn-primary btn-large" id="login">登录</button>
 				
 			</div> <!-- .actions -->
 			
@@ -92,13 +95,71 @@
 
 
 
-<script src="/static/js/libs/jquery-1.7.2.min.js"></script>
+<script src="/static/js/libs/jquery-3.4.1.min.js"></script>
 <script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
-
+<script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
 <script src="/static/js/libs/bootstrap/bootstrap.min.js"></script>
 
 <script src="/static/js/signin.js"></script>
+<script src="/static/js/libs/sweetalert2.all.min.js"></script>
+
+<script>
+
+	$(function () {
+		// $(".login").off("click").on("click",function () {
+		// 	var username=$("#username").val();
+		// 	console.log(username)
+		// 	alert(123)
+		// })
+		$("#login").on("click",function () {
+			var username=$("#username").val();
+			var password=$("#password").val();
+
+			if (!username) {
+				Swal.fire(
+					"提示",
+					"登录名不能为空",
+					"warning"
+				)
+			}
+			if (!password) {
+				Swal.fire(
+					"提示",
+					"密码不能为空",
+					"warning"
+				)
+			}
+
+			if (username && password) {
+				$.ajax({
+					url:"/user/login",
+					type:"post",
+					data:{
+						username:username,
+						password:password
+					},
+					success:function (json) {
+						if (json == 200) {
+							window.location.href="http://localhost:8080/"
+						}else if (json == 0) {
+							//用户不存在
+						}else if (json == -1) {
+							//密码不存在
+						}else if (json==500){
+							//服务器异常
+						} else{
+							//出现一点小问题
+						}
+					}
+				})
+			}
+			// console.log(username)
+			// alert(123)
+		})
+	})
+
+</script>
 
 </body>
 </html>

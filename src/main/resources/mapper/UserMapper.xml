@@ -5,12 +5,16 @@
 
     <resultMap id="user_login" type="com.sesc.rms.po.SysUserPo">
         <id column="uid" property="uid"></id>
+        <result column="uname" property="uname"></result>
+        <result column="password" property="password"></result>
+        <result column="salt" property="salt"></result>
     </resultMap>
-    <select id="login" resultMap="">
+    <select id="login" resultMap="user_login">
         SELECT
             su.uname,
             su.`password`,
-            su.email
+            su.email,
+            su.salt
         FROM
             sys_user AS su
         WHERE

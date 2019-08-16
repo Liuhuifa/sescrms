@@ -5,9 +5,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///rms?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useUnicode=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/sys_cms?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useUnicode=true&serverTimezone=UTC
     username: root
-    password: root
+    password: lhfadmin
 #    thymeleaf模板配置
   thymeleaf:
     cache: false
@@ -26,4 +26,6 @@ mybatis:
   mapper-locations: /mapper/*.xml
 
 
-
+#logging:
+#  level:
+#    com.sesc.rms.dao: debug
