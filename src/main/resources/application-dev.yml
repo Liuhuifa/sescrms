@@ -26,6 +26,6 @@ mybatis:
   mapper-locations: /mapper/*.xml
 
 
-#logging:
-#  level:
-#    com.sesc.rms.dao: debug
+logging:
+  level:
+    com.sesc.rms.dao: debug

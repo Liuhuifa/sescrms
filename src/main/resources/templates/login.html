@@ -103,6 +103,7 @@
 
 <script src="/static/js/signin.js"></script>
 <script src="/static/js/libs/sweetalert2.all.min.js"></script>
+<script src="/static/js/common/common.js"></script>
 
 <script>
 
@@ -141,15 +142,28 @@
 					},
 					success:function (json) {
 						if (json == 200) {
-							window.location.href="http://localhost:8080/"
+							window.location.href=url+"/index";
 						}else if (json == 0) {
 							//用户不存在
+                            Swal.fire(
+                                "提示",
+                                "用户名不存在",
+                                "warning"
+                            )
 						}else if (json == -1) {
 							//密码不存在
+                            Swal.fire(
+                                "提示",
+                                "用户名或密码不正确",
+                                "warning"
+                            )
 						}else if (json==500){
 							//服务器异常
+                            window.location.href=url+"/500";
 						} else{
 							//出现一点小问题
+                            //服务器异常
+                            window.location.href=url+"/500";
 						}
 					}
 				})

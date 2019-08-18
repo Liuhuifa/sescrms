@@ -19,7 +19,7 @@ public class ShiroConfig{
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashIterations(1);
+        hashedCredentialsMatcher.setHashIterations(99);
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");
         return hashedCredentialsMatcher;
     }

@@ -3,12 +3,12 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-				  <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>后台管理系统</title>
-	<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />
-	<meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
-	<meta charset="utf-8">	
+	<meta charset="utf-8">
+	<title>用户添加页面</title>
+<!--	<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
+<!--	<meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -20,9 +20,7 @@
 	<link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.21.custom.css">
 	
 	<link rel="stylesheet" href="/static/css/application.css">
-	<link rel="stylesheet" href="/static/css/pages/dashboard.css">
 
-	<script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
 
 </head>
 
@@ -43,48 +41,48 @@
 			<ul>
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-						查看网站				
-						<b class="caret"></b>
-					</a>
-					
-<!--					<ul class="dropdown-menu pull-right">-->
-<!--						<li><a href="javascript:;">查看网站1</a></li>-->
-<!--						<li><a href="javascript:;">查看网站2</a></li>-->
-<!--						<li class="dropdown-submenu">-->
-<!--		                  <a tabindex="-1" href="#">下拉菜单</a>-->
-<!--		                  <ul class="dropdown-menu">-->
-<!--		                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
-<!--		                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
-<!--		                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
-<!--		                  </ul>-->
-<!--		                </li>-->
-<!--					</ul> -->
-				</li>
-			</ul>
-			
-			<ul class="pull-right">
-				<li><a href="/login"><i class="icon-user"></i> 登录</a></li>
-				<li><a href="javascript:;"><span class="badge badge-primary">1</span> 新消息</a></li>
-				<li class="dropdown">
-					<a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
-						设置						
+						View Your Site				
 						<b class="caret"></b>
 					</a>
 					
 					<ul class="dropdown-menu pull-right">
-						<li><a href="javascript:;">设置 #1</a></li>
-						<li><a href="javascript:;">设置 #2</a></li>
+						<li><a href="javascript:;">View Site #1</a></li>
+						<li><a href="javascript:;">View Site #2</a></li>
 						<li class="dropdown-submenu">
-		                  <a tabindex="-1" href="#">下拉菜单</a>
+		                  <a tabindex="-1" href="#">Dropdown menu</a>
 		                  <ul class="dropdown-menu">
-		                    <li><a tabindex="-1" href="#">菜单1</a></li>
-		                    <li><a tabindex="-1" href="#">菜单2</a></li>
-		                    <li><a tabindex="-1" href="#">菜单3</a></li>
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
 		                  </ul>
 		                </li>
 					</ul> 
 				</li>
-				<li><a href="login.html">退出</a></li>
+			</ul>
+			
+			<ul class="pull-right">
+				<li><a href="javascript:;"><i class="icon-user"></i> Logged in as John Doe</a></li>
+				<li><a href="javascript:;"><span class="badge badge-primary">1</span> New Message</a></li>
+				<li class="dropdown">
+					<a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
+						Settings						
+						<b class="caret"></b>
+					</a>
+					
+					<ul class="dropdown-menu pull-right">
+						<li><a href="javascript:;">Settings #1</a></li>
+						<li><a href="javascript:;">Settings #2</a></li>
+						<li class="dropdown-submenu">
+		                  <a tabindex="-1" href="#">Dropdown menu</a>
+		                  <ul class="dropdown-menu">
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
+		                    <li><a tabindex="-1" href="#">Second level link</a></li>
+		                  </ul>
+		                </li>
+					</ul> 
+				</li>
+				<li><a href="login.html">Logout</a></li>
 			</ul>
 			
 		</div> <!-- /#top-nav -->
@@ -94,34 +92,34 @@
 </div> <!-- /#topbar -->
 
 
-	
-	
+
+
 <div id="header">
-	
+
 	<div class="container">
-		
+
 		<a href="./index.html" class="brand">首页</a>
-		
+
 		<a href="javascript:;" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        	<i class="icon-reorder"></i>
-      	</a>
-	
+			<i class="icon-reorder"></i>
+		</a>
+
 		<div class="nav-collapse">
 			<ul id="main-nav" class="nav pull-right">
-				<li class="nav-icon active">
+				<li class="nav-icon">
 					<a href="/index">
 						<i class="icon-home"></i>
-						<span>首页</span>        					
+						<span>首页</span>
 					</a>
 				</li>
-				
-				<li class="dropdown">					
+
+				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-th"></i>
 						<span>客户管理</span>
 						<b class="caret"></b>
-					</a>	
-				
+					</a>
+
 					<ul class="dropdown-menu">
 						<li><a href="./elements.html">组件</a></li>
 						<li><a href="user-add.html">表单验证</a></li>
@@ -129,36 +127,36 @@
 						<li><a href="./charts.html">图表</a></li>
 						<li><a href="./bonus.html">其他组件</a></li>
 						<li class="dropdown-submenu">
-		                  <a tabindex="-1" href="#">下拉菜单</a>
-		                  <ul class="dropdown-menu">
-		                    <li><a tabindex="-1" href="#">菜单1</a></li>
-		                    <li><a tabindex="-1" href="#">菜单2</a></li>
-		                    <li><a tabindex="-1" href="#">菜单3</a></li>
-		                  </ul>
-		                </li>
-					</ul>    				
+							<a tabindex="-1" href="#">下拉菜单</a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" href="#">菜单1</a></li>
+								<li><a tabindex="-1" href="#">菜单2</a></li>
+								<li><a tabindex="-1" href="#">菜单3</a></li>
+							</ul>
+						</li>
+					</ul>
 				</li>
-				
-				<li class="dropdown">					
+
+				<li class="dropdown active">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-copy"></i>
 						<span>系统管理</span>
 						<b class="caret"></b>
-					</a>	
-				
+					</a>
+
 					<ul class="dropdown-menu">
 						<li><a href="javascript:;" id="user">用户管理</a></li>
 						<li><a href="javascript:;" id="role">角色管理</a></li>
 						<li><a href="javascript:;" id="permission">权限管理</a></li>
-					</ul>    				
+					</ul>
 				</li>
-				
-				<li class="dropdown">					
+
+				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-external-link"></i>
-						<span>其他</span> 
+						<span>其他</span>
 						<b class="caret"></b>
-					</a>	
+					</a>
 
 					<ul class="dropdown-menu">
 						<li><a href="./login.html">登录</a></li>
@@ -166,14 +164,14 @@
 						<li><a href="./error.html">错误</a></li>
 						<li><a href="./skins.html">主题</a></li>
 						<li><a href="./sticky.html">完美的底部</a></li>
-					</ul>    				
+					</ul>
 				</li>
 			</ul>
-			
+
 		</div> <!-- /.nav-collapse -->
 
 	</div> <!-- /.container -->
-	
+
 </div> <!-- /#header -->
 
 
@@ -186,7 +184,8 @@
 		<div class="masthead-pad">
 			
 			<div class="masthead-text">
-				
+				<h2>Validation</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			</div> <!-- /.masthead-text -->
 			
 		</div>
@@ -196,7 +195,61 @@
 </div> <!-- /#masthead -->
 
 
+
+
+<div id="content">
+
+	<div class="container">
+		
+		
+		<div class="row">
+			
+			<div class="span12">
+				
+				<form action="/" id="contact-form" class="form-horizontal" novalidate="novalidate">
+					<fieldset>
+					    <div class="control-group">
+					      <label class="control-label">用户名</label>
+					      <div class="controls">
+					        <input type="text" class="input-large valid" name="uname" id="name">
+					      </div>
+					    </div>
+						<div class="control-group">
+							<label class="control-label">密码</label>
+							<div class="controls">
+								<input type="password" class="input-large" name="password" id="password">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">手机号</label>
+							<div class="controls">
+								<input type="tel" class="input-large" name="phone" id="phone">
+							</div>
+						</div>
+					    <div class="control-group">
+					      <label class="control-label">邮箱</label>
+					      <div class="controls">
+					        <input type="text" class="input-large" name="email" id="email">
+					      </div>
+					    </div>
+
+					    <div class="form-actions">
+					      <button type="button" class="btn btn-primary btn-large" id="user-add"><i class="icon-star"></i>确定</button>
+					      <button type="reset" class="btn btn-large">返回</button>
+					    </div>
+					  </fieldset>
+					</form>
+							
+			</div> <!-- /.span12 -->
+			
+		</div> <!-- /.row -->
+		
+	</div> <!-- /.container -->
+
+</div> <!-- /#content -->
+
 </div> <!-- /#wrapper -->
+
 
 
 
@@ -212,7 +265,7 @@
 			</div> <!-- /span6 -->
 			
 			<div id="builtby" class="span6">
-<!--				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">我爱模板网</a></a>				-->
+				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">我爱模板网</a> </a>				
 			</div> <!-- /.span6 -->
 			
 		</div> <!-- /row -->
@@ -220,25 +273,24 @@
 	</div> <!-- /container -->
 	
 </div> <!-- /#footer -->
+
+
+<script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
+
 <script src="/static/js/libs/jquery-1.7.2.min.js"></script>
 <script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
 
+<script src="/static/js/plugins/validate/jquery.validate.js"></script>
+
 <script src="/static/js/libs/bootstrap/bootstrap.min.js"></script>
 
 <script src="/static/js/Theme.js"></script>
-<script src="/static/js/Charts.js"></script>
 
-<script src="/static//js/plugins/excanvas/excanvas.min.js"></script>
-<script src="/static//js/plugins/flot/jquery.flot.js"></script>
-<script src="/static//js/plugins/flot/jquery.flot.pie.js"></script>
-<script src="/static//js/plugins/flot/jquery.flot.orderBars.js"></script>
-<script src="/static//js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-<script src="/static//js/plugins/flot/jquery.flot.resize.js"></script>
-
-<script src="/static/js/demos/charts/line.js"></script>
-<script src="/static/js/demos/charts/donut.js"></script>
+<script src="/static/js/demos/demo.validation.js"></script>
+<script src="/static/js/libs/sweetalert2.all.min.js"></script>
 <script src="/static/js/common/common.js"></script>
+<script src="/static/js/page/user-add.js"></script>
 
 <script>
 
@@ -247,6 +299,7 @@ $(function () {
 	Theme.init ();
 	
 });
+
 </script>
 
 </body>

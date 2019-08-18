@@ -1,11 +1,19 @@
 package com.sesc.rms.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sesc.rms.dao.UserDao;
 import com.sesc.rms.po.SysUserPo;
 import com.sesc.rms.service.inter.UserService;
+import com.sesc.rms.util.MD5Util;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.util.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,6 +27,37 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public PageInfo<SysUserPo> listUser(Integer pageindex, Integer pagesize) {
+        try {
+            PageHelper.startPage(pageindex,pagesize);
+            List<SysUserPo> sysUserPos = dao.listUser();
+
+            PageInfo<SysUserPo> infos = new PageInfo<>(sysUserPos);
+            return infos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int addUser(SysUserPo po) {
+        try{
+            Date date = new Date();
+            Long time = date.getTime();
+            po.setSalt(time.toString());
+            ByteSource bytes = ByteSource.Util.bytes(time.toString());
+            SimpleHash md5 = new SimpleHash("MD5", po.getPassword(), bytes, 99);
+            po.setPassword(md5.toString());
+            int result = dao.addUser(po);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 500;
         }
     }
 }

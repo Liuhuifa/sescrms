@@ -16,4 +16,19 @@ public class PageController {
     public String login(){
         return "login";
     }
+//    跳转用户列表
+    @GetMapping("user_list")
+    public String userList(){
+        return "user_list";
+    }
+//    测试
+    @GetMapping("load")
+    public String load(){
+        return "load";
+    }
+//    用户添加页面
+    @GetMapping("user-add")
+    public String userAdd(){
+        return "user-add";
+    }
 }

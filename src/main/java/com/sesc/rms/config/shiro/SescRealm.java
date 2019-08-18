@@ -29,10 +29,10 @@ public class SescRealm extends AuthorizingRealm {
         }else{
             return null;
         }
-//        String salt = user.getSalt();
-//        byte[] bytes = salt.getBytes();
-//        ByteSource salts = ByteSource.Util.bytes(bytes);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,user.getPassword(),this.getName());
+        String salt = user.getSalt();
+        byte[] bytes = salt.getBytes();
+        ByteSource salts = ByteSource.Util.bytes(bytes);
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,user.getPassword(),salts,this.getName());
         return info;
     }
 }

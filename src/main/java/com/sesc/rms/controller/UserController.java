@@ -1,5 +1,6 @@
 package com.sesc.rms.controller;
 
+import com.sesc.rms.po.SysUserPo;
 import com.sesc.rms.service.inter.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -10,9 +11,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,5 +44,17 @@ public class UserController {
             e.printStackTrace();
             return "500";
         }
+    }
+
+    @PostMapping("listUser")
+    @ResponseBody
+    public Object listUser(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageindex,
+                           @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pagesize){
+        return service.listUser(pageindex, pagesize);
+    }
+    @PostMapping("addUser")
+    @ResponseBody
+    public Object addUser(SysUserPo po){
+        return service.addUser(po);
     }
 }
