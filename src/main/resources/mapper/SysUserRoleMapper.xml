@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesc.rms.dao.SysUserRoleMapper">
+	<sql id="colnums">
+		sys_user_role.sys_user_id,
+		sys_user_role.sys_role_id
+	</sql>
+	<sql id="table_name">
+		sys_user_role
+	</sql>
+	<resultMap id="colnum_pro" type="com.sesc.rms.po.SysUserRolePo">
+		<result column="sys_user_id" property="sysUserId"></result>
+		<result column="sys_role_id" property="sysRoleId"></result>
+	</resultMap>
+	<insert id="addOne" parameterType="SysUserRolePo">
+		insert  into sys_user_role(sys_role_id,sys_user_id)
+		value(#{sysRoleId},#{sysUserId})
+	</insert>
+	<insert id="addAny" parameterType="list">
+		insert  into sys_user_role(sys_role_id,sys_user_id)values
+		<foreach collection="list" index="i" open="(" separator="),(" close=")" item="item">
+			#{item.sysRoleId},#{item.sysUserId}
+		</foreach>
+	</insert>
+	<delete id="del">
+		delete from sys_user_role where null=#{_parameter};
+	</delete>
+	<update id="modify" parameterType="SysUserRolePo">
+		update sys_user_role
+			<set>
+				<if test="sysRoleId!=null">
+					sys_role_id=#{sysRoleId},
+				</if>
+				<if test="sysUserId!=null">
+					sys_user_id=#{sysUserId},
+				</if>
+			</set>
+		where null=#{null}
+	</update>
+	<select id="selectOne" parameterType="SysUserRolePo" resultMap="colnum_pro">
+		select <include refid="colnums"/> from <include refid="table_name"/>
+			<where>
+				<if test="sysRoleId!=null">
+					and sys_role_id=#{sysRoleId}
+				</if>
+				<if test="sysUserId!=null">
+					and sys_user_id=#{sysUserId}
+				</if>
+			</where>
+	</select>
+</mapper>

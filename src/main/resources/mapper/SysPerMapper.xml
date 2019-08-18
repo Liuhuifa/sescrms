@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesc.rms.dao.SysPerMapper">
+	<sql id="colnums">
+		sys_per.pid,
+		sys_per.pname,
+		sys_per.permission,
+		sys_per.create_date,
+		sys_per.update_date,
+		sys_per.is_del
+	</sql>
+	<sql id="table_name">
+		sys_per
+	</sql>
+	<resultMap id="colnum_pro" type="com.sesc.rms.po.SysPerPo">
+		<id column="pid" property="pid"></id>
+		<result column="pname" property="pname"></result>
+		<result column="permission" property="permission"></result>
+		<result column="create_date" property="createDate"></result>
+		<result column="update_date" property="updateDate"></result>
+		<result column="is_del" property="isDel"></result>
+	</resultMap>
+	<insert id="addOne" parameterType="SysPerPo">
+		insert  into sys_per(sys_role_id,sys_user_id,pname,is_del,pid,permission,create_date,update_date)
+		value(#{sysRoleId},#{sysUserId},#{pname},#{isDel},#{pid},#{permission},#{createDate},#{updateDate})
+	</insert>
+	<insert id="addAny" parameterType="list">
+		insert  into sys_per(sys_role_id,sys_user_id,pname,is_del,pid,permission,create_date,update_date)values
+		<foreach collection="list" index="i" open="(" separator="),(" close=")" item="item">
+			#{item.sysRoleId},#{item.sysUserId},#{item.pname},#{item.isDel},#{item.pid},#{item.permission},#{item.createDate},#{item.updateDate}
+		</foreach>
+	</insert>
+	<delete id="del">
+		delete from sys_per where pid=#{_parameter};
+	</delete>
+	<update id="modify" parameterType="SysPerPo">
+		update sys_per
+			<set>
+				<if test="sysRoleId!=null">
+					sys_role_id=#{sysRoleId},
+				</if>
+				<if test="sysUserId!=null">
+					sys_user_id=#{sysUserId},
+				</if>
+				<if test="pname!=null">
+					pname=#{pname},
+				</if>
+				<if test="isDel!=null">
+					is_del=#{isDel},
+				</if>
+				<if test="permission!=null">
+					permission=#{permission},
+				</if>
+				<if test="createDate!=null">
+					create_date=#{createDate},
+				</if>
+				<if test="updateDate!=null">
+					update_date=#{updateDate},
+				</if>
+			</set>
+		where pid=#{pid}
+	</update>
+	<select id="selectOne" parameterType="SysPerPo" resultMap="colnum_pro">
+		select <include refid="colnums"/> from <include refid="table_name"/>
+			<where>
+				<if test="sysRoleId!=null">
+					and sys_role_id=#{sysRoleId}
+				</if>
+				<if test="sysUserId!=null">
+					and sys_user_id=#{sysUserId}
+				</if>
+				<if test="pname!=null">
+					and pname=#{pname}
+				</if>
+				<if test="isDel!=null">
+					and is_del=#{isDel}
+				</if>
+				<if test="pid!=null">
+					and pid=#{pid}
+				</if>
+				<if test="permission!=null">
+					and permission=#{permission}
+				</if>
+				<if test="createDate!=null">
+					and create_date=#{createDate}
+				</if>
+				<if test="updateDate!=null">
+					and update_date=#{updateDate}
+				</if>
+			</where>
+	</select>
+</mapper>

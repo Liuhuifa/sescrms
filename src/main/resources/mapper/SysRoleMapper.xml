@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesc.rms.dao.SysRoleMapper">
+	<sql id="colnums">
+		sys_role.rid,
+		sys_role.rname,
+		sys_role.create_time,
+		sys_role.update_time,
+		sys_role.is_del
+	</sql>
+	<sql id="table_name">
+		sys_role
+	</sql>
+	<resultMap id="colnum_pro" type="com.sesc.rms.po.SysRolePo">
+		<id column="rid" property="rid"></id>
+		<result column="rname" property="rname"></result>
+		<result column="create_time" property="createTime"></result>
+		<result column="update_time" property="updateTime"></result>
+		<result column="is_del" property="isDel"></result>
+	</resultMap>
+	<insert id="addOne" parameterType="SysRolePo">
+		insert  into sys_role(update_time,rname,create_time,is_del,rid)
+		value(#{updateTime},#{rname},#{createTime},#{isDel},#{rid})
+	</insert>
+	<insert id="addAny" parameterType="list">
+		insert  into sys_role(update_time,rname,create_time,is_del,rid)values
+		<foreach collection="list" index="i" open="(" separator="),(" close=")" item="item">
+			#{item.updateTime},#{item.rname},#{item.createTime},#{item.isDel},#{item.rid}
+		</foreach>
+	</insert>
+	<delete id="del">
+		delete from sys_role where rid=#{_parameter};
+	</delete>
+	<update id="modify" parameterType="SysRolePo">
+		update sys_role
+			<set>
+				<if test="updateTime!=null">
+					update_time=#{updateTime},
+				</if>
+				<if test="rname!=null">
+					rname=#{rname},
+				</if>
+				<if test="createTime!=null">
+					create_time=#{createTime},
+				</if>
+				<if test="isDel!=null">
+					is_del=#{isDel},
+				</if>
+			</set>
+		where rid=#{rid}
+	</update>
+	<select id="selectOne" parameterType="SysRolePo" resultMap="colnum_pro">
+		select <include refid="colnums"/> from <include refid="table_name"/>
+			<where>
+				<if test="updateTime!=null">
+					and update_time=#{updateTime}
+				</if>
+				<if test="rname!=null">
+					and rname=#{rname}
+				</if>
+				<if test="createTime!=null">
+					and create_time=#{createTime}
+				</if>
+				<if test="isDel!=null">
+					and is_del=#{isDel}
+				</if>
+				<if test="rid!=null">
+					and rid=#{rid}
+				</if>
+			</where>
+	</select>
+</mapper>
