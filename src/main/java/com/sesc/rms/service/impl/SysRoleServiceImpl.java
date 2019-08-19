@@ -37,4 +37,9 @@ return mapper.addAny(list);
 	public SysRolePo selectOne(SysRolePo sysRole){
 		return mapper.selectOne(sysRole);
 	}
+
+    @Override
+    public List<SysRolePo> listRoles(Integer uid) {
+        return mapper.listRoles(uid);
+    }
 }

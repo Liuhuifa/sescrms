@@ -234,9 +234,7 @@
 
     <section id="paginations">
         <div class="pagination">
-            <ul>
-
-            </ul>
+            <ul></ul>
         </div>
 
     </section>
@@ -253,18 +251,38 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">查看角色</h4>
             </div>
-            <div class="modal-body">按下 ESC 按钮退出。</div>
+            <div class="modal-body">
+                <ul>
 
-
-
+                </ul>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
+                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel1">角色授权</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <div id="footer">
 
     <div class="container">
@@ -303,82 +321,7 @@
 <script src="/static/js/demos/charts/line.js"></script>
 <script src="/static/js/demos/charts/donut.js"></script>
 <script src="/static/js/common/common.js"></script>
-
-<script>
-
-    $(function () {
-
-        Theme.init ();
-        //刷新用户列表
-        list_user(1,1);
-    });
-
-    $(function () {
-
-    })
-
-    //获取用户列表
-    function list_user(pageindex) {
-        $("#paginations .pagination ul li").remove();
-        $("#tables tbody tr").remove();
-        $.ajax({
-            url:url+"/user/listUser",
-            type:"post",
-            data:{
-                pageNum:pageindex,
-                pageSize:1
-            },
-            dataType:"json",
-            success:function (response) {
-                console.log(response)
-                var li="";
-                $.each(response.list,function (i, item) {
-                    li="<tr>\n" +
-                        "    <th>"+(++i)+"</th>\n" +
-                        "    <th>"+(item.realName)+"</th>\n" +
-                        "    <th>"+(item.uname)+"</th>\n" +
-                        "    <th>"+(item.phone)+"</th>\n" +
-                        "    <th>"+(item.email)+"</th>\n" +
-                        "    <th>"+(item.createTime)+"</th>\n" +
-                        "    <th>"+(item.updateTime)+"</th>\n" +
-                        "    <th><a href=\"javascript:;\" class=\"btn btn-small btn-secondary\">用户授权</a>&nbsp;&nbsp;" +
-                        "        <a href=\"javascript:;\" class=\"btn btn-small btn-inverse\" onclick='seerole("+item.uid+")'>查看角色</a>" +
-                        "</th>\n" +
-                        "</tr>";
-                })
-                //添加节点
-                $("#tables tbody").append(li);
-
-                //分页节点
-                var pages="";
-                if (response.hasPreviousPage == true){
-                    pages+="<li><a href=\"javascript:;\" onclick='list_user("+response.prePage+")'>上一页</a></li>";
-                }
-                $.each(response.navigatepageNums,function (i, item) {
-                    if (pageindex == item) {
-                        pages+=" <li class='active'><a href=\"javascript:;\" onclick='list_user("+item+")'>"+item+"</a></li>";
-                    }else{
-                        pages+=" <li><a href=\"javascript:;\" onclick='list_user("+item+")'>"+item+"</a></li>";
-                    }
-                })
-                if (response.hasNextPage == true) {
-                    pages+="<li><a href=\"javascript:;\" onclick='list_user("+response.nextPage+")'>下一页</a></li>"
-                }
-
-                $("#paginations .pagination ul").append(pages);
-
-            }
-        })
-    }
-    //添加用户跳转页面
-    function user_add() {
-        window.location.href=url+"/user-add";
-    }
-    //查看角色弹出模态框
-    function seerole(uid) {
-        $("#myModal").modal("show");
-    }
-</script>
+<script src="/static/js/page/user_list.js"></script>
 
 </body>
 </html>

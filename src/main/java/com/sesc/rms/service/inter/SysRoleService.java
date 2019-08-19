@@ -7,4 +7,6 @@ public interface SysRoleService {
 	int addAny(List<SysRolePo> list);
 	int modify(SysRolePo sysRole);	int del(int id);
 	SysRolePo selectOne(SysRolePo sysRole);
+
+	List<SysRolePo> listRoles(Integer uid);
 }

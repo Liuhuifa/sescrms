@@ -71,7 +71,7 @@
 			</where>
 	</select>
 <!--	查询所有的角色(可能根据用户)    -->
-	<select id="listRoles">
+	<select id="listRoles" resultMap="colnum_pro">
 		SELECT
 			sr.rid,
 			sr.rname,
@@ -79,10 +79,11 @@
 			sr.update_time
 		FROM
 			sys_role AS sr
+			inner join sys_user_role sur
 		<where>
 			sr.is_del = 0
 			<if test="uid !=null and uid &gt; 0">
-
+				and sur.sys_user_id=#{uid}
 			</if>
 		</where>
 
