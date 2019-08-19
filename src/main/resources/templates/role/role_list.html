@@ -6,7 +6,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>用户管理系统</title>
+    <title>角色列表</title>
     <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />
     <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
     <meta charset="utf-8">
@@ -207,7 +207,6 @@
             <tr>
                 <th>序号</th>
                 <th>姓名</th>
-                <th>账号</th>
                 <th>手机号</th>
                 <th>邮箱</th>
                 <th>创建时间</th>
@@ -220,7 +219,6 @@
             <tr>
                 <th>序号</th>
                 <th>姓名</th>
-                <th>账号</th>
                 <th>手机号</th>
                 <th>邮箱</th>
                 <th>创建时间</th>
@@ -243,27 +241,8 @@
 
 </div> <!-- /#wrapper -->
 
-<!--查看角色弹出框-->
-<a class="btn" data-toggle="modal" href="#myModal" >Launch Modal</a>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">查看角色</h4>
-            </div>
-            <div class="modal-body">按下 ESC 按钮退出。</div>
 
 
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
 
 <div id="footer">
 
@@ -310,7 +289,7 @@
 
         Theme.init ();
         //刷新用户列表
-        list_user(1,1);
+        list_role(1,1);
     });
 
     $(function () {
@@ -318,7 +297,7 @@
     })
 
     //获取用户列表
-    function list_user(pageindex) {
+    function list_role(pageindex) {
         $("#paginations .pagination ul li").remove();
         $("#tables tbody tr").remove();
         $.ajax({
@@ -335,14 +314,13 @@
                 $.each(response.list,function (i, item) {
                     li="<tr>\n" +
                         "    <th>"+(++i)+"</th>\n" +
-                        "    <th>"+(item.realName)+"</th>\n" +
                         "    <th>"+(item.uname)+"</th>\n" +
                         "    <th>"+(item.phone)+"</th>\n" +
                         "    <th>"+(item.email)+"</th>\n" +
                         "    <th>"+(item.createTime)+"</th>\n" +
                         "    <th>"+(item.updateTime)+"</th>\n" +
                         "    <th><a href=\"javascript:;\" class=\"btn btn-small btn-secondary\">用户授权</a>&nbsp;&nbsp;" +
-                        "        <a href=\"javascript:;\" class=\"btn btn-small btn-inverse\" onclick='seerole("+item.uid+")'>查看角色</a>" +
+                        "        <a href=\"javascript:;\" class=\"btn btn-small btn-inverse\">查看角色</a>" +
                         "</th>\n" +
                         "</tr>";
                 })
@@ -370,13 +348,8 @@
             }
         })
     }
-    //添加用户跳转页面
     function user_add() {
         window.location.href=url+"/user-add";
-    }
-    //查看角色弹出模态框
-    function seerole(uid) {
-        $("#myModal").modal("show");
     }
 </script>
 

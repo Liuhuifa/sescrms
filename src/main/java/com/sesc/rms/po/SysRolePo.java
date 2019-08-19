@@ -16,4 +16,6 @@ public class SysRolePo implements Serializable {
 	private Date createTime;
 	private Date updateTime;
 	private Integer isDel;
+
+	private List<SysPerPo> pers;
 }

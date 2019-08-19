@@ -13,4 +13,6 @@ public interface UserService {
     PageInfo<SysUserPo> listUser(Integer pageindex, Integer pagesize);
 
     int addUser(SysUserPo po);
+
+    SysUserPo listRoleAndPer(String uname);
 }

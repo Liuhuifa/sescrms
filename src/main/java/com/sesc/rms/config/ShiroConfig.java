@@ -1,5 +1,6 @@
 package com.sesc.rms.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.sesc.rms.config.shiro.SescRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -54,12 +55,19 @@ public class ShiroConfig{
 //        添加过滤器链
         Map<String,String> filters = new HashMap<>();
         filters.put("/index","authc");
+        filters.put("/user_list","authc");
+        filters.put("/user-add","authc");
         filters.put("/user/login","anon");
         filters.put("/static/*","anon");
         bean.setFilterChainDefinitionMap(filters);
 
         return bean;
 
+    }
+//    shiro标签与thymeleaf模板结合使用
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
     }
 
 }

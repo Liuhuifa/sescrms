@@ -70,4 +70,21 @@
 				</if>
 			</where>
 	</select>
+<!--	查询所有的角色(可能根据用户)    -->
+	<select id="listRoles">
+		SELECT
+			sr.rid,
+			sr.rname,
+			sr.create_time,
+			sr.update_time
+		FROM
+			sys_role AS sr
+		<where>
+			sr.is_del = 0
+			<if test="uid !=null and uid &gt; 0">
+
+			</if>
+		</where>
+
+	</select>
 </mapper>

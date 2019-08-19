@@ -60,4 +60,16 @@ public class UserServiceImpl implements UserService {
             return 500;
         }
     }
+
+    @Override
+    public SysUserPo listRoleAndPer(String uname) {
+
+        try {
+            SysUserPo sysUserPos = dao.listRoleAndPer(uname);
+            return sysUserPos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
