@@ -78,21 +78,63 @@ function seerole(uid) {
         },
         dataType:"json",
         success:function (response) {
-            $("#myModal").modal("show");
-            var li='';
-            console.log(response)
-            if (response != null) {
-                $.each(response,function (i, item) {
+            if (response.code == 1) {
+                var li='';
+                $.each(response.data,function (i, item) {
                     li='<li>'+item.rname+'</li>'
                 })
+                $("#myModal .modal-body ul").append(li)
+                $("#myModal").modal("show");
             }else{
 
             }
-            $("#myModal .modal-body ul").append(li)
+
         }
     })
 }
 //用户授权
 function giverole(uid) {
+    $("#myModal1").modal("show");
+    $("#myModal1 .modal-body #authorized ul li").remove();
+    $("#myModal1 .modal-body #authorize ul li").remove();
+    $.ajax({
+        url:url+"/role/listRoles",
+        type:"post",
+        data:{
+            uid:uid,
+            flag:1
+        },
+        dataType:"json",
+        success:function (response) {
+            if (response.code == 1) {
+                console.log(response);
+                var li1='';
+                $.each(response.data.authorized,function (i, item) {
+                    li1+='<li id="authorized'+item.rid+'">'+item.rname+'<a href="javascript:;" onclick="removeroleforuser('+item.rid+','+uid+',\''+item.rname+'\')">取消</a></li>'
+                })
+                $("#myModal1 .modal-body #authorized ul").append(li1)
 
+                var li2='';
+                $.each(response.data.authorize,function (i, item) {
+                    li2+='<li id="authorize'+item.rid+'"+'+item.rid+'>'+item.rname+'<a href="javascript:;" onclick="addroleforuser('+item.rid+','+uid+',\''+item.rname+'\')">添加</a></li>'
+                })
+                $("#myModal1 .modal-body #authorize ul").append(li2)
+            }else{
+
+            }
+
+        }
+    })
+}
+//为用户添加角色
+function addroleforuser(rid, uid,rname) {
+    var li = '<li id="authorized'+rid+'">'+rname+'<a href="javascript:;" onclick="removeroleforuser('+rid+','+uid+',\''+rname+'\')">取消</a></li>';
+    $("#myModal1 #authorized ol").append(li);
+    $("#authorize"+rid).remove();
+}
+//为用户取消角色
+function removeroleforuser(rid, uid,rname) {
+    var li = '<li id="authorize'+rid+'">'+rname+'<a href="javascript:;" onclick="addroleforuser('+rid+','+uid+',\''+rname+'\')">添加</a></li>';
+    $("#myModal1 #authorize ol").append(li);
+    $("#authorized"+rid).remove();
 }

@@ -6,6 +6,6 @@ url="http://localhost:8080";
 $(function () {
     $("#user").on("click",function () {
         console.log("123")
-        window.location.href=url+"/user_list";
+        window.location.href=url+"/user_list.html";
     })
 })

@@ -17,8 +17,9 @@ public class RoleController {
 
     @PostMapping("listRoles")
     @ResponseBody
-    public Object listRoles(@RequestParam(name = "uid",required = false,defaultValue = "-1")Integer uid){
-        return service.listRoles(uid);
+    public Object listRoles(@RequestParam(name = "uid",required = false,defaultValue = "-1")Integer uid,
+                            @RequestParam(name = "flag",required = false,defaultValue = "-1")Integer flag){
+        return service.listRoles(uid,flag);
     }
 
 }

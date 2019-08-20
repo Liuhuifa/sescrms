@@ -95,7 +95,7 @@
 
 
 
-<script src="/static/js/libs/jquery-3.4.1.min.js"></script>
+<script th:src="@{/static/js/libs/jquery-3.4.1.min.js}"></script>
 <script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
 <script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
@@ -142,7 +142,8 @@
 					},
 					success:function (json) {
 						if (json == 200) {
-							window.location.href=url+"/index";
+							alert("登录成功")
+							window.location.href=url+"/index.html";
 						}else if (json == 0) {
 							//用户不存在
                             Swal.fire(

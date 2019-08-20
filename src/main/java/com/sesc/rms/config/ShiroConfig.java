@@ -55,10 +55,14 @@ public class ShiroConfig{
 //        添加过滤器链
         Map<String,String> filters = new HashMap<>();
         filters.put("/index","authc");
+        filters.put("/index.html","authc");
         filters.put("/user_list","authc");
+        filters.put("/user_list.html","authc");
         filters.put("/user-add","authc");
+        filters.put("/user-add.html","authc");
         filters.put("/user/login","anon");
-        filters.put("/static/*","anon");
+        filters.put("/user/login.html","anon");
+        filters.put("/static/**","anon");
         bean.setFilterChainDefinitionMap(filters);
 
         return bean;
