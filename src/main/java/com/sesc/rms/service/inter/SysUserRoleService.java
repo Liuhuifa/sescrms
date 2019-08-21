@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface SysUserRoleService {
-	int addOne(SysUserRolePo sysUserRole);
+	Result addOne(SysUserRolePo sysUserRole);
 	Result addAny(List<SysUserRolePo> list);
-	int modify(SysUserRolePo sysUserRole);	int del(int id);
+	int modify(SysUserRolePo sysUserRole);
+	int del(int id);
 	SysUserRolePo selectOne(SysUserRolePo sysUserRole);
+	Result del(Integer uid,Integer rid);
 }

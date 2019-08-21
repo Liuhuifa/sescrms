@@ -90,4 +90,34 @@
 				</if>
 			</where>
 	</select>
+<!--	权限列表查询	flag==0角色已拥有的的权限flag==1角色未拥有的权限-->
+	<select id="listPers" resultMap="colnum_pro">
+		SELECT
+			sp.pid,
+			sp.pname,
+			sp.permission,
+			sp.create_date,
+			sp.update_date
+		FROM
+			sys_per AS sp
+			LEFT JOIN sys_role_per AS srp ON sp.pid = srp.per_per_id
+		<where>
+			and sp.is_del=0
+			<if test="rid!=null and flag!=null">
+				<choose>
+					<when test="flag==0">
+						and sp.pid in (
+						select per_per_id from sys_role_per where per_role_id=#{rid}
+						)
+					</when>
+					<when test="flag==1">
+						and sp.pid not in (
+						select per_per_id from sys_role_per where per_role_id=#{rid}
+						)
+					</when>
+				</choose>
+			</if>
+
+		</where>
+	</select>
 </mapper>

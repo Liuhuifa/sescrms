@@ -2,6 +2,7 @@ package com.sesc.rms.service.inter;
 import java.util.*;
 import java.lang.*;
 import com.sesc.rms.po.SysPerPo;
+import com.sesc.rms.util.Result;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,4 +11,6 @@ public interface SysPerService {
 	int addAny(List<SysPerPo> list);
 	int modify(SysPerPo sysPer);	int del(int id);
 	SysPerPo selectOne(SysPerPo sysPer);
+	Result listPers(Integer rid,Integer flag);
+	Result listPers(Integer pageindex,Integer pagesize,Integer flag);
 }

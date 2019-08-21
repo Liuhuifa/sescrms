@@ -8,6 +8,9 @@ import javax.annotation.Resource;
 
 import com.sesc.rms.util.Result;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SysUserRoleServiceImpl implements SysUserRoleService {
@@ -15,8 +18,9 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 	private SysUserRoleMapper mapper;
 
 	@Override
-	public int addOne(SysUserRolePo sysUserRole){
-		return mapper.addOne(sysUserRole);
+	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,timeout = 500)
+	public Result addOne(SysUserRolePo sysUserRole){
+		return Result.success(mapper.addOne(sysUserRole));
 	}
 
 	@Override
@@ -47,5 +51,16 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 	@Override
 	public SysUserRolePo selectOne(SysUserRolePo sysUserRole){
 		return mapper.selectOne(sysUserRole);
+	}
+
+	@Override
+	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,timeout = 500)
+	public Result del(Integer uid, Integer rid) {
+		try {
+			return Result.success(mapper.del(uid, rid));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.fail("服务器异常");
+		}
 	}
 }

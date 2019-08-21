@@ -81,7 +81,7 @@ function seerole(uid) {
             if (response.code == 1) {
                 var li='';
                 $.each(response.data,function (i, item) {
-                    li='<li>'+item.rname+'</li>'
+                    li+='<li>'+item.rname+'</li>'
                 })
                 $("#myModal .modal-body ul").append(li)
                 $("#myModal").modal("show");
@@ -128,13 +128,56 @@ function giverole(uid) {
 }
 //为用户添加角色
 function addroleforuser(rid, uid,rname) {
-    var li = '<li id="authorized'+rid+'">'+rname+'<a href="javascript:;" onclick="removeroleforuser('+rid+','+uid+',\''+rname+'\')">取消</a></li>';
-    $("#myModal1 #authorized ol").append(li);
-    $("#authorize"+rid).remove();
+
+    $.ajax({
+        url:url+"/user-role/addOne",
+        type:"post",
+        data:{
+            rid:rid,
+            uid:uid
+        },
+        dataType:"json",
+        success:function (response) {
+            if (response.code == 1) {
+                var li = '<li id="authorized'+rid+'">'+rname+'<a href="javascript:;" onclick="removeroleforuser('+rid+','+uid+',\''+rname+'\')">取消</a></li>';
+                $("#myModal1 #authorized ul").append(li);
+                $("#authorize"+rid).remove();
+            }else{
+                Swal.fire(
+                    "提示",
+                    "添加失败",
+                    "warning"
+                )
+            }
+        }
+    })
+
 }
 //为用户取消角色
 function removeroleforuser(rid, uid,rname) {
-    var li = '<li id="authorize'+rid+'">'+rname+'<a href="javascript:;" onclick="addroleforuser('+rid+','+uid+',\''+rname+'\')">添加</a></li>';
-    $("#myModal1 #authorize ol").append(li);
-    $("#authorized"+rid).remove();
+    // var li = '<li id="authorize'+rid+'">'+rname+'<a href="javascript:;" onclick="addroleforuser('+rid+','+uid+',\''+rname+'\')">添加</a></li>';
+    // $("#myModal1 #authorize ul").append(li);
+    // $("#authorized"+rid).remove();
+    $.ajax({
+        url:url+"/user-role/del",
+        type:"post",
+        data:{
+            rid:rid,
+            uid:uid
+        },
+        dataType:"json",
+        success:function (response) {
+            if (response.code == 1) {
+                var li = '<li id="authorize'+rid+'">'+rname+'<a href="javascript:;" onclick="addroleforuser('+rid+','+uid+',\''+rname+'\')">添加</a></li>';
+                $("#myModal1 #authorize ul").append(li);
+                $("#authorized"+rid).remove();
+            }else{
+                Swal.fire(
+                    "提示",
+                    "添加失败",
+                    "warning"
+                )
+            }
+        }
+    })
 }

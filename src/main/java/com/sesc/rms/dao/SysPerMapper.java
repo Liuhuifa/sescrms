@@ -7,4 +7,5 @@ public interface SysPerMapper {
 	int addAny(List<SysPerPo> list);
 	int modify(SysPerPo sysPer);	int del(int id);
 	SysPerPo selectOne(SysPerPo sysPer);
+	List<SysPerPo> listPers(Integer rid,Integer flag);
 }

@@ -6,7 +6,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>角色列表</title>
+    <title>权限列表</title>
     <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />
     <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
     <meta charset="utf-8">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="/static/css/application.css">
     <link rel="stylesheet" href="/static/css/pages/dashboard.css">
-    <link rel="stylesheet" href="/static/css/pages/role_list.css">
 
     <script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
 
@@ -197,9 +196,9 @@
 
     </div> <!-- /#masthead -->
 
-        <section shiro:hasPermission="role-create" id="buttons">
-            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="user_add()">添加角色</a>
-        </section>
+<!--        <section shiro:hasPermission="role-create" id="buttons">-->
+<!--            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="user_add()">添加角色</a>-->
+<!--        </section>-->
 
 
     <section id="tables">
@@ -207,33 +206,33 @@
             <thead>
             <tr>
                 <th>序号</th>
-                <th>角色名</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>邮箱</th>
+                <th>创建时间</th>
+                <th>修改时间</th>
+                <th>操作
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>邮箱</th>
                 <th>创建时间</th>
                 <th>修改时间</th>
                 <th>操作</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr th:each="data,loopStatus : ${datas}">
-                <th th:text="${loopStatus.count}"></th>
-                <th th:text="${data.rname}"></th>
-                <th th:text="${data.createTime}"></th>
-                <th th:text="${data.updateTime}"></th>
-                <th><a href="javascript:;" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a></th>
-            </tr>
             </tbody>
         </table>
-
     </section>
 
     <section id="paginations">
         <div class="pagination">
             <ul>
-                <li th:if="${!info.isFirstPage}" th:value="${info.prePage}"><a href="javascript:;">上一页</a></li>
-                <li th:each="item,loopStatus:${info.navigatepageNums}" th:class="${item==info.pageNum?'active':''}" th:value="${item}">
-                    <a href="javascript:;" th:text="${item}"></a>
-                </li>
-                <li th:value="${info.nextPage}"  th:if="${!info.isLastPage}"><a href="javascript:;">下一页</a></li>
+
             </ul>
         </div>
 
@@ -241,33 +240,7 @@
 
 </div> <!-- /#wrapper -->
 
-<!-- 模态框（Modal）给角色授权模态框 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">角色授权</h4>
-            </div>
-            <div class="modal-body">
-                <div id="authorized" class="">
-                    <h5 class="modal-title">已拥有权限</h5>
-                    <ul></ul><!--现未拥有的-->
-                    <ol></ol><!--添加的-->
-                </div>
-                <div id="authorize" class="">
-                    <h5 class="modal-title">未拥有权限</h5>
-                    <ul></ul><!--现拥有的-->
-                    <ol></ol><!--取消的-->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
+
 
 
 <div id="footer">
@@ -308,11 +281,9 @@
 <script src="/static/js/demos/charts/line.js"></script>
 <script src="/static/js/demos/charts/donut.js"></script>
 <script src="/static/js/common/common.js"></script>
-<script src="/static/js/page/role_list.js"></script>
+<script src="/static/js/page/per_list.js"></script>
 
 <script>
-
-
     $(function () {
         Theme.init ();
     });

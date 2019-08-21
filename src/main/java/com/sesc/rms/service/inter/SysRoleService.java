@@ -1,6 +1,8 @@
 package com.sesc.rms.service.inter;
 import java.util.*;
 import java.lang.*;
+
+import com.github.pagehelper.PageInfo;
 import com.sesc.rms.po.SysRolePo;
 import com.sesc.rms.util.Result;
 
@@ -11,4 +13,6 @@ public interface SysRoleService {
 	SysRolePo selectOne(SysRolePo sysRole);
 
 	Result listRoles(Integer uid, Integer flag);
+
+	PageInfo listRoles(Integer pageindex, Integer pagesize,Integer flag);
 }
