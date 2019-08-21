@@ -6,6 +6,7 @@ import com.sesc.rms.dao.SysRolePerMapper;
 import com.sesc.rms.service.inter.SysRolePerService;
 import javax.annotation.Resource;
 import com.sesc.rms.po.SysRolePerPo;
+import com.sesc.rms.util.Result;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +15,13 @@ public class SysRolePerServiceImpl implements SysRolePerService {
 	private SysRolePerMapper mapper;
 
 	@Override
-	public int addOne(SysRolePerPo sysRolePer){
-		return mapper.addOne(sysRolePer);
+	public Result addOne(SysRolePerPo sysRolePer){
+		try {
+			return Result.success(mapper.addOne(sysRolePer));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.fail("服务器gg");
+		}
 	}
 
 	@Override
@@ -29,8 +35,13 @@ return mapper.addAny(list);
 	}
 
 	@Override
-	public int del(int id){
-		return mapper.del(id);
+	public Result del(int pid, int rid){
+		try {
+			return Result.success(mapper.del(pid,rid));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.fail("服务器gg");
+		}
 	}
 
 	@Override

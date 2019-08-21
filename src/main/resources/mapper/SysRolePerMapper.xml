@@ -14,8 +14,8 @@
 		<result column="per_per_id" property="perPerId"></result>
 	</resultMap>
 	<insert id="addOne" parameterType="SysRolePerPo">
-		insert  into sys_role_per(per_role_id,sys_role_id,per_per_id,sys_user_id,pname,is_del,pid,permission,create_date,update_date)
-		value(#{perRoleId},#{sysRoleId},#{perPerId},#{sysUserId},#{pname},#{isDel},#{pid},#{permission},#{createDate},#{updateDate})
+		insert  into sys_role_per(per_role_id,per_per_id)
+		value(#{perRoleId},#{perPerId})
 	</insert>
 	<insert id="addAny" parameterType="list">
 		insert  into sys_role_per(per_role_id,sys_role_id,per_per_id,sys_user_id,pname,is_del,pid,permission,create_date,update_date)values
@@ -24,7 +24,7 @@
 		</foreach>
 	</insert>
 	<delete id="del">
-		delete from sys_role_per where pid=#{_parameter};
+		delete from sys_role_per where per_role_id=#{rid} and per_per_id=#{pid};
 	</delete>
 	<update id="modify" parameterType="SysRolePerPo">
 		update sys_role_per

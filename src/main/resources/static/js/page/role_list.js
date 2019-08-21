@@ -5,10 +5,16 @@ $(function () {
         console.log(val);
         window.location.href=url+"/role/listRoles1?pageindex="+val;
     })
+    //关闭模态框时删除节点
+    $("#myModal").on("hide.bs.modal",function () {
+        $("#myModal .modal-body #authorized ul li").remove()
+        $("#myModal .modal-body #authorize ul li").remove()
+    })
 
-
+    //点击角色授权查询角色授权信息
     $(".roleaddper").on("click",function () {
         var val=$(this).attr("value");
+
         $("#myModal").modal("show");
         $.ajax({
             url:url+"/per/listPers1",
@@ -44,17 +50,18 @@ $(function () {
 function addPerForRole(pid, val,pname) {
 
     $.ajax({
-        url:url+"/user-role/addOne",
+        url:url+"/role-per/add",
         type:"post",
         data:{
             rid:val,
-            pid:pid
+            pid:pid,
+            // _method:"PUT"
         },
         dataType:"json",
         success:function (response) {
             if (response.code == 1) {
-                var li = '<li id="authorized'+pid+'">'+pname+'<a href="javascript:;" onclick="removeroleforuser('+pid+','+val+',\''+pname+'\')">取消</a></li>';
-                $("#myModal1 #authorized ul").append(li);
+                var li = '<li id="authorized'+pid+'">'+pname+'<a href="javascript:;" onclick="removeRerForRole('+pid+','+val+',\''+pname+'\')">取消</a></li>';
+                $("#myModal #authorized ul").append(li);
                 $("#authorize"+pid).remove();
             }else{
                 Swal.fire(
@@ -73,16 +80,17 @@ function removeRerForRole(pid, val,pname) {
     // $("#myModal1 #authorize ul").append(li);
     // $("#authorized"+rid).remove();
     $.ajax({
-        url:url+"/user-role/del",
+        url:url+"/role-per/del",
         type:"post",
         data:{
             rid:val,
-            pid:pid
+            pid:pid,
+            // _method:"DELETE"
         },
         dataType:"json",
         success:function (response) {
             if (response.code == 1) {
-                var li = '<li id="authorize'+rid+'">'+rname+'<a href="javascript:;" onclick="addroleforuser('+pid+','+val+',\''+pname+'\')">添加</a></li>';
+                var li = '<li id="authorize'+pid+'">'+pname+'<a href="javascript:;" onclick="addPerForRole('+pid+','+val+',\''+pname+'\')">添加</a></li>';
                 $("#myModal #authorize ul").append(li);
                 $("#authorized"+pid).remove();
             }else{
