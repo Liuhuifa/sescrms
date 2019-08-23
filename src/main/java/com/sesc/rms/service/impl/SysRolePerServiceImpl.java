@@ -26,7 +26,8 @@ public class SysRolePerServiceImpl implements SysRolePerService {
 
 	@Override
 	public int addAny(List<SysRolePerPo> list){
-return mapper.addAny(list);
+
+		return mapper.addAny(list);
 	}
 
 	@Override

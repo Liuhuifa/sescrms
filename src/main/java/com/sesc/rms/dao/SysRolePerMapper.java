@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface SysRolePerMapper {
 	int addOne(SysRolePerPo sysRolePer);
-	int addAny(List<SysRolePerPo> list);
+	int addAny(@Param("list") List<SysRolePerPo> list);
 	int modify(SysRolePerPo sysRolePer);
 	int del(@Param("pid") int pid, @Param("rid")int rid);
 	SysRolePerPo selectOne(SysRolePerPo sysRolePer);

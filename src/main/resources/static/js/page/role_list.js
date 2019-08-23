@@ -1,8 +1,11 @@
 $(function () {
     //翻页
     $("#paginations li").on("click",function () {
-        var val=$(this).attr("value");
-        console.log(val);
+        let val=$(this).attr("value");
+        //当前页数存到cookie中
+        // let cookieTime = new Date();
+        // cookieTime.setHours(1);
+        // $.cookie("pageNum",val,{expires:cookieTime});
         window.location.href=url+"/role/listRoles1?pageindex="+val;
     })
     //关闭模态框时删除节点
@@ -103,3 +106,63 @@ function removeRerForRole(pid, val,pname) {
         }
     })
 }
+//删除角色
+$(function () {
+
+    $(".roleRemove").on("click",function () {
+        let rid;
+        let index;
+		let pageNum;
+        Swal.fire({
+            title: '提示?',
+            text: "删除是不可逆的,确定要删除吗?",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '是',
+            cancelButtonText:'否'
+        }).then((result)=>{
+            if (result.value) {
+                rid = $(this).attr("value");
+                console.log(rid)
+                $.ajax({
+                    url:url+"/role/delOne",
+                    type:"post",
+                    data:{
+                        rid:rid
+                    },
+                    dataType:"json",
+                    success:function (response) {
+                        if (response.code == 1) {
+							pageNum=$("#paginations .active").attr("value");
+							console.log(pageNum);
+                            index = $("#next-page").length
+                            Swal.fire(
+                                "提示",
+                                "删除成功",
+                                "success"
+                            ).then(
+                                res=>{
+                                    if(index==0){
+                                        pageNum=pageNum-1;
+                                        window.location.href=url+"/role/listRoles1?pageindex="+pageNum;
+                                    }else{
+                                        window.location.href=url+"/role/listRoles1?pageindex="+pageNum;
+                                    }
+                                }
+                            )
+                        }else{
+                            Swal.fire(
+                                "提示",
+                                "删除失败",
+                                "error"
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+})

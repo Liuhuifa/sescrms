@@ -17,10 +17,10 @@
 		insert  into sys_role_per(per_role_id,per_per_id)
 		value(#{perRoleId},#{perPerId})
 	</insert>
-	<insert id="addAny" parameterType="list">
-		insert  into sys_role_per(per_role_id,sys_role_id,per_per_id,sys_user_id,pname,is_del,pid,permission,create_date,update_date)values
+	<insert id="addAny" parameterType="SysRolePerPo">
+		insert  into sys_role_per(per_role_id,per_per_id)values
 		<foreach collection="list" index="i" open="(" separator="),(" close=")" item="item">
-			#{item.perRoleId},#{item.sysRoleId},#{item.perPerId},#{item.sysUserId},#{item.pname},#{item.isDel},#{item.pid},#{item.permission},#{item.createDate},#{item.updateDate}
+			#{item.perRoleId},#{item.perPerId}
 		</foreach>
 	</insert>
 	<delete id="del">

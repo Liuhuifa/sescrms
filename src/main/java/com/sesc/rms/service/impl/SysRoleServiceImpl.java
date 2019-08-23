@@ -4,27 +4,50 @@ import java.lang.*;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sesc.rms.po.SysRolePerPo;
 import com.sesc.rms.po.SysRolePo;
 import com.sesc.rms.dao.SysRoleMapper;
+import com.sesc.rms.service.inter.SysRolePerService;
 import com.sesc.rms.service.inter.SysRoleService;
 import javax.annotation.Resource;
 import com.sesc.rms.po.SysRolePo;
 import com.sesc.rms.util.Result;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
 	@Resource
 	private SysRoleMapper mapper;
+	@Resource
+	private SysRolePerService srpService;
 
 	@Override
-	public int addOne(SysRolePo sysRole){
-		return mapper.addOne(sysRole);
+	@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+	public Result addOne(SysRolePo po,Integer[]pids){
+		Result result = new Result();
+		mapper.addOne(po);
+		Integer rid = po.getRid();
+		if (rid>0){//如果角色添加成功以后再进行授权
+			List<SysRolePerPo> lists = new ArrayList<>();
+			for (int i=0; i<pids.length; i++){
+				lists.add(new SysRolePerPo(rid,pids[i]));
+			}
+			if (!lists.isEmpty())//判断是否给该角色授权了
+			    srpService.addAny(lists);
+			result.setCode(1);
+		}else{
+			result.setCode(0);
+			new RuntimeException();
+		}
+		return result;
 	}
 
 	@Override
 	public int addAny(List<SysRolePo> list){
-return mapper.addAny(list);
+		return mapper.addAny(list);
 	}
 
 	@Override
@@ -32,14 +55,30 @@ return mapper.addAny(list);
 		return mapper.modify(sysRole);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
 	@Override
-	public int del(int id){
-		return mapper.del(id);
+	public Result del(int id){
+		Result result = new Result();
+		int del = mapper.del(id);
+		if (del>0){
+			result.setCode(1);
+		}else{
+			result.setCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public SysRolePo selectOne(SysRolePo sysRole){
-		return mapper.selectOne(sysRole);
+	public Result selectOne(SysRolePo sysRole){
+        try {
+            SysRolePo sysRolePo = mapper.selectOne(sysRole);
+            return Result.success(sysRolePo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail("服务器gg");
+        }
+
+
 	}
 
     @Override

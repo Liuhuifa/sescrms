@@ -7,10 +7,12 @@ import com.sesc.rms.po.SysRolePo;
 import com.sesc.rms.util.Result;
 
 public interface SysRoleService {
-	int addOne(SysRolePo sysRole);
+	Result addOne(SysRolePo po,Integer[]pids);
 	int addAny(List<SysRolePo> list);
-	int modify(SysRolePo sysRole);	int del(int id);
-	SysRolePo selectOne(SysRolePo sysRole);
+	int modify(SysRolePo sysRole);
+
+	Result del(int id);
+	Result selectOne(SysRolePo sysRole);
 
 	Result listRoles(Integer uid, Integer flag);
 

@@ -198,7 +198,7 @@
     </div> <!-- /#masthead -->
 
         <section shiro:hasPermission="role-create" id="buttons">
-            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="user_add()">添加角色</a>
+            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>
         </section>
 
 
@@ -219,7 +219,10 @@
                 <th th:text="${data.rname}"></th>
                 <th th:text="${data.createTime}"></th>
                 <th th:text="${data.updateTime}"></th>
-                <th><a href="javascript:;" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a></th>
+                <th>
+                    <a shiro:hasPermission="role-per" href="javascript:;" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a>
+                    <a shiro:hasPermission="role-del" href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${data.rid}">删除角色</a>
+                </th>
             </tr>
             </tbody>
         </table>
@@ -233,7 +236,7 @@
                 <li th:each="item,loopStatus:${info.navigatepageNums}" th:class="${item==info.pageNum?'active':''}" th:value="${item}">
                     <a href="javascript:;" th:text="${item}"></a>
                 </li>
-                <li th:value="${info.nextPage}"  th:if="${!info.isLastPage}"><a href="javascript:;">下一页</a></li>
+                <li th:value="${info.nextPage}"  th:if="${!info.isLastPage}" id="next-page"><a href="javascript:;">下一页</a></li>
             </ul>
         </div>
 
@@ -309,6 +312,8 @@
 <script src="/static/js/demos/charts/donut.js"></script>
 <script src="/static/js/common/common.js"></script>
 <script src="/static/js/page/role_list.js"></script>
+<script src="/static/js/page/role-add.js"></script>
+<script src="/static/js/libs/sweetalert2.all.min.js"></script>
 
 <script>
 

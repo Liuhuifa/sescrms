@@ -206,23 +206,20 @@
             <thead>
             <tr>
                 <th>序号</th>
-                <th>姓名</th>
-                <th>手机号</th>
-                <th>邮箱</th>
+                <th>权限名称</th>
+                <th>权限</th>
                 <th>创建时间</th>
                 <th>修改时间</th>
-                <th>操作
-                </th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th>序号</th>
-                <th>姓名</th>
-                <th>手机号</th>
-                <th>邮箱</th>
-                <th>创建时间</th>
-                <th>修改时间</th>
+            <tr th:each="item,index:${data.list}">
+                <th th:text="${index.count}">序号</th>
+                <th th:text="${item.pname}">权限名称</th>
+                <th th:text="${item.permission}">权限</th>
+                <th th:text="${item.createDate}">创建时间</th>
+                <th th:name="${item.updateDate}">修改时间</th>
                 <th>操作</th>
             </tr>
             </tbody>
@@ -232,7 +229,11 @@
     <section id="paginations">
         <div class="pagination">
             <ul>
-
+                <li th:if="${!data.isFirstPage}" th:value="${data.prePage}"><a href="javascript:;">上一页</a></li>
+                <li th:each="item,loopStatus:${data.navigatepageNums}" th:class="${item==data.pageNum?'active':''}" th:value="${item}">
+                    <a href="javascript:;" th:text="${item}"></a>
+                </li>
+                <li th:value="${data.nextPage}"  th:if="${!data.isLastPage}" id="next-page"><a href="javascript:;">下一页</a></li>
             </ul>
         </div>
 

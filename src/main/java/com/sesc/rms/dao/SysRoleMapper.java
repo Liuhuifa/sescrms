@@ -5,7 +5,7 @@ import com.sesc.rms.po.SysRolePo;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMapper {
-	int addOne(SysRolePo sysRole);
+	int addOne(SysRolePo po);
 	int addAny(List<SysRolePo> list);
 	int modify(SysRolePo sysRole);	int del(int id);
 	SysRolePo selectOne(SysRolePo sysRole);

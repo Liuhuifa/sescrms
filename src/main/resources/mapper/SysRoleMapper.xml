@@ -19,9 +19,9 @@
 		<result column="update_time" property="updateTime"></result>
 		<result column="is_del" property="isDel"></result>
 	</resultMap>
-	<insert id="addOne" parameterType="SysRolePo">
-		insert  into sys_role(update_time,rname,create_time,is_del,rid)
-		value(#{updateTime},#{rname},#{createTime},#{isDel},#{rid})
+	<insert id="addOne" parameterType="SysRolePo" keyProperty="rid" keyColumn="rid" useGeneratedKeys="true">
+		insert  into sys_role(update_time,rname,create_time,is_del)
+		value(now(),#{rname},now(),0)
 	</insert>
 	<insert id="addAny" parameterType="list">
 		insert  into sys_role(update_time,rname,create_time,is_del,rid)values
