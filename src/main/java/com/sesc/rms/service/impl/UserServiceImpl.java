@@ -33,11 +33,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageInfo<SysUserPo> listUser(Integer pageindex, Integer pagesize) {
         try {
-            PageHelper.startPage(pageindex,pagesize);
-            List<SysUserPo> sysUserPos = dao.listUser();
+            PageInfo<SysUserPo> infos = null;
+            if (pageindex!=null && pagesize!=null){
+                PageHelper.startPage(pageindex,pagesize);
+                List<SysUserPo> sysUserPos = dao.listUser();
+                infos = new PageInfo<>(sysUserPos);
+                return infos;
+            }else{
+                List<SysUserPo> sysUserPos = dao.listUser();
+                infos = new PageInfo<>(sysUserPos);
+                return infos;
+            }
 
-            PageInfo<SysUserPo> infos = new PageInfo<>(sysUserPos);
-            return infos;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -16,4 +16,8 @@ $(function () {
     $("#permission").on("click",function () {
         window.location.href=url+"/per/listPers";
     })
+//    跳转客户列表页面
+    $("#customers").on("click",function () {
+        window.location.href=url+"/customer/list?pageindex=1";
+    })
 })

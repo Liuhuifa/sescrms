@@ -1,0 +1,415 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>客户列表</title>
+<!--    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
+<!--    <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css">
+
+    <link rel="stylesheet" href="/static/css/ui-lightness/jquery-ui-1.8.21.custom.css">
+
+    <link rel="stylesheet" href="/static/css/application.css">
+    <link rel="stylesheet" href="/static/css/pages/dashboard.css">
+    <link rel="stylesheet" href="/static/css/pages/role_list.css">
+
+    <script src="/static/js/libs/jquery-1.7.2.min.js"></script>
+    <script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div id="topbar">
+
+        <div class="container">
+
+            <a href="javascript:;" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+                <i class="icon-cog"></i>
+            </a>
+
+            <div id="top-nav">
+
+                <ul>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            查看网站
+                            <b class="caret"></b>
+                        </a>
+
+                        <!--					<ul class="dropdown-menu pull-right">-->
+                        <!--						<li><a href="javascript:;">查看网站1</a></li>-->
+                        <!--						<li><a href="javascript:;">查看网站2</a></li>-->
+                        <!--						<li class="dropdown-submenu">-->
+                        <!--		                  <a tabindex="-1" href="#">下拉菜单</a>-->
+                        <!--		                  <ul class="dropdown-menu">-->
+                        <!--		                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
+                        <!--		                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
+                        <!--		                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
+                        <!--		                  </ul>-->
+                        <!--		                </li>-->
+                        <!--					</ul> -->
+                    </li>
+                </ul>
+
+                <ul class="pull-right">
+                    <li><a href="/login"><i class="icon-user"></i> 登录</a></li>
+                    <li><a href="javascript:;"><span class="badge badge-primary">1</span> 新消息</a></li>
+                    <li class="dropdown">
+                        <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
+                            设置
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:;">设置 #1</a></li>
+                            <li><a href="javascript:;">设置 #2</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">下拉菜单</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">菜单1</a></li>
+                                    <li><a tabindex="-1" href="#">菜单2</a></li>
+                                    <li><a tabindex="-1" href="#">菜单3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="login.html">退出</a></li>
+                </ul>
+
+            </div> <!-- /#top-nav -->
+
+        </div> <!-- /.container -->
+
+    </div> <!-- /#topbar -->
+
+
+
+
+    <div id="header">
+
+        <div class="container">
+
+            <a href="./index.html" class="brand">首页</a>
+
+            <a href="javascript:;" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-reorder"></i>
+            </a>
+
+            <div class="nav-collapse">
+                <ul id="main-nav" class="nav pull-right">
+                    <li class="nav-icon">
+                        <a href="/index">
+                            <i class="icon-home"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown active">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-th"></i>
+                            <span>客户管理</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li id="customers"><a href="javascript:;">客户列表</a></li>
+                            <li><a href="javascript:;">休眠公海</a></li>
+                            <li><a href="./jqueryui.html">jQuery UI</a></li>
+                            <li><a href="./charts.html">图表</a></li>
+                            <li><a href="./bonus.html">其他组件</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">下拉菜单</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">菜单1</a></li>
+                                    <li><a tabindex="-1" href="#">菜单2</a></li>
+                                    <li><a tabindex="-1" href="#">菜单3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-copy"></i>
+                            <span>系统管理</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:;" id="user">用户管理</a></li>
+                            <li><a href="javascript:;" id="role">角色管理</a></li>
+                            <li><a href="javascript:;" id="permission">权限管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-external-link"></i>
+                            <span>其他</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="./login.html">登录</a></li>
+                            <li><a href="./signup.html">注册</a></li>
+                            <li><a href="./error.html">错误</a></li>
+                            <li><a href="./skins.html">主题</a></li>
+                            <li><a href="./sticky.html">完美的底部</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div> <!-- /.nav-collapse -->
+
+        </div> <!-- /.container -->
+
+    </div> <!-- /#header -->
+
+
+
+
+    <div id="masthead">
+
+        <form id="solr-form" style="margin: 0" action="/customer/list" method="get">
+            <label class="control-label" style="display: inline-block">分组查询:</label>
+            <select name="group" style="margin: 0px">
+                <option value="-2" selected>全部</option>
+                <option value="-1">休眠中</option>
+                <option value="1">已分配</option>
+                <option value="0">未分配</option>
+            </select>
+
+            <label class="control-label" style="display: inline-block">客户姓名:</label>
+            <input type="text" name="name" style="margin: 0px" th:value="${solr.name}"/>
+
+            <label class="control-label" style="display: inline-block">客户电话:</label>
+            <input type="text" name="tel" style="margin: 0px" th:value="${solr.tel}"/>
+
+            <label class="control-label" style="display: inline-block">企业名称:</label>
+            <input type="text" name="cfrom" style="margin: 0px" th:value="${solr.cfrom}"/>
+
+            <label class="control-label" style="display: inline-block">地区:</label>
+            <input type="text" name="address" style="margin: 0px" th:value="${solr.address}"/>
+
+            <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
+        </form>
+        <script>
+            $(function () {
+                $("[name='group']").on("change",function () {
+                    let group = $(this).val();
+                    $("[name='belongs']").remove()
+                    $("#uname").remove()
+                    addelem(group,-3);
+                });
+
+                let group = [[${solr.group}]] ==null?(-2):[[${solr.group}]];
+                if (group) {
+                    $("[name='group']").children("[value='"+group+"']").attr("selected","selected")
+                    if (group == 1) {
+                        let belongs = [[${solr.belongs}]];
+                        addelem(1,belongs);
+                    }
+                }
+            });
+            function addelem(group,belongs) {
+                let elem='';
+                if ( group==1 ){
+                    $.ajax({
+                        url:url+"/user/allUser",
+                        type:"post",
+                        data:{},
+                        dataType:"json",
+                        success:function (response) {
+                            elem+="<label id='uname' class=\"control-label\" style=\"display: inline-block\">坐席:</label>";
+                            elem+='<select name="belongs" style="margin: 0px">';
+                            elem+='<option value="-3" selected>全部</option>';
+                            $.each(response.list,function (i, item) {
+                                if (belongs == item.uid) {
+                                    elem+='<option value="'+item.uid+'" selected>'+item.uname+'</option>'
+                                }else{
+                                    elem+='<option value="'+item.uid+'">'+item.uname+'</option>'
+                                }
+                            })
+                            elem+='</select>';
+                            $("[name='group']").after(elem);
+                        }
+                    })
+                }
+            }
+        </script>
+<!--        <div class="container">-->
+
+<!--            <div class="masthead-pad">-->
+
+<!--                <div class="masthead-text">-->
+<!--                    客户列表-->
+<!--                </div> &lt;!&ndash; /.masthead-text &ndash;&gt;-->
+
+<!--            </div>-->
+
+<!--        </div> &lt;!&ndash; /.container &ndash;&gt;-->
+
+    </div> <!-- /#masthead -->
+
+<!--        <section shiro:hasPermission="role-create" id="buttons">-->
+<!--            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>-->
+<!--        </section>-->
+
+
+    <section id="tables">
+        <table class="table table-bordered table-striped table-highlight">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>归属坐席</th>
+                <th>客户姓名</th>
+                <th>客户电话</th>
+                <th>企业名称</th>
+                <th>客户地址</th>
+                <th>创建时间</th>
+                <th>是否回访</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item,loopStatus : ${datas.list}">
+                <th th:text="${loopStatus.count}"></th>
+                <th th:if="${item.belongs == 0}">
+                    未分配
+                </th>
+                <th th:if="${item.belongs == -1}">
+                    休眠中
+                </th>
+                <th th:if="${item.belongs &gt; 0}">
+                    [[${item.uname}]]
+                </th>
+
+                <th th:text="${item.name}"></th>
+                <th th:text="${item.tel}"></th>
+                <th th:text="${item.cfrom}"></th>
+                <th th:text="${item.address}"></th>
+                <th th:text="${item.time}"></th>
+                <th th:if="${item.restatus == 0}">
+                    否
+                </th>
+                <th th:if="${item.restatus == 1}">
+                    是
+                </th>
+<!--                <th>-->
+<!--                    <a shiro:hasPermission="role-per" href="javascript:;" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a>-->
+<!--                    <a shiro:hasPermission="role-del" href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${data.rid}">删除角色</a>-->
+<!--                </th>-->
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <section id="paginations">
+        <div class="pagination">
+            <ul>
+                <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:;">首页</a></li>
+                <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:;">上一页</a></li>
+                <li th:each="item,loopStatus:${datas.navigatepageNums}" th:class="${item==datas.pageNum?'active':''}" th:value="${item}">
+                    <a href="javascript:;" th:text="${item}"></a>
+                </li>
+                <li th:value="${datas.nextPage}"  th:if="${!datas.isLastPage}" id="next-page"><a href="javascript:;">下一页</a></li>
+                <li th:value="${datas.pages}"  th:if="${!datas.isLastPage}"><a href="javascript:;">尾页</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+</div> <!-- /#wrapper -->
+
+<!-- 模态框（Modal）给角色授权模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">角色授权</h4>
+            </div>
+            <div class="modal-body">
+                <div id="authorized" class="">
+                    <h5 class="modal-title">已拥有权限</h5>
+                    <ul></ul><!--现未拥有的-->
+                    <ol></ol><!--添加的-->
+                </div>
+                <div id="authorize" class="">
+                    <h5 class="modal-title">未拥有权限</h5>
+                    <ul></ul><!--现拥有的-->
+                    <ol></ol><!--取消的-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<div id="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="span6">
+                (c) 2012 all rights reserved.
+            </div> <!-- /span6 -->
+
+            <div id="builtby" class="span6">
+                <!--				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">我爱模板网</a></a>				-->
+            </div> <!-- /.span6 -->
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /#footer -->
+<script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
+
+<script src="/static/js/libs/bootstrap/bootstrap.min.js"></script>
+
+<script src="/static/js/Theme.js"></script>
+<script src="/static/js/Charts.js"></script>
+
+<script src="/static//js/plugins/excanvas/excanvas.min.js"></script>
+<script src="/static//js/plugins/flot/jquery.flot.js"></script>
+<script src="/static//js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="/static//js/plugins/flot/jquery.flot.orderBars.js"></script>
+<script src="/static//js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/static//js/plugins/flot/jquery.flot.resize.js"></script>
+
+<script src="/static/js/demos/charts/line.js"></script>
+<script src="/static/js/demos/charts/donut.js"></script>
+<script src="/static/js/common/common.js"></script>
+<script src="/static/js/libs/sweetalert2.all.min.js"></script>
+<script src="/static/js/page/client-list.js"></script>
+<script>
+
+    $(function () {
+        Theme.init ();
+    });
+</script>
+
+</body>
+</html>

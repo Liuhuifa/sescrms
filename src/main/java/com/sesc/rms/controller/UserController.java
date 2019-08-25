@@ -59,4 +59,14 @@ public class UserController {
     public Object addUser(SysUserPo po){
         return service.addUser(po);
     }
+
+    /**
+     * 查询所有坐席(用户)
+     * @return
+     */
+    @PostMapping("allUser")
+    @ResponseBody
+    public Object allUser(){
+        return service.listUser(null, null);
+    }
 }
