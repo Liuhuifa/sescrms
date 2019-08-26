@@ -62,6 +62,7 @@ public class ShiroConfig{
         filters.put("/user-add.html","authc");
         filters.put("/role/**","authc");
         filters.put("/per/**","authc");
+        filters.put("/customer/**","authc");
         filters.put("/user/login","anon");
         filters.put("/user/login.html","anon");
         filters.put("/static/**","anon");

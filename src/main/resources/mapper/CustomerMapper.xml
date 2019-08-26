@@ -4,6 +4,13 @@
 <mapper namespace="com.sesc.rms.dao.CustomerMapper">
 
 <!--  客户列表查询  -->
+    <!--
+        group==-2  查询全部客户
+        group==1  查询目标坐席下的客户
+        group == -1 查询公海内的客户
+        group ==0 查询未分配的客户
+
+    -->
     <select id="listCustomers" resultType="com.sesc.rms.po.CustomerPo">
         SELECT
             mc.id,
@@ -61,7 +68,6 @@
 
                 </choose>
             </if>
-
             <if test="lasttime != null and lasttime!=''">
                 and mc.lasttime=#{lasttime}
             </if>
@@ -105,6 +111,80 @@
                 and mc.project=#{project}
             </if>
         </where>
-        order by mc.time
+        order by mc.time desc
+    </select>
+<!--添加客户-->
+    <insert id="addCustomer" parameterType="com.sesc.rms.po.CustomerPo">
+        insert  into ml_customer(`name`,`address`,`qq`,`tel`,`email`,`belongs`,`time`,cfrom)
+        value(#{name},#{address},#{qq},#{tel},#{email},#{belongs},#{time},#{cfrom})
+    </insert>
+<!--  根据条件查询一个客户是否存在 -->
+    <select id="findOneCustomer" resultType="int" parameterType="com.sesc.rms.po.CustomerPo">
+        SELECT
+            count(1)
+        FROM
+        ml_customer AS mc
+        <where>
+            <if test="name != null and name!=''">
+                and mc.name=#{name}
+            </if>
+            <if test="address != null and address!=''">
+                and mc.address=#{address}
+            </if>
+            <if test="qq != null and qq!=''">
+                and mc.qq=#{qq}
+            </if>
+            <if test="tel != null and tel!=''">
+                and mc.tel=#{tel}
+            </if>
+            <if test="email != null and email!=''">
+                and mc.email=#{email}
+            </if>
+            <if test="belongs != null">
+                and mc.belongs=#{belongs}
+            </if>
+            <if test="lasttime != null and lasttime!=''">
+                and mc.lasttime=#{lasttime}
+            </if>
+            <if test="time != null and time!=''">
+                and mc.time=#{time}
+            </if>
+            <if test="status != null">
+                and mc.`status`=#{status}
+            </if>
+            <if test="look != null">
+                and mc.look=#{look}
+            </if>
+            <if test="restatus != null">
+                and mc.restatus=#{restatus}
+            </if>
+            <if test="caim != null">
+                and mc.caim=#{caim}
+            </if>
+            <if test="cfrom != null and cfrom!=''">
+                and mc.cfrom=#{cfrom}
+            </if>
+            <if test="type != null">
+                and mc.type=#{type}
+            </if>
+            <if test="keyword != null and keyword!=''">
+                and mc.keyword=#{keyword}
+            </if>
+            <if test="etime != null and etime!=''">
+                and mc.etime=#{etime}
+            </if>
+            <if test="rate != null and rate!=''">
+                and mc.rate=#{rate}
+            </if>
+            <if test="remark != null and remark!=''">
+                and mc.remark=#{remark}
+            </if>
+            <if test="count != null">
+                and mc.count=#{count}
+            </if>
+            <if test="project != null and project!=''">
+                and mc.project=#{project}
+            </if>
+        </where>
     </select>
 </mapper>

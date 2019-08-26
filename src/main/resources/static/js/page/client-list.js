@@ -35,4 +35,7 @@ $(function () {
     //     // let data = $("#solr-form").serialize();
     //     $("#solr-form").submit();
     // })
+    $("#add-customer").on("click",function () {
+        window.location.href=url+"/templates/client/client-add.html"
+    })
 })

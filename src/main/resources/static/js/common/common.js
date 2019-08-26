@@ -21,3 +21,7 @@ $(function () {
         window.location.href=url+"/customer/list?pageindex=1";
     })
 })
+
+function trim(str){ //删除左右两端的空格
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+}

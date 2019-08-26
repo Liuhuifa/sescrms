@@ -30,7 +30,8 @@ public class UserController {
         UsernamePasswordToken token = new UsernamePasswordToken(username.trim(),password.trim());
         try {
             subject.login(token);
-            request.getSession().setAttribute("user",username);
+            SysUserPo user = service.login(username);
+            request.getSession().setAttribute("user",user);
             return "200";
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();

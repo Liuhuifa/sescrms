@@ -11,4 +11,18 @@ public interface CustomerMapper {
      * @return
      */
     List<CustomerPo> listCustomers(CustomerPo po);
+
+    /**
+     * 添加客户
+     * @param po
+     * @return
+     */
+    int addCustomer(CustomerPo po);
+
+    /**
+     * 查询客户是否存在
+     * @param po
+     * @return
+     */
+    int findOneCustomer(CustomerPo po);
 }

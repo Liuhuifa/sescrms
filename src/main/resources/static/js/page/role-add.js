@@ -52,12 +52,12 @@ $(function () {
                                 cancelButtonText:'继续添加'
                             }).then((result) => {
                                 console.log(result.value);
-                            if(result.value){
-                                window.location.href=url+"/role/listRoles1";
-                            }else{
-                                role_add()
-                            }
-                        });
+                                if(result.value){
+                                    window.location.href=url+"/role/listRoles1";
+                                }else{
+                                    role_add()
+                                }
+                            });
                         }
                     }
                 })//ajax
