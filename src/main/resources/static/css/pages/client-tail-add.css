@@ -1,0 +1,40 @@
+#tail-form{
+    position: relative;
+    overflow: hidden;
+}
+
+.customer-info,.communication,.history{
+    display: inline-block;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+#question{
+    height: 109px;
+}
+#remark{
+    height: 281px;
+}
+#history{
+    height: 422px;
+}
+.operation{
+    position: relative;
+    bottom: 0px;
+}
+
+#tail-form>div{
+    width: 33% !important;
+}
+.form-horizontal .control-label{
+    width: 140px;
+}
+.form-horizontal .controls{
+    margin-left: 10px;
+    float: left;
+}
+#tail-form>div.operation{
+    width: 100%!important;
+    text-align: center;
+    overflow: hidden;
+}

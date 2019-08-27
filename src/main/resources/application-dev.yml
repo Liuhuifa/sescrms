@@ -1,6 +1,9 @@
 
 #开发环境
 
+#端口号
+server:
+  port: 8888
 #数据库连接
 spring:
   datasource:

@@ -37,5 +37,9 @@ $(function () {
     // })
     $("#add-customer").on("click",function () {
         window.location.href=url+"/templates/client/client-add.html"
-    })
+    });
+
 })
+
+
+

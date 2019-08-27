@@ -277,7 +277,7 @@
         <table class="table table-bordered table-striped table-highlight">
             <thead>
             <tr>
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" onclick="checkAll(this)" class="check-all"></th>
                 <th>序号</th>
                 <th>归属坐席</th>
                 <th>客户姓名</th>
@@ -292,7 +292,7 @@
             </thead>
             <tbody>
             <tr th:each="item,loopStatus : ${datas.list}">
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" class="checked" onclick="checkOne(this)"></th>
 
                 <th th:text="${loopStatus.count}"></th>
 
@@ -325,10 +325,10 @@
                     是
                 </th>
                 <th>
-                    <a href="javascript:;" class="btn btn-small btn-secondary" th:value="${item.id}" th:data-show="${item.id}">查看</a>
+                    <a href="javascript:;" class="btn btn-small btn-secondary" th:data-show="${item.id}">查看</a>
 <!--                    <a href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
-                    <a href="javascript:;" class="btn btn-small btn-warning" th:value="${item.id}" th:data-tail="${item.id}">跟踪</a>
-                    <a href="javascript:;" class="btn btn-small btn-success" th:value="${item.id}" th:data-visit="${item.id}">回访</a>
+                    <a href="javascript:;" class="btn btn-small btn-warning"  th:data-tail="${item.id}">跟踪</a>
+                    <a href="javascript:;" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
                 </th>
             </tr>
             </tbody>
@@ -421,7 +421,7 @@
 <script src="/static/js/common/common.js"></script>
 <script src="/static/js/libs/sweetalert2.all.min.js"></script>
 <!--<script src="/static/js/page/client-list.js"></script>-->
-<script src="/static/js/page/client-list.min.js"></script>
+<script src="/static/js/page/client-list.js"></script>
 <script>
 
     $(function () {
