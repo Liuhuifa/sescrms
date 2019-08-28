@@ -41,5 +41,10 @@ $(function () {
 
 })
 
+function customerTail(e) {
+    let tail = e.dataset.tail;
+    window.location.href=url+"/customer/tail/"+tail;
+}
+
 
 

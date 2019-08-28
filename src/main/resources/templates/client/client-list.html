@@ -327,7 +327,7 @@
                 <th>
                     <a href="javascript:;" class="btn btn-small btn-secondary" th:data-show="${item.id}">查看</a>
 <!--                    <a href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
-                    <a href="javascript:;" class="btn btn-small btn-warning"  th:data-tail="${item.id}">跟踪</a>
+                    <a href="javascript:;" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">跟踪</a>
                     <a href="javascript:;" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
                 </th>
             </tr>

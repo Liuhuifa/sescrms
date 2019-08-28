@@ -92,4 +92,16 @@ public class CustomerController{
     public Result findOneByCustomer(CustomerPo po){
         return service.findOneCustomer(po);
     }
+
+    @GetMapping("/tail/{customer_id}")
+    public ModelAndView tail(@PathVariable Long customer_id){
+        CustomerPo po = new CustomerPo();
+        po.setId(customer_id);
+        ModelAndView mv= new ModelAndView("/client/client-tail-add");
+        CustomerPo customer = service.findCustomerById(customer_id);
+        System.out.println(customer);
+        mv.addObject("customer",customer);
+        return mv;
+    }
+
 }

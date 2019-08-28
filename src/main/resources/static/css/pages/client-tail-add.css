@@ -9,14 +9,24 @@
     box-sizing: border-box;
     padding-left: 10px;
 }
+#history{
+    height: 422px;
+    border: 2px solid #cccccc;
+    padding: 5px;
+    border-radius: 2%;
+    overflow: auto;
+}
+#history hr{
+    margin: 0 0 20px 0;
+}
+.question-remark strong,.question-remark div{
+    display: inline-block;
+}
 #question{
     height: 109px;
 }
 #remark{
     height: 281px;
-}
-#history{
-    height: 422px;
 }
 .operation{
     position: relative;

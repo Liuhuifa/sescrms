@@ -61,4 +61,14 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return result;
     }
+
+    @Override
+    public CustomerPo findCustomerById(Long id) {
+        return mapper.findCustomerById(id);
+    }
+
+    @Override
+    public Result updateByCustomer(CustomerPo po) {
+        return null;
+    }
 }

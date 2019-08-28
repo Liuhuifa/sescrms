@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @ToString
@@ -21,6 +22,21 @@ public class CustomerPo implements Serializable {
         this.cfrom = cfrom;
         this.pageindex = pageindex;
         this.group = group;
+    }
+
+    public CustomerPo(String name, String address, String qq, String tel, String email, Integer look, Integer caim, String cfrom, String etime, Integer rate, String remark) {
+        this.name = name;
+        this.address = address;
+        this.qq = qq;
+        this.tel = tel;
+        this.email = email;
+        this.look = look;
+        this.caim = caim;
+        this.cfrom = cfrom;
+        this.etime = etime;
+        this.rate = rate;
+        this.remark = remark;
+        this.count = count;
     }
 
     private Long id;//用户id
@@ -48,8 +64,11 @@ public class CustomerPo implements Serializable {
     private Integer rate;//进度
 
     private String remark;//沟通内容
-    private String count;//沟通的次数
+    private int count;//沟通的次数
     private String project;//询问的项目
+
+//    分装聊天内容
+    private List<CustomerLogPo> logs;
 
 //    只是为了前端传值,后端接收是方便
     private Integer pageindex=1;//当前页码,默认显示第一页

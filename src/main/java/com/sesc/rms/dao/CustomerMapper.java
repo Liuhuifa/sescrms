@@ -25,4 +25,18 @@ public interface CustomerMapper {
      * @return
      */
     int findOneCustomer(CustomerPo po);
+
+    /**
+     * 查询某个具体的客户
+     * @param id
+     * @return
+     */
+    CustomerPo findCustomerById(Long id);
+
+    /**
+     * 修改客户信息
+     * @param po
+     * @return
+     */
+    int updateByCustomer(CustomerPo po);
 }

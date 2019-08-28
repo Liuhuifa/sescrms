@@ -187,4 +187,78 @@
             </if>
         </where>
     </select>
+
+    <resultMap id="customer-log" type="com.sesc.rms.po.CustomerPo" autoMapping="true">
+        <id property="id" column="id"></id>
+        <collection property="logs" ofType="com.sesc.rms.po.CustomerLogPo" autoMapping="true">
+            <id property="id" column="id"></id>
+        </collection>
+    </resultMap>
+    <!--  根据条件查询一个客户是否存在 -->
+    <select id="findCustomerById" resultMap="customer-log" parameterType="com.sesc.rms.po.CustomerPo">
+        SELECT
+            mc.id, mc.`name`, mc.address, mc.qq, mc.tel, mc.email, mc.belongs, mc.lasttime, mc.time, mc.`status`, mc.look,mc.restatus,
+            mc.caim, mc.cfrom, mc.type, mc.keyword, mc.etime, mc.rate, mc.remark, mc.count
+        FROM
+        ml_customer AS mc
+        where mc.id=#{id}
+    </select>
+
+<!--  修改某个客户信息  -->
+    <update id="updateByCustomer" parameterType="com.sesc.rms.po.CustomerPo">
+        update ml_customer mc
+        <set>
+            <if test="name != null and name !=''">
+                mc.name=#{name},
+            </if>
+            <if test="address != null and address !=''">
+                mc.address=#{address},
+            </if>
+            <if test="qq != null and qq !=''">
+                mc.qq=#{qq},
+            </if>
+            <if test="tel != null and tel !=''">
+                mc.tel=#{tel},
+            </if>
+            <if test="email != null and email !=''">
+                mc.email=#{email},
+            </if>
+            <if test="belongs != null">
+                mc.belongs=#{belongs},
+            </if>
+            <if test="lasttime != null and lasttime !=''">
+                mc.lasttime=#{lasttime},
+            </if>
+
+            <if test="status != null and status !=''">
+                mc.status=#{status},
+            </if>
+            <if test="look != null">
+                mc.look=#{look},
+            </if>
+            <if test="restatus != null and restatus !=''">
+                mc.restatus=#{restatus},
+            </if>
+            <if test="caim != null">
+                mc.caim=#{caim},
+            </if>
+            <if test="cfrom != null and cfrom !=''">
+                mc.cfrom=#{cfrom},
+            </if>
+
+            <if test="etime != null and etime !=''">
+                mc.etime=#{etime},
+            </if>
+            <if test="rate != null">
+                mc.rate=#{rate},
+            </if>
+            <if test="remark != null and remark !=''">
+                mc.remark=#{remark},
+            </if>
+            <if test="count != null">
+                mc.`count`=mv.`count`+1,
+            </if>
+        </set>
+        where mc.id=#{id}
+    </update>
 </mapper>
