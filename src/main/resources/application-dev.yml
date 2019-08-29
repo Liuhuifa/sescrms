@@ -27,7 +27,8 @@ spring:
 mybatis:
   type-aliases-package: com.sesc.rms.po
   mapper-locations: /mapper/*.xml
-
+  configuration:
+    lazy-loading-enabled: true
 
 logging:
   level:

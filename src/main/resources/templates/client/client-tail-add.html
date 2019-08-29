@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" href="/static/css/pages/client-tail-add.css"/>
     <script src="/static/js/libs/jquery-1.7.2.min.js"></script>
+    <script src="/static/js/libs/jquery.cookie.js"></script>
     <style>
 
 
@@ -259,11 +260,6 @@
                                         <label class="control-label">联系状态:</label>
                                         <div class="controls">
                                             <select class="input-large" name="rate" id="rate">
-<!--                                                <option value="0" th:case="0" selected>未联系上</option>-->
-<!--                                                <option value="1" th:case="1" selected>联系中</option>-->
-<!--                                                <option value="2" th:case="2" selected>合作中</option>-->
-<!--                                                <option value="3" th:case="3" selected>暂停下线</option>-->
-
                                                 <option value="0">未联系上</option>
                                                 <option value="1">联系中</option>
                                                 <option value="2">合作中</option>
@@ -288,9 +284,9 @@
                         </div>
                         <script>
                             $(function () {
-                                let status = [[${customer.status}]]
+                                let rate = [[${customer.rate}]]
                                 let caim = [[${customer.caim}]];
-                                $("#status option").eq(status).attr('selected','selected');
+                                $("#rate option").eq(rate).attr('selected','selected');
                                 $("#caim option").eq(caim).attr('selected','selected');
                             })
                         </script>
@@ -321,7 +317,7 @@
                                             <div id="history__one" th:each="item,index:${customer.logs}">
                                                 <div class="history__one__time question-remark">
                                                     <strong>时间:</strong>
-                                                    <div>[[${item.time}]]</div>
+                                                    <div>[[${item.logtime}]]</div>
                                                 </div>
                                                 <div class="history__one__bname question-remark">
                                                     <strong>管理者:</strong>
@@ -329,11 +325,11 @@
                                                 </div>
                                                 <div class="history__one__question question-remark">
                                                     <strong>问题:</strong>
-                                                    <div>[[${item.question}]]</div>
+                                                    <div>[[${item.logquestion}]]</div>
                                                 </div>
                                                 <div class="history__one__remark question-remark">
                                                     <strong>内容:</strong>
-                                                    <div>[[${item.remark}]]</div>
+                                                    <div>[[${item.logremark}]]</div>
                                                 </div>
                                                 <hr>
                                             </div>
@@ -346,7 +342,7 @@
                             <button type="button" class="btn btn-primary btn-large" id="log-add"><i
                                     class="icon-star"></i>确定
                             </button>
-                            <button type="reset" class="btn btn-large">返回</button>
+                            <button type="reset" class="btn btn-large"><a href="javascript:history.go(-1)">返回</a></button>
                         </div>
                     </form>
                 </div> <!-- /.span12 -->
@@ -358,7 +354,96 @@
     </div> <!-- /#content -->
 
 </div> <!-- /#wrapper -->
+<script>
+    $(function () {
+        $("#log-add").on("click",function () {
+            let name = $("#name").val();//姓名
+            let address = $('#address').val();//地址
+            let tel = $("#tel").val();//地址
+            let cfrom = $('#cfrom').val();//公司
+            let qq = $('#qq').val();//qq
+            let email = $("#emailandwx").val();//邮箱，或者微信
+            let money = $("#money").val();//费用
+            let rate = $("#rate").val();//状态
+            let caim = $("#caim").val();//级别
+            let question = $('#question').val();//问题
+            let remark = $("#remark").val();//回答
 
+            let boo=false;
+
+            if (!trim(name)) {
+                Swal.fire(
+                    "提示",
+                    "名字必须填写",
+                    "error"
+                )
+            }else if (!trim(address)) {
+                Swal.fire(
+                    "提示",
+                    "地址必须填写",
+                    "error"
+                )
+            }else if (!trim(tel)) {
+                Swal.fire(
+                    "提示",
+                    "电话必须填写",
+                    "error"
+                )
+            }else if (!trim(cfrom)) {
+                Swal.fire(
+                    "提示",
+                    "公司名称必须填写",
+                    "error"
+                )
+            }else if (!trim(remark)) {
+                Swal.fire(
+                    "提示",
+                    "交流内容必须填写",
+                    "error"
+                )
+            }else if (!trim(question)) {
+                Swal.fire(
+                    "提示",
+                    "客户问题必须填写",
+                    "error"
+                )
+            }else if (caim == 0) {
+                Swal.fire(
+                    "提示",
+                    "请选择客户级别",
+                    "error"
+                )
+            }else{
+                $.ajax({
+                    url:url+"/customer-log/add",
+                    type:"post",
+                    data:{
+                        logname:name,
+                        address:address,
+                        tel:tel,
+                        cfrom:cfrom,
+                        qq:trim(qq),
+                        email:trim(email),
+                        money:money,
+                        rate:rate,
+                        caim:caim,
+                        question:question,
+                        remark:remark,
+                        cumtomerid:[[${cumtomerid}]]
+                    },
+                    dataType:'json',
+                    success:function (response) {
+                        if (response.code == 1) {
+                            //调专页面
+                            let pageindex = $.cookie("pageindex");
+                            window.location.href=url+"/customer/list?pageindex="+pageindex;
+                        }
+                    }
+                })
+            }
+        })
+    })
+</script>
 
 <div id="footer">
 

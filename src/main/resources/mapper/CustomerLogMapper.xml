@@ -3,7 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sesc.rms.dao.CustomerLogMapper">
     <insert id="insertOne">
-        INSERT into ml_customer_log(id,`name`,belongsname,rate,question,remark,money,time)
-        value(#{id},#{name},#{belongsname},#{rate},#{question},#{remark},#{money},#{time})
+        INSERT into ml_customer_log(logid,`logname`,belongsname,lograte,logquestion,logremark,logmoney,logtime)
+        value(#{logid},#{logname},#{belongsname},#{lograte},#{logquestion},#{logremark},#{logmoney},#{logtime})
     </insert>
+
+    <select id="listById" resultType="com.sesc.rms.po.CustomerLogPo">
+        SELECT mcl.logid, mcl.logname, mcl.belongsname, mcl.lograte, mcl.logquestion, mcl.logremark, mcl.logmoney, mcl.logtime
+        FROM ml_customer_log AS mcl
+        where mcl.logid=#{logid}
+        order by mcl.logtime desc
+    </select>
 </mapper>

@@ -26,7 +26,7 @@ $(function () {
     //     }
     // });
     //翻页
-    $("#paginations .pagination ul li").on("click",function () {
+    $(".pagination ul li").on("click",function () {
         let pageNum = $(this).attr("value");
         window.location.href=url+"/customer/list?pageindex="+pageNum;
     });
@@ -39,11 +39,41 @@ $(function () {
         window.location.href=url+"/templates/client/client-add.html"
     });
 
+//    分配坐席
+    $("#handleCustomer").on("click",function () {
+        let checkedCustomer = $(".checked");
+        let customerArray = new Array();
+        $.each(checkedCustomer,function (i, item) {
+            if (item.checked == true) {
+                customerArray.push(item.value);
+            }
+        })
+        //如果有选择
+        if (customerArray.length >0) {
+            $("#myModal").modal("show");
+        }else{
+            //没有选择提示他
+            Swal.fire(
+                "提示",
+                "请选择要分配的客户!",
+                "error"
+            )
+        }
+    })
+
 })
 
 function customerTail(e) {
     let tail = e.dataset.tail;
     window.location.href=url+"/customer/tail/"+tail;
+}
+
+/**
+ * 查看
+ */
+function tailInfo(e) {
+    let logid = e.dataset.show;
+    window.location.href=url+"/customer-log/tail-info/"+logid;
 }
 
 

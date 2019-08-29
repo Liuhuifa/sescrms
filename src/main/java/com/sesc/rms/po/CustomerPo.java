@@ -24,7 +24,8 @@ public class CustomerPo implements Serializable {
         this.group = group;
     }
 
-    public CustomerPo(String name, String address, String qq, String tel, String email, Integer look, Integer caim, String cfrom, String etime, Integer rate, String remark) {
+    public CustomerPo(Long id,String name, String address, String qq, String tel, String email, Integer look, Integer caim, String cfrom, String etime, Integer rate, String remark) {
+        this.id=id;
         this.name = name;
         this.address = address;
         this.qq = qq;
@@ -36,7 +37,6 @@ public class CustomerPo implements Serializable {
         this.etime = etime;
         this.rate = rate;
         this.remark = remark;
-        this.count = count;
     }
 
     private Long id;//用户id
@@ -64,7 +64,7 @@ public class CustomerPo implements Serializable {
     private Integer rate;//进度
 
     private String remark;//沟通内容
-    private int count;//沟通的次数
+    private Integer count;//沟通的次数
     private String project;//询问的项目
 
 //    分装聊天内容

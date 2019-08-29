@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CustomerLogServiceImpl implements CustomerLogService {
@@ -21,23 +23,27 @@ public class CustomerLogServiceImpl implements CustomerLogService {
     @Resource
     private CustomerMapper customerMapper;
 
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     public Result insertOne(CustomerLogPo logPo, CustomerPo customerPo) {
         Result res = new Result();
-        int result=-1;//标识作用
-        result = mapper.insertOne(logPo);
-        if (result>0){
-            result=-1;
-            result = customerMapper.updateByCustomer(customerPo);
-        }
-        if (result>0){
+        int logResult = mapper.insertOne(logPo);
+        customerPo.setCount(1);
+        int customerResult = customerMapper.updateByCustomer(customerPo);
+        if (logResult>0 && customerResult>0){
             //大于0添加成功
             res.setCode(1);
         }else{
             //否则添加失败
             res.setCode(0);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return res;
+    }
+
+    @Override
+    public List<CustomerLogPo> listById(Long id) {
+        return mapper.listById(id);
     }
 }

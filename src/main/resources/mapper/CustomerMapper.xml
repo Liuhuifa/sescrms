@@ -188,20 +188,48 @@
         </where>
     </select>
 
-    <resultMap id="customer-log" type="com.sesc.rms.po.CustomerPo" autoMapping="true">
+    <resultMap id="customer-log" type="com.sesc.rms.po.CustomerPo">
         <id property="id" column="id"></id>
-        <collection property="logs" ofType="com.sesc.rms.po.CustomerLogPo" autoMapping="true">
-            <id property="id" column="id"></id>
+        <result column="name" property="name"></result>
+        <result column="address" property="address"></result>
+        <result column="qq" property="qq"></result>
+        <result column="tel" property="tel"></result>
+        <result column="email" property="email"></result>
+        <result column="belongs" property="belongs"></result>
+        <result column="lasttime" property="lasttime"></result>
+        <result column="time" property="time"></result>
+        <result column="status" property="status"></result>
+        <result column="look" property="look"></result>
+        <result column="restatus" property="restatus"></result>
+        <result column="caim" property="caim"></result>
+        <result column="cfrom" property="cfrom"></result>
+        <result column="type" property="type"></result>
+        <result column="etime" property="etime"></result>
+        <result column="rate" property="rate"></result>
+        <result column="remark" property="remark"></result>
+        <result column="count" property="count"></result>
+        <collection property="logs" ofType="com.sesc.rms.po.CustomerLogPo">
+            <result property="logid" column="logid"></result>
+            <result property="logname" column="logname"></result>
+            <result property="belongsname" column="belongsname"></result>
+            <result property="lograte" column="lograte"></result>
+            <result property="logquestion" column="logquestion"></result>
+            <result property="logremark" column="logremark"></result>
+            <result property="logmoney" column="logmoney"></result>
+            <result property="logtime" column="logtime"></result>
         </collection>
     </resultMap>
-    <!--  根据条件查询一个客户是否存在 -->
+    <!--  根据条件查询信息 -->
     <select id="findCustomerById" resultMap="customer-log" parameterType="com.sesc.rms.po.CustomerPo">
         SELECT
             mc.id, mc.`name`, mc.address, mc.qq, mc.tel, mc.email, mc.belongs, mc.lasttime, mc.time, mc.`status`, mc.look,mc.restatus,
-            mc.caim, mc.cfrom, mc.type, mc.keyword, mc.etime, mc.rate, mc.remark, mc.count
+            mc.caim, mc.cfrom, mc.type,mc.etime, mc.rate, mc.remark, mc.count,
+            mcl.logid,mcl.`logname`, mcl.belongsname, mcl.lograte, mcl.logquestion, mcl.logremark, mcl.logmoney, mcl.logtime
         FROM
         ml_customer AS mc
+        left join ml_customer_log mcl on mc.id=mcl.logid
         where mc.id=#{id}
+        order by mcl.logtime desc
     </select>
 
 <!--  修改某个客户信息  -->
@@ -256,7 +284,7 @@
                 mc.remark=#{remark},
             </if>
             <if test="count != null">
-                mc.`count`=mv.`count`+1,
+                mc.`count`=`count`+1,
             </if>
         </set>
         where mc.id=#{id}

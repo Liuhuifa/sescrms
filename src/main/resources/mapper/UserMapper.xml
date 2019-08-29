@@ -8,13 +8,15 @@
         <result column="uname" property="uname"></result>
         <result column="password" property="password"></result>
         <result column="salt" property="salt"></result>
+        <result column="real_name" property="realName"></result>
     </resultMap>
     <select id="login" resultMap="user_login">
         SELECT
             su.uname,
             su.`password`,
             su.email,
-            su.salt
+            su.salt,
+            su.real_name
         FROM
             sys_user AS su
         WHERE

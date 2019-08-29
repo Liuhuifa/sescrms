@@ -10,26 +10,26 @@ public class CustomerLogPo {
     public CustomerLogPo() {
     }
 
-    public CustomerLogPo(String name, String belongsname, int rate, String question, String remark, Integer money, String time) {
-        this.name = name;
+    public CustomerLogPo(Long id,String name, String belongsname, int rate, String question, String remark, Integer money, String time) {
+        this.logid=id;
+        this.logname = name;
         this.belongsname = belongsname;
-        this.rate = rate;
-        this.question = question;
-        this.remark = remark;
-        this.money = money;
-        this.time = time;
+        this.lograte = rate;
+        this.logquestion = question;
+        this.logremark = remark;
+        this.logmoney = money;
+        this.logtime = time;
     }
 
-    private Long id; //客户id  外键
-    private String name;//客户姓名
+    private Long logid; //客户id  外键
+    private String logname;//客户姓名
     private String belongsname;//管理者名字
 
-    private int rate;//联系进度
-    private String question;//询问的问题
-    private String remark;//回答
+    private int lograte;//联系进度
+    private String logquestion;//询问的问题
+    private String logremark;//回答
 
-    private Integer money;
-    private String time;//创建时间
-    private String keyword;//关键字
+    private Integer logmoney;
+    private String logtime;//创建时间
 
 }
