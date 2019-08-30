@@ -71,4 +71,15 @@ public class CustomerServiceImpl implements CustomerService {
     public Result updateByCustomer(CustomerPo po) {
         return null;
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+    public Result updateByUidAndIds(Integer uid, Long[] ids) {
+        int result = mapper.updateByUidAndIds(uid, ids);
+        if (result>0){
+            return Result.success();
+        }else {
+            return Result.fail("修改失败");
+        }
+    }
 }

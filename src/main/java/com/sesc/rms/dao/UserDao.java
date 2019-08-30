@@ -13,4 +13,12 @@ public interface UserDao {
     int addUser(SysUserPo po);
 
     SysUserPo listRoleAndPer(@Param("uname") String uname);
+
+    /**
+     * 查询指定角色下的用户
+     * @param rid
+     * @return
+     */
+    List<SysUserPo> listUserByRoleId(@Param("rid") Integer rid,
+                                     @Param("uname") String uname);
 }

@@ -42,4 +42,10 @@ public interface CustomerService {
      * @return
      */
     Result updateByCustomer(CustomerPo po);
+
+    /**
+     * 给市场专员分配客户
+     * @return
+     */
+    Result updateByUidAndIds(Integer uid,Long[]ids);
 }

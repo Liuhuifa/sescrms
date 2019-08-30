@@ -6,6 +6,7 @@ import com.sesc.rms.dao.UserDao;
 import com.sesc.rms.po.SysUserPo;
 import com.sesc.rms.service.inter.UserService;
 import com.sesc.rms.util.MD5Util;
+import com.sesc.rms.util.Result;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.StringUtils;
@@ -78,5 +79,13 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public Result listUserByRoleId(Integer rid,String uname,Integer pageindex) throws Exception{
+        PageHelper.startPage(pageindex,6);
+        List<SysUserPo> sysUserPos = dao.listUserByRoleId(rid,uname);
+        sysUserPos.stream().forEach(item-> System.out.println(item));
+        return Result.success(new PageInfo<SysUserPo>(sysUserPos));
     }
 }

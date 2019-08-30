@@ -25,18 +25,68 @@
     <link rel="stylesheet" href="/static/css/pages/role_list.css">
 
     <script src="/static/js/libs/jquery-1.7.2.min.js"></script>
-    <script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
     <style>
-        .pagination{
-            display: inline-block;
+        #tables{
             position: relative;
-            right: -70%;
+            padding-bottom: 50px;
+        }
+       #tables .pagination{
+            position: absolute;
+            right: 20px;
+            bottom: 15px;
+            margin: 0;
         }
         .handle{
-            display: inline-block;
-            position: relative;
-            top: -20px;
+            position: absolute;
             left: 20px;
+            bottom: 26px;
+        }
+        #myModal .modal-body table{
+            margin-top: 20px;
+        }
+
+
+        #myModal{}
+        #myModal .modal-body div{
+            display: block;
+            width: auto;
+            float: right;
+            margin: 0;
+        }
+        #myModal .modal-body div ul{
+            display: block;
+        }
+        #myModal .modal-body a{
+            right: 0;
+        }
+        #myModal #uname{
+            background-color: #fff;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            -webkit-transition: border linear .2s,box-shadow linear .2s;
+            -moz-transition: border linear .2s,box-shadow linear .2s;
+            -o-transition: border linear .2s,box-shadow linear .2s;
+            transition: border linear .2s,box-shadow linear .2s;
+            display: inline-block;
+            height: 20px;
+            padding: 4px 6px;
+            font-size: 14px;
+            line-height: 20px;
+            color: #555;
+            vertical-align: middle;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        #myModal #uname:focus{
+            border-color: rgba(82,168,236,0.8);
+            outline: 0;
+            outline: thin dotted \9;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(82,168,236,0.6);
+            -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(82,168,236,0.6);
         }
     </style>
 </head>
@@ -376,20 +426,25 @@
                 <h4 class="modal-title" id="myModalLabel">分配客户</h4>
             </div>
             <div class="modal-body">
-                <div id="authorized" class="">
-                    <h5 class="modal-title">已拥有权限</h5>
-                    <ul></ul><!--现未拥有的-->
-                    <ol></ol><!--添加的-->
+                <h4>请选择市场专员</h4>
+                <input name="uname" id="uname">
+                <span><a href="javascript:;" class="btn btn-small btn-primary" onclick="userByRole(1)">搜索</a></span>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>选择</th>
+                        <th>姓名</th>
+                        <th>联系方式</th>
+                    </tr>
+                </table>
+<!--       分页部分         -->
+                <div class="pagination">
+                    <ul></ul>
                 </div>
-                <div id="authorize" class="">
-                    <h5 class="modal-title">未拥有权限</h5>
-                    <ul></ul><!--现拥有的-->
-                    <ol></ol><!--取消的-->
-                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消分配</button>
+                <button type="button" class="btn btn-primary" id="primary">确认分配</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

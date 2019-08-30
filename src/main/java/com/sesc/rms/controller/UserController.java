@@ -2,6 +2,7 @@ package com.sesc.rms.controller;
 
 import com.sesc.rms.po.SysUserPo;
 import com.sesc.rms.service.inter.UserService;
+import com.sesc.rms.util.Result;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -69,5 +70,28 @@ public class UserController {
     @ResponseBody
     public Object allUser(){
         return service.listUser(null, null);
+    }
+
+    /**
+     * 查询指定角色的用户
+     * @param rid
+     * @param pageindex
+     * @return
+     */
+    @GetMapping("listUserByRole/{rid}/{pageindex}/{uname}")
+    @ResponseBody
+    public Result listUserByRoleId(@PathVariable("rid") Integer rid,
+                                   @PathVariable("pageindex") Integer pageindex,
+                                   @PathVariable("uname")String uname){
+        try {
+            if (uname.equals("null")){
+                uname=null;
+            }
+            Result result = service.listUserByRoleId(rid,uname,pageindex);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail("服务器GG了");
+        }
     }
 }

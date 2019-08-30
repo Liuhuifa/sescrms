@@ -1,5 +1,7 @@
 package com.sesc.rms.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.util.IOUtils;
 import com.github.pagehelper.PageInfo;
 import com.sesc.rms.po.CustomerPo;
 import com.sesc.rms.po.SysUserPo;
@@ -15,6 +17,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("customer")
@@ -145,4 +150,20 @@ public class CustomerController{
         return mv;
     }
 
+    /**
+     * 给市场专员分配客户
+     * @param uid
+     * @param
+     * @return
+     */
+    @PostMapping("/update")
+    @ResponseBody
+    public Result updateByUidAndIds(@RequestParam("uid")Integer uid,Long[] ids){
+        try {
+            return service.updateByUidAndIds(uid, ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail("分配失败");
+        }
+    }
 }

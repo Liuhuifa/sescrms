@@ -99,4 +99,29 @@
             AND sr.is_del = 0
             AND sp.is_del = 0
     </select>
+
+<!--  查询指定角色下的用户  -->
+    <resultMap id="user-role" type="com.sesc.rms.po.SysUserPo">
+        <id column="uname" property="uname"></id>
+        <result column="uid" property="uid"></result>
+        <result column="real_name" property="realName"></result>
+        <result column="phone" property="phone"></result>
+    </resultMap>
+    <select id="listUserByRoleId" parameterType="int" resultMap="user-role">
+        SELECT
+            su.uname,
+            su.uid,
+            su.real_name,
+            su.phone
+        FROM
+            sys_user AS su
+            INNER JOIN sys_user_role AS sur ON su.uid = sur.sys_user_id
+        WHERE
+            sur.sys_role_id =#{rid}
+            <if test="uname != null and uname != ''">
+                and position(#{uname} in su.real_name)
+            </if>
+    </select>
+
+<!--  搜索指定名字或者手机号的   模糊查询  -->
 </mapper>
