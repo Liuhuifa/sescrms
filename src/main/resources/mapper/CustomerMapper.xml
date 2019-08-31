@@ -35,7 +35,8 @@
             mc.count,
             mc.project,
             su.uid,
-            su.uname
+            su.uname,
+            su.realName
         FROM
             ml_customer AS mc
             LEFT JOIN sys_user AS su ON mc.belongs = su.uid
@@ -293,7 +294,7 @@
 <!--  给市场专员分配用户时  -->
     <update id="updateByUidAndIds" parameterType="com.sesc.rms.po.CustomerPo">
         update ml_customer mc
-        set mc.belongs=#{uid}
+        set mc.belongs=#{uid},mc.lasttime=#{lasttime}
         where mc.id in
         <foreach collection="ids" open="(" item="item" close=")" separator="," index="i">
             #{item}

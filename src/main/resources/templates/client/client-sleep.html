@@ -99,7 +99,7 @@
 
         <div class="container">
 
-            <a href="javascript:;" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+            <a href="javascript:void(0)" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
                 <i class="icon-cog"></i>
             </a>
 
@@ -107,14 +107,14 @@
 
                 <ul>
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             查看网站
                             <b class="caret"></b>
                         </a>
 
                         <!--					<ul class="dropdown-menu pull-right">-->
-                        <!--						<li><a href="javascript:;">查看网站1</a></li>-->
-                        <!--						<li><a href="javascript:;">查看网站2</a></li>-->
+                        <!--						<li><a href="javascript:void(0)">查看网站1</a></li>-->
+                        <!--						<li><a href="javascript:void(0)">查看网站2</a></li>-->
                         <!--						<li class="dropdown-submenu">-->
                         <!--		                  <a tabindex="-1" href="#">下拉菜单</a>-->
                         <!--		                  <ul class="dropdown-menu">-->
@@ -129,7 +129,7 @@
 
                 <ul class="pull-right">
                     <li><a href="/login"><i class="icon-user"></i> 登录</a></li>
-                    <li><a href="javascript:;"><span class="badge badge-primary">1</span> 新消息</a></li>
+                    <li><a href="javascript:void(0)"><span class="badge badge-primary">1</span> 新消息</a></li>
                     <li class="dropdown">
                         <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
                             设置
@@ -137,8 +137,8 @@
                         </a>
 
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:;">设置 #1</a></li>
-                            <li><a href="javascript:;">设置 #2</a></li>
+                            <li><a href="javascript:void(0)">设置 #1</a></li>
+                            <li><a href="javascript:void(0)">设置 #2</a></li>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">下拉菜单</a>
                                 <ul class="dropdown-menu">
@@ -167,7 +167,7 @@
 
             <a href="./index.html" class="brand">首页</a>
 
-            <a href="javascript:;" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <a href="javascript:void(0)" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <i class="icon-reorder"></i>
             </a>
 
@@ -189,7 +189,7 @@
 
                         <ul class="dropdown-menu">
                             <li id="customers"><a href="javascript:void(0)">客户列表</a></li>
-                            <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
+                            <li><a href="javascript:void(0)">休眠公海</a></li>
                             <li><a href="./jqueryui.html">jQuery UI</a></li>
                             <li><a href="./charts.html">图表</a></li>
                             <li><a href="./bonus.html">其他组件</a></li>
@@ -205,21 +205,21 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-copy"></i>
                             <span>系统管理</span>
                             <b class="caret"></b>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:;" id="user">用户管理</a></li>
-                            <li><a href="javascript:;" id="role">角色管理</a></li>
-                            <li><a href="javascript:;" id="permission">权限管理</a></li>
+                            <li><a href="javascript:void(0)" id="user">用户管理</a></li>
+                            <li><a href="javascript:void(0)" id="role">角色管理</a></li>
+                            <li><a href="javascript:void(0)" id="permission">权限管理</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-external-link"></i>
                             <span>其他</span>
                             <b class="caret"></b>
@@ -245,93 +245,22 @@
 
 
     <div id="masthead">
+        <div class="container">
 
-        <form id="solr-form" style="margin: 0" action="/customer/list" method="get">
-            <label class="control-label" style="display: inline-block">分组查询:</label>
-            <select name="group" style="margin: 0px">
-                <option value="-2" selected>全部</option>
-                <option value="-1">休眠中</option>
-                <option value="1">已分配</option>
-                <option value="0">未分配</option>
-            </select>
+            <div class="masthead-pad">
 
-            <label class="control-label" style="display: inline-block">客户姓名:</label>
-            <input type="text" name="name" style="margin: 0px" th:value="${solr.name}"/>
+                <div class="masthead-text">
+<!--                    休眠公海-->
+                </div> <!-- /.masthead-text -->
 
-            <label class="control-label" style="display: inline-block">客户电话:</label>
-            <input type="text" name="tel" style="margin: 0px" th:value="${solr.tel}"/>
+            </div>
 
-            <label class="control-label" style="display: inline-block">企业名称:</label>
-            <input type="text" name="cfrom" style="margin: 0px" th:value="${solr.cfrom}"/>
-
-            <label class="control-label" style="display: inline-block">地区:</label>
-            <input type="text" name="address" style="margin: 0px" th:value="${solr.address}"/>
-
-            <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
-
-            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">
-        </form>
-
-        <script>
-            $(function () {
-                $("[name='group']").on("change",function () {
-                    let group = $(this).val();
-                    $("[name='belongs']").remove()
-                    $("#uname").remove()
-                    addelem(group,-3);
-                });
-
-                let group = [[${solr.group}]] ==null?(-2):[[${solr.group}]];
-                if (group) {
-                    $("[name='group']").children("[value='"+group+"']").attr("selected","selected")
-                    if (group == 1) {
-                        let belongs = [[${solr.belongs}]];
-                        addelem(1,belongs);
-                    }
-                }
-            });
-            function addelem(group,belongs) {
-                let elem='';
-                if ( group==1 ){
-                    $.ajax({
-                        url:url+"/user/allUser",
-                        type:"post",
-                        data:{},
-                        dataType:"json",
-                        success:function (response) {
-                            elem+="<label id='uname' class=\"control-label\" style=\"display: inline-block\">坐席:</label>";
-                            elem+='<select name="belongs" style="margin: 0px">';
-                            elem+='<option value="-3" selected>全部</option>';
-                            $.each(response.list,function (i, item) {
-                                if (belongs == item.uid) {
-                                    elem+='<option value="'+item.uid+'" selected>'+item.uname+'</option>'
-                                }else{
-                                    elem+='<option value="'+item.uid+'">'+item.uname+'</option>'
-                                }
-                            })
-                            elem+='</select>';
-                            $("[name='group']").after(elem);
-                        }
-                    })
-                }
-            }
-        </script>
-<!--        <div class="container">-->
-
-<!--            <div class="masthead-pad">-->
-
-<!--                <div class="masthead-text">-->
-<!--                    客户列表-->
-<!--                </div> &lt;!&ndash; /.masthead-text &ndash;&gt;-->
-
-<!--            </div>-->
-
-<!--        </div> &lt;!&ndash; /.container &ndash;&gt;-->
+        </div> <!-- /.container -->
 
     </div> <!-- /#masthead -->
 
 <!--        <section shiro:hasPermission="role-create" id="buttons">-->
-<!--            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>-->
+<!--            <a href="javascript:void(0)" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>-->
 <!--        </section>-->
 
 
@@ -341,7 +270,6 @@
             <tr>
                 <th><input type="checkbox" onclick="checkAll(this)" class="check-all"></th>
                 <th>序号</th>
-                <th>归属坐席</th>
                 <th>客户姓名</th>
                 <th>级别</th>
                 <th>客户电话</th>
@@ -358,15 +286,7 @@
 
                 <th th:text="${loopStatus.count}"></th>
 
-                <th th:if="${item.belongs == 0}">
-                    未分配
-                </th>
-                <th th:if="${item.belongs == -1}">
-                    休眠中
-                </th>
-                <th th:if="${item.belongs &gt; 0}">
-                    [[${item.realName}]]
-                </th>
+
 
 
                 <th th:text="${item.name}"></th>
@@ -388,27 +308,29 @@
                     是
                 </th>
                 <th>
-                    <a href="javascript:;" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
-<!--                    <a href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
-                    <a href="javascript:;" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">跟踪</a>
-                    <a href="javascript:;" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
+                    <a href="javascript:void(0)" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
+<!--                    <a href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
+                    <a href="javascript:void(0)" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">移出</a>
+                    <a href="javascript:void(0)" class="btn btn-small btn-tertiary" onclick="removeCus(this)"  th:data-tail="${item.id}">移除</a>
+<!--                    <a href="javascript:void(0)" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>-->
                 </th>
             </tr>
             </tbody>
         </table>
         <div class="handle">
             <a href="javascript:void(0)" class="btn btn-primary btn-small handleCustomer" data-flag="allocation">分配</a>
+            <a href="javascript:void(0)" class="btn btn-warning btn-small handleCustomer" data-flag="pull">拉取</a>
             <a href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="sleep">休眠</a>
         </div>
         <div class="pagination">
             <ul>
-                <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:;">首页</a></li>
-                <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:;">上一页</a></li>
+                <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:void(0)">首页</a></li>
+                <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:void(0)">上一页</a></li>
                 <li th:each="item,loopStatus:${datas.navigatepageNums}" th:class="${item==datas.pageNum?'active':''}" th:value="${item}">
-                    <a href="javascript:;" th:text="${item}"></a>
+                    <a href="javascript:void(0)" th:text="${item}"></a>
                 </li>
-                <li th:value="${datas.nextPage}"  th:if="${!datas.isLastPage}" id="next-page"><a href="javascript:;">下一页</a></li>
-                <li th:value="${datas.pages}"  th:if="${!datas.isLastPage}"><a href="javascript:;">尾页</a></li>
+                <li th:value="${datas.nextPage}"  th:if="${!datas.isLastPage}" id="next-page"><a href="javascript:void(0)">下一页</a></li>
+                <li th:value="${datas.pages}"  th:if="${!datas.isLastPage}"><a href="javascript:void(0)">尾页</a></li>
             </ul>
         </div>
     </section>
@@ -428,7 +350,7 @@
             <div class="modal-body">
                 <h4>请选择市场专员</h4>
                 <input name="uname" id="uname">
-                <span><a href="javascript:;" class="btn btn-small btn-primary" onclick="userByRole(1)">搜索</a></span>
+                <span><a href="javascript:void(0)" class="btn btn-small btn-primary" onclick="userByRole(1)">搜索</a></span>
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>选择</th>

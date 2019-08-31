@@ -76,4 +76,6 @@ public class CustomerPo implements Serializable {
     private String uname;//归属坐席的名字
 
     private Integer group;//分组查询
+
+    private String realName;//专员的真实名字
 }

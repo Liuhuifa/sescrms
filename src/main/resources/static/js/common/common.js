@@ -20,6 +20,10 @@ $(function () {
     $("#customers").on("click",function () {
         window.location.href=url+"/customer/list?pageindex=1";
     })
+//    跳转休眠公海页面
+    $("#sleep").on('click',function () {
+        window.location.href=url+"/customer/sleep/1";
+    })
 })
 
 /**

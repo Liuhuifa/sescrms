@@ -166,4 +166,18 @@ public class CustomerController{
             return Result.fail("分配失败");
         }
     }
+
+    /**
+     * 跳转公海页面的接口
+     */
+    @GetMapping("sleep/{pageindex}")
+    public ModelAndView listSleepCustomer(@PathVariable Integer pageindex){
+        CustomerPo po =new CustomerPo();
+        po.setGroup(-1);
+        po.setPageindex(pageindex);
+        PageInfo<CustomerPo> customerPoPageInfo = service.listCustomers(po);
+        ModelAndView mv = new ModelAndView("client/client-sleep");
+        mv.addObject("datas",customerPoPageInfo);
+        return mv;
+    }
 }

@@ -8,7 +8,7 @@
         <result column="uname" property="uname"></result>
         <result column="password" property="password"></result>
         <result column="salt" property="salt"></result>
-        <result column="real_name" property="realName"></result>
+        <result column="realName" property="realName"></result>
     </resultMap>
     <select id="login" resultMap="user_login">
         SELECT
@@ -16,7 +16,7 @@
             su.`password`,
             su.email,
             su.salt,
-            su.real_name
+            su.realName
         FROM
             sys_user AS su
         WHERE
@@ -27,7 +27,7 @@
 <!--  查询所有用户  -->
     <resultMap id="user_listUser" type="com.sesc.rms.po.SysUserPo">
         <id column="uid" property="uid"></id>
-        <result column="real_name" property="realName"></result>
+        <result column="realName" property="realName"></result>
         <result column="uname" property="uname"></result>
         <result column="password" property="password"></result>
         <result column="phone" property="phone"></result>
@@ -104,14 +104,14 @@
     <resultMap id="user-role" type="com.sesc.rms.po.SysUserPo">
         <id column="uname" property="uname"></id>
         <result column="uid" property="uid"></result>
-        <result column="real_name" property="realName"></result>
+        <result column="realName" property="realName"></result>
         <result column="phone" property="phone"></result>
     </resultMap>
     <select id="listUserByRoleId" parameterType="int" resultMap="user-role">
         SELECT
             su.uname,
             su.uid,
-            su.real_name,
+            su.realName,
             su.phone
         FROM
             sys_user AS su
@@ -119,7 +119,7 @@
         WHERE
             sur.sys_role_id =#{rid}
             <if test="uname != null and uname != ''">
-                and position(#{uname} in su.real_name)
+                and position(#{uname} in su.realName)
             </if>
     </select>
 

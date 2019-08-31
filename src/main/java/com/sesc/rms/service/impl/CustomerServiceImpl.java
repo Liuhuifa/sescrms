@@ -75,7 +75,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public Result updateByUidAndIds(Integer uid, Long[] ids) {
-        int result = mapper.updateByUidAndIds(uid, ids);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        int result = mapper.updateByUidAndIds(uid, ids,format.format(new Date()));
         if (result>0){
             return Result.success();
         }else {

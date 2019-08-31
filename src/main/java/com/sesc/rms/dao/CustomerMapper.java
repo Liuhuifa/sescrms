@@ -47,5 +47,5 @@ public interface CustomerMapper {
      * @param ids
      * @return
      */
-    int updateByUidAndIds(@Param("uid") Integer uid,@Param("ids")Long[]ids);
+    int updateByUidAndIds(@Param("uid") Integer uid,@Param("ids")Long[]ids,@Param("lasttime")String lasttime);
 }
