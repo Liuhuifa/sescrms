@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="/static/css/pages/user_list.css">
 
     <script src="/static/js/libs/modernizr-2.5.3.min.js"></script>
+    <style>
 
+    </style>
 </head>
 
 <body>
@@ -65,8 +67,8 @@
                 </ul>
 
                 <ul class="pull-right">
-                    <li><a href="/login"><i class="icon-user"></i> 登录</a></li>
-                    <li><a href="javascript:;"><span class="badge badge-primary">1</span> 新消息</a></li>
+                    <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
+                    <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
                     <li class="dropdown">
                         <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
                             设置
@@ -125,10 +127,10 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="./elements.html">组件</a></li>
-                            <li><a href="user-add.html">表单验证</a></li>
-                            <li><a href="./jqueryui.html">jQuery UI</a></li>
-                            <li><a href="./charts.html">图表</a></li>
+                            <li id="customers"><a href="javascript:void(0)">客户列表</a></li>
+                            <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
+                            <li id="partner"><a href="javascript:void(0)">合作中</a></li>
+                            <li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
                             <li><a href="./bonus.html">其他组件</a></li>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">下拉菜单</a>
@@ -277,12 +279,10 @@
                 <div id="authorized" class="">
                     <h5 class="modal-title">已拥有角色</h5>
                     <ul></ul><!--现未拥有的-->
-                    <ol></ol><!--添加的-->
                 </div>
                 <div id="authorize" class="">
                     <h5 class="modal-title">未拥有角色</h5>
                     <ul></ul><!--现拥有的-->
-                    <ol></ol><!--取消的-->
                 </div>
             </div>
             <div class="modal-footer">

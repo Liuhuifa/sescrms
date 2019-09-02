@@ -71,8 +71,8 @@
                 </ul>
 
                 <ul class="pull-right">
-                    <li><a href="javascript:;"><i class="icon-user"></i> Logged in as John Doe</a></li>
-                    <li><a href="javascript:;"><span class="badge badge-primary">1</span> New Message</a></li>
+                    <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
+                    <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
                     <li class="dropdown">
                         <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
                             Settings
@@ -418,7 +418,7 @@
                     url:url+"/customer-log/add",
                     type:"post",
                     data:{
-                        logname:name,
+                        name:name,
                         address:address,
                         tel:tel,
                         cfrom:cfrom,
@@ -435,8 +435,9 @@
                     success:function (response) {
                         if (response.code == 1) {
                             //调专页面
-                            let pageindex = $.cookie("pageindex");
-                            window.location.href=url+"/customer/list?pageindex="+pageindex;
+                            // let pageindex = $.cookie("pageindex");
+                            // window.location.href=url+"/customer/list?pageindex="+pageindex;
+                            window.location.href=document.referrer;//返回上一级页面并且刷新
                         }
                     }
                 })

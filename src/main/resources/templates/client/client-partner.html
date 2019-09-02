@@ -6,9 +6,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>客户列表</title>
-<!--    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
-<!--    <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
+    <title>合作中</title>
+    <!--    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
+    <!--    <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,7 @@
             position: relative;
             padding-bottom: 50px;
         }
-       #tables .pagination{
+        #tables .pagination{
             position: absolute;
             right: 20px;
             bottom: 15px;
@@ -247,13 +247,13 @@
     <div id="masthead">
 
         <form id="solr-form" style="margin: 0" action="/customer/list" method="get">
-            <label class="control-label" style="display: inline-block">分组查询:</label>
-            <select name="group" style="margin: 0px">
-                <option value="-2" selected>全部</option>
-                <option value="-1">休眠中</option>
-                <option value="1">已分配</option>
-                <option value="0">未分配</option>
-            </select>
+<!--            <label class="control-label" style="display: inline-block">分组查询:</label>-->
+<!--            <select name="group" style="margin: 0px">-->
+<!--                <option value="-2" selected>全部</option>-->
+<!--                <option value="-1">休眠中</option>-->
+<!--                <option value="1">已分配</option>-->
+<!--                <option value="0">未分配</option>-->
+<!--            </select>-->
 
             <label class="control-label" style="display: inline-block">客户姓名:</label>
             <input type="text" name="name" style="margin: 0px" th:value="${solr.name}"/>
@@ -267,11 +267,11 @@
             <label class="control-label" style="display: inline-block">地区:</label>
             <input type="text" name="address" style="margin: 0px" th:value="${solr.address}"/>
 
-            <input type="hidden" name="flag" value="1"/>
+            <input type="hidden" name="flag" value="3"/>
 
             <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
 
-            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">
+<!--            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">-->
         </form>
 
         <script>
@@ -318,23 +318,23 @@
                 }
             }
         </script>
-<!--        <div class="container">-->
+        <!--        <div class="container">-->
 
-<!--            <div class="masthead-pad">-->
+        <!--            <div class="masthead-pad">-->
 
-<!--                <div class="masthead-text">-->
-<!--                    客户列表-->
-<!--                </div> &lt;!&ndash; /.masthead-text &ndash;&gt;-->
+        <!--                <div class="masthead-text">-->
+        <!--                    客户列表-->
+        <!--                </div> &lt;!&ndash; /.masthead-text &ndash;&gt;-->
 
-<!--            </div>-->
+        <!--            </div>-->
 
-<!--        </div> &lt;!&ndash; /.container &ndash;&gt;-->
+        <!--        </div> &lt;!&ndash; /.container &ndash;&gt;-->
 
     </div> <!-- /#masthead -->
 
-<!--        <section shiro:hasPermission="role-create" id="buttons">-->
-<!--            <a href="javascript:void(0)" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>-->
-<!--        </section>-->
+    <!--        <section shiro:hasPermission="role-create" id="buttons">-->
+    <!--            <a href="javascript:void(0)" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>-->
+    <!--        </section>-->
 
 
     <section id="tables">
@@ -358,7 +358,7 @@
             <tr class="customer" th:each="item,loopStatus : ${datas.list}">
                 <th><input type="checkbox" class="checked" onclick="checkOne(this)" th:value="${item.id}"></th>
 
-                <th>[[${loopStatus.count}]] <img shiro:hasRole="市场专员" th:if="${item.look==0}" style="height: 20px;width: 20px;float: right" th:src="@{/static/icon/new.png}"/> </th>
+                <th th:text="${loopStatus.count}"></th>
 
                 <th th:if="${item.belongs == 0}">
                     未分配
@@ -391,7 +391,7 @@
                 </th>
                 <th>
                     <a href="javascript:void(0)" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
-<!--                    <a href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
+                    <!--                    <a href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
                     <a href="javascript:void(0)" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">跟踪</a>
                     <a href="javascript:void(0)" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
                 </th>
@@ -403,7 +403,7 @@
             <a href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="sleep">休眠</a>
         </div>
         <div class="pagination">
-            <input type="hidden" name="page" value="1"/>
+            <input type="hidden" name="page" value="3"/>
             <ul>
                 <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:void(0)">首页</a></li>
                 <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:void(0)">上一页</a></li>
@@ -439,7 +439,7 @@
                         <th>联系方式</th>
                     </tr>
                 </table>
-<!--       分页部分         -->
+                <!--       分页部分         -->
                 <div class="pagination">
                     <ul></ul>
                 </div>
@@ -492,8 +492,8 @@
 <script src="/static/js/demos/charts/donut.js"></script>
 <script src="/static/js/common/common.js"></script>
 <script src="/static/js/libs/sweetalert2.all.min.js"></script>
-<!--<script src="/static/js/page/client-list.js"></script>-->
 <script src="/static/js/page/client-list.js"></script>
+<!--<script src="/static/js/page/client-list.js"></script>-->
 <script>
 
     $(function () {

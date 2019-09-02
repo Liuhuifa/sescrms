@@ -48,4 +48,25 @@ public interface CustomerService {
      * @return
      */
     Result updateByUidAndIds(Integer uid,Long[]ids);
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    Result delAnyCustomers(Long[]ids);
+
+    /**
+     * 删除一个
+     * @param id
+     * @return
+     */
+    Result delCustomer(Long id);
+
+    /**
+     * 查询指定用户下未读的消息数量
+     * @param id
+     * @return
+     */
+    Result selectLookCount(Integer id);
 }

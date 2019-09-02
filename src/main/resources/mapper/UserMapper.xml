@@ -12,6 +12,7 @@
     </resultMap>
     <select id="login" resultMap="user_login">
         SELECT
+            su.uid,
             su.uname,
             su.`password`,
             su.email,
@@ -38,6 +39,7 @@
     <select id="listUser" resultMap="user_listUser">
         SELECT
             su.uid,
+            su.realName,
             su.uname,
             su.`password`,
             su.phone,
@@ -51,8 +53,8 @@
     </select>
 
     <insert id="addUser" keyColumn="uid" useGeneratedKeys="true" keyProperty="uid">
-        INSERT INTO sys_user( uname, password,salt, phone, email, create_time, update_time,is_del )
-        VALUE (#{uname},#{password},#{salt},#{phone},#{email},now(),now(),0)
+        INSERT INTO sys_user( uname,realName, password,salt, phone, email, create_time, update_time,is_del )
+        VALUE (#{uname},#{realName},#{password},#{salt},#{phone},#{email},now(),now(),0)
     </insert>
 
 <!--  查询用户全部角色和权限  -->

@@ -18,14 +18,38 @@ $(function () {
     })
 //    跳转客户列表页面
     $("#customers").on("click",function () {
-        window.location.href=url+"/customer/list?pageindex=1";
+        window.location.href=url+"/customer/list?pageindex=1&flag=1";
     })
 //    跳转休眠公海页面
     $("#sleep").on('click',function () {
-        window.location.href=url+"/customer/sleep/1";
+        window.location.href=url+"/customer/list?pageindex=1&flag=2";
+    })
+//    跳转合作中客户列表页面
+    $("#partner").on("click",function () {
+        window.location.href=url+"/customer/list?pageindex=1&flag=3";
+    })
+//    跳转合作中客户列表页面
+    $("#pause").on("click",function () {
+        window.location.href=url+"/customer/list?pageindex=1&flag=4";
     })
 
-
+    // //翻页
+    $(".pagination ul li").on("click",function () {
+        let pageNum = $(this).attr("value");
+        let flag = $(this).parents(".pagination").children('[name="page"]').val();
+        console.log(flag)
+        window.location.href=url+"/customer/list?pageindex="+pageNum+"&flag="+flag;
+    });
+//    未查看信息条数查询
+    $.ajax({
+        url:'/customer/countLook',
+        type:'get',
+        data:{},
+        dataType:'json',
+        success:function (response) {
+            $('.pull-right .badge-primary').text(response.data)
+        }
+    })
 })
 
 /**
@@ -103,12 +127,13 @@ $(function () {
                 })
             }else if (flag == 'sleep') {
                 //添加到公海
-                sleep(customerArray);
+                updateBelongs(customerArray,-1,1);
             }else if (flag == 'pull') {
                 //专员自己在公海中拉取信息
-
+                updateBelongs(customerArray,0,2);
             }else if (flag == 'delete') {
-                //
+                //批量删除客户
+                delAny(customerArray);
             }
 
             //去人按钮绑定提交事件
@@ -245,4 +270,99 @@ function userByRole(pageindex) {
 function tailInfo(e) {
     let logid = e.dataset.show;
     window.location.href=url+"/customer-log/tail-info/"+logid;
+}
+
+/**
+ * 添加到休眠公海
+ * @param customerArray
+ */
+function updateBelongs(customerArray,uid,flag) {
+    //如果checked不为空
+    let question;
+    let success;
+    if (flag == 1) {
+        //添加休眠公海
+        question='你确定要添加到休眠公海吗?'
+        success='成功添加到休眠公海!!!'
+    }else if (flag==2) {
+        //用户在公海自己拉取信息
+        question='你确定要获取这些信息?'
+        success='成功添加到您的客户列表!!!'
+    }
+    Swal.fire({
+        title: '提示',
+        text: question,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '是',
+        cancelButtonText:'否',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:url+"/customer/update",
+                type: "post",
+                traditional: true,
+                data: {
+                    uid:uid,
+                    ids:customerArray
+                },
+                dataType: 'json',
+                success:function (response) {
+                    if (response.code == 1) {
+                        Swal.fire(
+                            '提示',
+                            success,
+                            'success'
+                        ).then((result)=>{
+                            window.location.reload();
+                        })
+                    }
+                }
+            });
+        }
+
+    })
+}
+
+/**
+ * 批量删除客户
+ * @param customerArray
+ */
+function delAny(customerArray) {
+    Swal.fire({
+        title: '提示',
+        text: '你确定要删除所选的客户吗?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '是',
+        cancelButtonText:'否',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:url+"/customer/delAny",
+                type: "post",
+                traditional: true,
+                data: {
+                    ids:customerArray
+                },
+                dataType: 'json',
+                success:function (response) {
+                    if (response.code == 1) {
+                        Swal.fire(
+                            '提示',
+                            '删除成功',
+                            'success'
+                        ).then((result)=>{
+                            window.location.reload();
+                        })
+                    }
+                }
+            });
+        }
+
+    })
 }

@@ -37,6 +37,7 @@ public class CustomerController{
      * @param address
      * @param pageindex
      * @param request
+     * @param flag //标识哪个页面的请求 1:客户列表,2:休眠公海,3:合作中
      * @return
      */
     @GetMapping("list")
@@ -47,9 +48,11 @@ public class CustomerController{
                                       @RequestParam(required = false) String cfrom,
                                       @RequestParam(required = false) String address,
                                       @RequestParam(required = false,defaultValue = "1") Integer pageindex,
+                                      @RequestParam(required = false,defaultValue = "1") Integer flag,
                                       HttpServletRequest request,
                                       HttpServletResponse response) {
         CustomerPo po=null;
+        ModelAndView mv=null;
         Subject subject = SecurityUtils.getSubject();
         boolean sub = subject.hasRole("超级管理员");
 //        把当前页码保存到cookie中,以便后续操作需要回到当前页
@@ -81,8 +84,25 @@ public class CustomerController{
         }
 //        保存搜索信息
         request.getSession().setAttribute("solr",po);
-        PageInfo<CustomerPo> infos = service.listCustomers(po);
-        ModelAndView mv= new ModelAndView("/client/client-list");
+        PageInfo<CustomerPo> infos = null;
+        if (flag==1){
+//            客户列表
+            mv= new ModelAndView("/client/client-list");
+        }else if (flag==2){
+//            休眠公海
+            po.setGroup(-1);
+            po.setBelongs(-1);
+            mv= new ModelAndView("/client/client-sleep");
+        }else if (flag==3){
+//            合作中
+            po.setRate(2);
+            mv= new ModelAndView("/client/client-partner");
+        }else if (flag==4){
+//            暂停下线
+            po.setRate(3);
+            mv= new ModelAndView("/client/client-pause");
+        }
+        infos = service.listCustomers(po);
         mv.addObject("datas",infos);
         mv.addObject("solr",(CustomerPo)request.getSession().getAttribute("solr"));
         return mv;
@@ -158,8 +178,13 @@ public class CustomerController{
      */
     @PostMapping("/update")
     @ResponseBody
-    public Result updateByUidAndIds(@RequestParam("uid")Integer uid,Long[] ids){
+    public Result updateByUidAndIds(@RequestParam("uid")Integer uid,Long[] ids,HttpServletRequest request){
         try {
+            if (uid==null || uid==0){
+//                其阿奴单没有传uid的时候，用session中获取
+                SysUserPo user = (SysUserPo) request.getSession().getAttribute("user");
+                uid = user.getUid();
+            }
             return service.updateByUidAndIds(uid, ids);
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,4 +205,58 @@ public class CustomerController{
         mv.addObject("datas",customerPoPageInfo);
         return mv;
     }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @PostMapping("delAny")
+    @ResponseBody
+    public Result delAnyCustomers(@RequestParam("ids")Long[]ids){
+        Result result = service.delAnyCustomers(ids);
+        return result;
+    }
+
+    /**
+     * 删除一个
+     * @param id
+     * @return
+     */
+    @PostMapping("del")
+    @ResponseBody
+    public Result delCustomer(@RequestParam("id")Long id){
+        return service.delCustomer(id);
+    }
+
+    @PostMapping("move")
+    @ResponseBody
+    public Result move(@RequestParam("id")Long id){
+        CustomerPo po= new CustomerPo();
+        po.setId(id);
+        po.setBelongs(0);
+        return service.updateByCustomer(po);
+    }
+
+//    /**
+//     * 跳转公海页面的接口
+//     */
+//    @GetMapping("partner/{pageindex}")
+//    public ModelAndView partner(@PathVariable Integer pageindex){
+//        CustomerPo po =new CustomerPo();
+//        po.setGroup(-1);
+//        po.setPageindex(pageindex);
+//        PageInfo<CustomerPo> customerPoPageInfo = service.listCustomers(po);
+//        ModelAndView mv = new ModelAndView("client/client-sleep");
+//        mv.addObject("datas",customerPoPageInfo);
+//        return mv;
+//    }
+
+    @GetMapping("countLook")
+    @ResponseBody
+    public Result selectLookCount(HttpServletRequest request){
+        SysUserPo user = (SysUserPo)request.getSession().getAttribute("user");
+        return service.selectLookCount(user.getUid());
+    }
+
 }

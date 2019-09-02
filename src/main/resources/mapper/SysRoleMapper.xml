@@ -79,7 +79,11 @@
 			sr.update_time
 		FROM
 			sys_role AS sr
-			left join sys_user_role sur on sr.rid = sur.sys_role_id
+			<if test="flag!=null and flag==-1">
+				<if test="uid !=null and uid &gt; 0">
+					left join sys_user_role sur on sr.rid = sur.sys_role_id
+				</if>
+			</if>
 		<where>
 			sr.is_del = 0
 			<if test="flag!=null and flag==-1">

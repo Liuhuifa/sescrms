@@ -107,14 +107,30 @@ $(function () {
         }else{
         //    提交代码
             var data = $("#contact-form").serialize();
-
+            console.log(data)
             $.ajax({
                 url:url+"/user/addUser",
                 type:"post",
                 data:data,
                 dataType:"json",
                 success:function (response) {
-                    console.log(response);
+                    Swal.fire({
+                        title: '提示!',
+                        text: "是否返回用户列表!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '是的!',
+                        cancelButtonText:'继续添加'
+                    }).then((result) => {
+                        console.log(result.value);
+                        if(result.value){
+                            window.location.href=document.referrer;//返回并刷新
+                        }else{
+                            $("#contact-form").reset();
+                        }
+                    });
                 }
             })
         }

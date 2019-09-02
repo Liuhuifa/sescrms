@@ -6,7 +6,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>客户列表</title>
+    <title>暂停下线</title>
 <!--    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
 <!--    <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
     <meta charset="utf-8">
@@ -247,13 +247,13 @@
     <div id="masthead">
 
         <form id="solr-form" style="margin: 0" action="/customer/list" method="get">
-            <label class="control-label" style="display: inline-block">分组查询:</label>
-            <select name="group" style="margin: 0px">
-                <option value="-2" selected>全部</option>
-                <option value="-1">休眠中</option>
-                <option value="1">已分配</option>
-                <option value="0">未分配</option>
-            </select>
+<!--            <label class="control-label" style="display: inline-block">分组查询:</label>-->
+<!--            <select name="group" style="margin: 0px">-->
+<!--                <option value="-2" selected>全部</option>-->
+<!--                <option value="-1">休眠中</option>-->
+<!--                <option value="1">已分配</option>-->
+<!--                <option value="0">未分配</option>-->
+<!--            </select>-->
 
             <label class="control-label" style="display: inline-block">客户姓名:</label>
             <input type="text" name="name" style="margin: 0px" th:value="${solr.name}"/>
@@ -267,11 +267,11 @@
             <label class="control-label" style="display: inline-block">地区:</label>
             <input type="text" name="address" style="margin: 0px" th:value="${solr.address}"/>
 
-            <input type="hidden" name="flag" value="1"/>
+            <input type="hidden" name="flag" value="4"/>
 
             <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
 
-            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">
+<!--            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">-->
         </form>
 
         <script>
@@ -358,7 +358,7 @@
             <tr class="customer" th:each="item,loopStatus : ${datas.list}">
                 <th><input type="checkbox" class="checked" onclick="checkOne(this)" th:value="${item.id}"></th>
 
-                <th>[[${loopStatus.count}]] <img shiro:hasRole="市场专员" th:if="${item.look==0}" style="height: 20px;width: 20px;float: right" th:src="@{/static/icon/new.png}"/> </th>
+                <th th:text="${loopStatus.count}"></th>
 
                 <th th:if="${item.belongs == 0}">
                     未分配
@@ -403,7 +403,7 @@
             <a href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="sleep">休眠</a>
         </div>
         <div class="pagination">
-            <input type="hidden" name="page" value="1"/>
+            <input type="hidden" name="page" value="4"/>
             <ul>
                 <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:void(0)">首页</a></li>
                 <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:void(0)">上一页</a></li>

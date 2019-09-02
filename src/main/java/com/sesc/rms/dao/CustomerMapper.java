@@ -48,4 +48,25 @@ public interface CustomerMapper {
      * @return
      */
     int updateByUidAndIds(@Param("uid") Integer uid,@Param("ids")Long[]ids,@Param("lasttime")String lasttime);
+
+    /**
+     * 批量客户
+     * @param ids
+     * @return
+     */
+    int delAnyCustomers(@Param("ids") Long[] ids);
+
+    /**
+     * 删除一个
+     * @param id
+     * @return
+     */
+    int delCustomer(@Param("id")Long id);
+
+    /**
+     * 查询指定用户下未读的消息数量
+     * @param id
+     * @return
+     */
+    int selectLookCount(@Param("id")Integer id);
 }

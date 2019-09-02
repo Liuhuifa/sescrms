@@ -68,8 +68,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public Result updateByCustomer(CustomerPo po) {
-        return null;
+        int updateResult = mapper.updateByCustomer(po);
+        if (updateResult>0){
+            return Result.success();
+        }else{
+            return Result.fail("修改失败");
+        }
     }
 
     @Override
@@ -81,6 +87,38 @@ public class CustomerServiceImpl implements CustomerService {
             return Result.success();
         }else {
             return Result.fail("修改失败");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+    public Result delAnyCustomers(Long[] ids) {
+        int delResult = mapper.delAnyCustomers(ids);
+        if (delResult>0){
+            return Result.success();
+        }else {
+            return Result.fail("删除失败");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
+    public Result delCustomer(Long id) {
+        int delResult = mapper.delCustomer(id);
+        if (delResult>0){
+            return Result.success();
+        }else {
+            return Result.fail("删除失败");
+        }
+    }
+
+    @Override
+    public Result selectLookCount(Integer id) {
+        int result = mapper.selectLookCount(id);
+        if (result>=0){
+            return Result.success(result);
+        }else{
+            return Result.fail("服务器GG了可能");
         }
     }
 }

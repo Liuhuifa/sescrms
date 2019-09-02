@@ -6,7 +6,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>客户列表</title>
+    <title>休眠公海</title>
 <!--    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap后台模版,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />-->
 <!--    <meta name="description" content="JS代码网提供Bootstrap模版,后台管理系统模版,后台管理界面,Bootstrap后台模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />-->
     <meta charset="utf-8">
@@ -128,8 +128,8 @@
                 </ul>
 
                 <ul class="pull-right">
-                    <li><a href="/login"><i class="icon-user"></i> 登录</a></li>
-                    <li><a href="javascript:void(0)"><span class="badge badge-primary">1</span> 新消息</a></li>
+                    <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
+                    <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
                     <li class="dropdown">
                         <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
                             设置
@@ -189,9 +189,9 @@
 
                         <ul class="dropdown-menu">
                             <li id="customers"><a href="javascript:void(0)">客户列表</a></li>
-                            <li><a href="javascript:void(0)">休眠公海</a></li>
-                            <li><a href="./jqueryui.html">jQuery UI</a></li>
-                            <li><a href="./charts.html">图表</a></li>
+                            <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
+                            <li id="partner"><a href="javascript:void(0)">合作中</a></li>
+                            <li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
                             <li><a href="./bonus.html">其他组件</a></li>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">下拉菜单</a>
@@ -245,17 +245,90 @@
 
 
     <div id="masthead">
-        <div class="container">
+        <form id="solr-form" style="margin: 0" action="/customer/list" method="get">
+            <!--            <label class="control-label" style="display: inline-block">分组查询:</label>-->
+            <!--            <select name="group" style="margin: 0px">-->
+            <!--                <option value="-2" selected>全部</option>-->
+            <!--                <option value="-1">休眠中</option>-->
+            <!--                <option value="1">已分配</option>-->
+            <!--                <option value="0">未分配</option>-->
+            <!--            </select>-->
 
-            <div class="masthead-pad">
+            <label class="control-label" style="display: inline-block">客户姓名:</label>
+            <input type="text" name="name" style="margin: 0px" th:value="${solr.name}"/>
 
-                <div class="masthead-text">
-<!--                    休眠公海-->
-                </div> <!-- /.masthead-text -->
+            <label class="control-label" style="display: inline-block">客户电话:</label>
+            <input type="text" name="tel" style="margin: 0px" th:value="${solr.tel}"/>
 
-            </div>
+            <label class="control-label" style="display: inline-block">企业名称:</label>
+            <input type="text" name="cfrom" style="margin: 0px" th:value="${solr.cfrom}"/>
 
-        </div> <!-- /.container -->
+            <label class="control-label" style="display: inline-block">地区:</label>
+            <input type="text" name="address" style="margin: 0px" th:value="${solr.address}"/>
+
+
+            <input type="hidden" name="flag" value="2"/>
+
+            <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
+
+<!--            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">-->
+        </form>
+
+        <script>
+            $(function () {
+                $("[name='group']").on("change",function () {
+                    let group = $(this).val();
+                    $("[name='belongs']").remove()
+                    $("#uname").remove()
+                    addelem(group,-3);
+                });
+
+                let group = [[${solr.group}]] ==null?(-2):[[${solr.group}]];
+                if (group) {
+                    $("[name='group']").children("[value='"+group+"']").attr("selected","selected")
+                    if (group == 1) {
+                        let belongs = [[${solr.belongs}]];
+                        addelem(1,belongs);
+                    }
+                }
+            });
+            function addelem(group,belongs) {
+                let elem='';
+                if ( group==1 ){
+                    $.ajax({
+                        url:url+"/user/allUser",
+                        type:"post",
+                        data:{},
+                        dataType:"json",
+                        success:function (response) {
+                            elem+="<label id='uname' class=\"control-label\" style=\"display: inline-block\">坐席:</label>";
+                            elem+='<select name="belongs" style="margin: 0px">';
+                            elem+='<option value="-3" selected>全部</option>';
+                            $.each(response.list,function (i, item) {
+                                if (belongs == item.uid) {
+                                    elem+='<option value="'+item.uid+'" selected>'+item.uname+'</option>'
+                                }else{
+                                    elem+='<option value="'+item.uid+'">'+item.uname+'</option>'
+                                }
+                            })
+                            elem+='</select>';
+                            $("[name='group']").after(elem);
+                        }
+                    })
+                }
+            }
+        </script>
+<!--        <div class="container">-->
+
+<!--            <div class="masthead-pad">-->
+
+<!--                <div class="masthead-text">-->
+<!--&lt;!&ndash;                    休眠公海&ndash;&gt;-->
+<!--                </div> &lt;!&ndash; /.masthead-text &ndash;&gt;-->
+
+<!--            </div>-->
+
+<!--        </div> &lt;!&ndash; /.container &ndash;&gt;-->
 
     </div> <!-- /#masthead -->
 
@@ -310,10 +383,11 @@
                 <th>
                     <a href="javascript:void(0)" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
 <!--                    <a href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
-                    <a href="javascript:void(0)" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">移出</a>
-                    <a href="javascript:void(0)" class="btn btn-small btn-tertiary" onclick="removeCus(this)"  th:data-tail="${item.id}">移除</a>
+                    <a href="javascript:void(0)" class="btn btn-small btn-warning" onclick="moveUnallocated(this)"  th:data-move="${item.id}">移出</a>
+                    <a href="javascript:void(0)" class="btn btn-small btn-tertiary" onclick="removeCus(this)"  th:data-del="${item.id}">移除</a>
 <!--                    <a href="javascript:void(0)" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>-->
                 </th>
+
             </tr>
             </tbody>
         </table>
@@ -322,7 +396,10 @@
             <a href="javascript:void(0)" class="btn btn-warning btn-small handleCustomer" data-flag="pull">拉取</a>
             <a href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="delete">删除</a>
         </div>
+
+
         <div class="pagination">
+            <input type="hidden" name="page" value="2"/>
             <ul>
                 <li th:if="${!datas.isFirstPage}" th:value="1"><a href="javascript:void(0)">首页</a></li>
                 <li th:if="${!datas.isFirstPage}" th:value="${datas.prePage}"><a href="javascript:void(0)">上一页</a></li>

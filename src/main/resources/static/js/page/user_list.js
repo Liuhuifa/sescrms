@@ -19,14 +19,14 @@ function list_user(pageindex) {
         type:"post",
         data:{
             pageNum:pageindex,
-            pageSize:1
+            pageSize:10
         },
         dataType:"json",
         success:function (response) {
             console.log(response)
             var li="";
             $.each(response.list,function (i, item) {
-                li="<tr>\n" +
+                li+="<tr>\n" +
                     "    <th>"+(++i)+"</th>\n" +
                     "    <th>"+(item.realName)+"</th>\n" +
                     "    <th>"+(item.uname)+"</th>\n" +
