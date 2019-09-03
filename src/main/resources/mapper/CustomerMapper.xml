@@ -305,7 +305,7 @@
 <!--  给市场专员分配用户时  -->
     <update id="updateByUidAndIds" parameterType="com.sesc.rms.po.CustomerPo">
         update ml_customer mc
-        set mc.belongs=#{uid},mc.lasttime=#{lasttime}
+        set mc.belongs=#{uid},mc.lasttime=#{lasttime},mc.look=0
         where mc.id in
         <foreach collection="ids" open="(" item="item" close=")" separator="," index="i">
             #{item}

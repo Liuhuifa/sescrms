@@ -128,7 +128,7 @@ $(function () {
                         if(result.value){
                             window.location.href=document.referrer;//返回并刷新
                         }else{
-                            $("#contact-form").reset();
+                            window.location.reload();
                         }
                     });
                 }

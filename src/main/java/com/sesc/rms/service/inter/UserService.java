@@ -17,4 +17,6 @@ public interface UserService {
     SysUserPo listRoleAndPer(String uname);
 
     Result listUserByRoleId(Integer rid,String uname,Integer pageindex) throws Exception;
+
+    Result del(Integer uid);
 }

@@ -88,4 +88,14 @@ public class UserServiceImpl implements UserService {
         sysUserPos.stream().forEach(item-> System.out.println(item));
         return Result.success(new PageInfo<SysUserPo>(sysUserPos));
     }
+
+    @Override
+    public Result del(Integer uid) {
+        int del = dao.del(uid);
+        if (del>0){
+            return Result.success();
+        }else{
+            return Result.fail("删除失败");
+        }
+    }
 }

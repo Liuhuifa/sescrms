@@ -256,7 +256,11 @@ function userByRole(pageindex) {
                     resolve(true);
                     $("#myModal").modal("show");
                 }else{
-
+                    Swal.fire(
+                        '提示',
+                        '分配失败',
+                        'warning'
+                    );
                 }
             }
         })

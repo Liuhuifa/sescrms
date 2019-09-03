@@ -13,6 +13,9 @@ ul,ol{
 }
 
 #myModal1 .modal-body a{
+    position: absolute;
+    left: 120px;
+}
+#authorize>ul li{
     position: relative;
-    right: -50px;
 }

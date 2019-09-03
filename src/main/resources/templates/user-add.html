@@ -3,7 +3,8 @@
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 	<meta charset="utf-8">
 	<title>用户添加页面</title>
@@ -125,19 +126,19 @@
 						<li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
 						<li id="partner"><a href="javascript:void(0)">合作中</a></li>
 						<li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
-						<li><a href="./bonus.html">其他组件</a></li>
-						<li class="dropdown-submenu">
-							<a tabindex="-1" href="#">下拉菜单</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="#">菜单1</a></li>
-								<li><a tabindex="-1" href="#">菜单2</a></li>
-								<li><a tabindex="-1" href="#">菜单3</a></li>
-							</ul>
-						</li>
+<!--						<li><a href="./bonus.html">其他组件</a></li>-->
+<!--						<li class="dropdown-submenu">-->
+<!--							<a tabindex="-1" href="#">下拉菜单</a>-->
+<!--							<ul class="dropdown-menu">-->
+<!--								<li><a tabindex="-1" href="#">菜单1</a></li>-->
+<!--								<li><a tabindex="-1" href="#">菜单2</a></li>-->
+<!--								<li><a tabindex="-1" href="#">菜单3</a></li>-->
+<!--							</ul>-->
+<!--						</li>-->
 					</ul>
 				</li>
 
-				<li class="dropdown active">
+				<li class="dropdown active" shiro:hasPermission="per-list">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-copy"></i>
 						<span>系统管理</span>
@@ -271,7 +272,7 @@
 			</div> <!-- /span6 -->
 			
 			<div id="builtby" class="span6">
-				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">我爱模板网</a> </a>				
+				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">十二十辰</a> </a>
 			</div> <!-- /.span6 -->
 			
 		</div> <!-- /row -->

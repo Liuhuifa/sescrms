@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("customer")
@@ -54,7 +56,17 @@ public class CustomerController{
         CustomerPo po=null;
         ModelAndView mv=null;
         Subject subject = SecurityUtils.getSubject();
-        boolean sub = subject.hasRole("超级管理员");
+        List roles = new ArrayList();
+        roles.add("超级管理员");
+        roles.add("市场经理");
+        boolean[] booleans = subject.hasRoles(roles);
+        boolean sub = false;
+        for (int i=0;i<booleans.length;i++){
+            if (booleans[i]){
+                sub=booleans[i];
+                break;
+            }
+        }
 //        把当前页码保存到cookie中,以便后续操作需要回到当前页
         Cookie cookie = new Cookie("pageindex",pageindex.toString());
         cookie.setMaxAge(30000);
@@ -259,4 +271,12 @@ public class CustomerController{
         return service.selectLookCount(user.getUid());
     }
 
+    @PostMapping("updateLook")
+    @ResponseBody
+    public Result update(@RequestParam("cid") Long cid){
+        CustomerPo po = new CustomerPo();
+        po.setId(cid);
+        po.setLook(1);
+        return service.updateByCustomer(po);
+    }
 }

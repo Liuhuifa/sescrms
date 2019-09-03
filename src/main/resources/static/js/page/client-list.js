@@ -19,8 +19,26 @@ $(function () {
 })
 
 function customerTail(e) {
+    let isLook = e.dataset.look;
     let tail = e.dataset.tail;
-    window.location.href=url+"/customer/tail/"+tail;
+
+    if (isLook == 0) {
+        $.ajax({
+            url:"/customer/updateLook",
+            type:"post",
+            data:{
+                cid:tail
+            },
+            dataType:'json',
+            success:function (response) {
+                if (response.code == 1) {
+                    e.parentElement.parentElement.children.item(1).removeChild(e.parentElement.parentElement.children.item(1).children.item(0));
+                }
+            }
+        })
+    }
+
+    window.location.href = url+"/customer/tail/"+tail;
 }
 
 /**

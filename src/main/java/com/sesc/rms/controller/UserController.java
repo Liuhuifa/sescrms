@@ -94,4 +94,10 @@ public class UserController {
             return Result.fail("服务器GG了");
         }
     }
+
+    @PostMapping("del")
+    @ResponseBody
+    public Result del(@RequestParam Integer uid){
+        return service.del(uid);
+    }
 }

@@ -130,26 +130,26 @@
                 <ul class="pull-right">
                     <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
                     <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
-                    <li class="dropdown">
-                        <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
-                            设置
-                            <b class="caret"></b>
-                        </a>
+<!--                    <li class="dropdown">-->
+<!--                        <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">-->
+<!--                            设置-->
+<!--                            <b class="caret"></b>-->
+<!--                        </a>-->
 
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0)">设置 #1</a></li>
-                            <li><a href="javascript:void(0)">设置 #2</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">下拉菜单</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#">菜单1</a></li>
-                                    <li><a tabindex="-1" href="#">菜单2</a></li>
-                                    <li><a tabindex="-1" href="#">菜单3</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="login.html">退出</a></li>
+<!--                        <ul class="dropdown-menu pull-right">-->
+<!--                            <li><a href="javascript:void(0)">设置 #1</a></li>-->
+<!--                            <li><a href="javascript:void(0)">设置 #2</a></li>-->
+<!--                            <li class="dropdown-submenu">-->
+<!--                                <a tabindex="-1" href="#">下拉菜单</a>-->
+<!--                                <ul class="dropdown-menu">-->
+<!--                                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
+<!--                                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
+<!--                                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+                    <li><a href="/login">退出</a></li>
                 </ul>
 
             </div> <!-- /#top-nav -->
@@ -192,19 +192,19 @@
                             <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
                             <li id="partner"><a href="javascript:void(0)">合作中</a></li>
                             <li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
-                            <li><a href="./bonus.html">其他组件</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">下拉菜单</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#">菜单1</a></li>
-                                    <li><a tabindex="-1" href="#">菜单2</a></li>
-                                    <li><a tabindex="-1" href="#">菜单3</a></li>
-                                </ul>
-                            </li>
+<!--                            <li><a href="./bonus.html">其他组件</a></li>-->
+<!--                            <li class="dropdown-submenu">-->
+<!--                                <a tabindex="-1" href="#">下拉菜单</a>-->
+<!--                                <ul class="dropdown-menu">-->
+<!--                                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
+<!--                                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
+<!--                                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown" shiro:hasPermission="system-manage">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-copy"></i>
                             <span>系统管理</span>
@@ -390,17 +390,17 @@
                     是
                 </th>
                 <th>
-                    <a href="javascript:void(0)" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
+                    <a shiro:hasPermission="tail-show" href="javascript:void(0)" class="btn btn-small btn-secondary" onclick="tailInfo(this)" th:data-show="${item.id}">查看</a>
                     <!--                    <a href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${item.id}" th:data-visit="${item.id}">回访</a>-->
-                    <a href="javascript:void(0)" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">跟踪</a>
-                    <a href="javascript:void(0)" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
+                    <a shiro:hasPermission="tail-add" href="javascript:void(0)" class="btn btn-small btn-warning" onclick="customerTail(this)"  th:data-tail="${item.id}">跟踪</a>
+                    <a shiro:hasPermission="visit-add" href="javascript:void(0)" class="btn btn-small btn-success"  th:data-visit="${item.id}">回访</a>
                 </th>
             </tr>
             </tbody>
         </table>
         <div class="handle">
-            <a href="javascript:void(0)" class="btn btn-primary btn-small handleCustomer" data-flag="allocation">分配</a>
-            <a href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="sleep">休眠</a>
+            <a shiro:hasPermission="customer-allocation" href="javascript:void(0)" class="btn btn-primary btn-small handleCustomer" data-flag="allocation">分配</a>
+            <a shiro:hasPermission="custommer-sleep" href="javascript:void(0)" class="btn btn-danger btn-small handleCustomer" data-flag="sleep">休眠</a>
         </div>
         <div class="pagination">
             <input type="hidden" name="page" value="3"/>

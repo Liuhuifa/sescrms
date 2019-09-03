@@ -36,6 +36,7 @@ function list_user(pageindex) {
                     "    <th>"+(item.updateTime)+"</th>\n" +
                     "    <th><a href=\"javascript:;\" class=\"btn btn-small btn-secondary\" onclick='giverole("+item.uid+")'>用户授权</a>&nbsp;&nbsp;" +
                     "        <a href=\"javascript:;\" class=\"btn btn-small btn-inverse\" onclick='seerole("+item.uid+")'>查看角色</a>" +
+                    "        <a href=\"javascript:;\" class=\"btn btn-small btn-danger\" onclick='del("+item.uid+",this)'>删除角色</a>" +
                     "</th>\n" +
                     "</tr>";
             })
@@ -128,7 +129,6 @@ function giverole(uid) {
 }
 //为用户添加角色
 function addroleforuser(rid, uid,rname) {
-
     $.ajax({
         url:url+"/user-role/addOne",
         type:"post",
@@ -180,4 +180,40 @@ function removeroleforuser(rid, uid,rname) {
             }
         }
     })
+}
+
+//删除用户
+function del(uid,e) {
+    Swal.fire({
+        title: '提示',
+        text:'你确定要删除该用户吗?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '是',
+        cancelButtonText:'否',
+    }).then((result) => {
+        $.ajax({
+            url:url+"/user/del",
+            type:'post',
+            data:{
+                uid:uid
+            },
+            dataType:'json',
+            success:function (response) {
+                if (response.code == 1) {
+                    Swal.fire(
+                        '提示',
+                        '删除成功',
+                        'success'
+                    ).then((result)=>{
+                        let parent = e.parentNode.parentElement;
+                        parent.parentNode.removeChild(parent);
+                    })
+                }
+            }
+        })
+    })
+
 }

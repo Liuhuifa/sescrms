@@ -33,7 +33,7 @@ public class RoleController {
      */
     @GetMapping("listRoles1")
     public ModelAndView listRoles1(@RequestParam(name = "pageindex",required = false,defaultValue = "1")Integer pageindex,
-                                  @RequestParam(name = "pagesize",required = false,defaultValue = "1")Integer pagesize){
+                                  @RequestParam(name = "pagesize",required = false,defaultValue = "15")Integer pagesize){
         PageInfo<SysRolePo> info = service.listRoles(pageindex, pagesize, null);
         List<SysRolePo> list = info.getList();
         Map<String,Object> map = new HashMap<>();

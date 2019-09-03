@@ -125,5 +125,8 @@
             </if>
     </select>
 
-<!--  搜索指定名字或者手机号的   模糊查询  -->
+<!--删除用户-->
+    <delete id="del">
+        delete from sys_user where uid=#{uid}
+    </delete>
 </mapper>
