@@ -16,13 +16,16 @@ spring:
     cache: false
     encoding: utf-8
     mode: HTML
-#    mvc配置
+    prefix: classpath:/templates/
+  #    mvc配置
   mvc:
     view:
       prefix: /
       suffix: .html
 #      静态资源
     static-path-pattern: /static/**
+    favicon:
+      enabled: true
 #mybatis配置
 mybatis:
   type-aliases-package: com.sesc.rms.po
@@ -33,3 +36,4 @@ mybatis:
 logging:
   level:
     com.sesc.rms.dao: debug
+

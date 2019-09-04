@@ -1,6 +1,6 @@
 
 //公用的url
-url="http://localhost:8888";
+url="http://192.168.1.57:8888";
 
 //首页公用js
 $(function () {
@@ -36,9 +36,10 @@ $(function () {
     // //翻页
     $(".pagination ul li").on("click",function () {
         let pageNum = $(this).attr("value");
-        let flag = $(this).parents(".pagination").children('[name="page"]').val();
-        console.log(flag)
-        window.location.href=url+"/customer/list?pageindex="+pageNum+"&flag="+flag;
+        // let flag = $(this).parents(".pagination").children('[name="page"]').val();
+        let data = $("#solr-form").serialize();
+        console.log(data)
+        window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
     });
 //    未查看信息条数查询
     $.ajax({

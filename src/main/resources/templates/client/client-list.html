@@ -299,19 +299,20 @@
                 let elem='';
                 if ( group==1 ){
                     $.ajax({
-                        url:url+"/user/allUser",
-                        type:"post",
+                        url:url+"/user/listUserByRole/6/0/null",
+                        type:"get",
                         data:{},
                         dataType:"json",
                         success:function (response) {
                             elem+="<label id='uname' class=\"control-label\" style=\"display: inline-block\">坐席:</label>";
                             elem+='<select name="belongs" style="margin: 0px">';
                             elem+='<option value="-3" selected>全部</option>';
-                            $.each(response.list,function (i, item) {
+                            console.log(response)
+                            $.each(response.data,function (i, item) {
                                 if (belongs == item.uid) {
-                                    elem+='<option value="'+item.uid+'" selected>'+item.uname+'</option>'
+                                    elem+='<option value="'+item.uid+'" selected>'+item.realName+'</option>'
                                 }else{
-                                    elem+='<option value="'+item.uid+'">'+item.uname+'</option>'
+                                    elem+='<option value="'+item.uid+'">'+item.realName+'</option>'
                                 }
                             })
                             elem+='</select>';

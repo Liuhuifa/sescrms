@@ -39,7 +39,7 @@ public class RoleController {
         Map<String,Object> map = new HashMap<>();
         map.put("datas",list);
         map.put("info",info);
-        ModelAndView mv = new ModelAndView("/role/role_list",map);
+        ModelAndView mv = new ModelAndView("role/role_list",map);
         return mv;
     }
 

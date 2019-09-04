@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,6 +54,7 @@ public class CustomerController{
                                       @RequestParam(required = false,defaultValue = "1") Integer flag,
                                       HttpServletRequest request,
                                       HttpServletResponse response) {
+        long l = System.currentTimeMillis();
         CustomerPo po=null;
         ModelAndView mv=null;
         Subject subject = SecurityUtils.getSubject();
@@ -68,9 +70,9 @@ public class CustomerController{
             }
         }
 //        把当前页码保存到cookie中,以便后续操作需要回到当前页
-        Cookie cookie = new Cookie("pageindex",pageindex.toString());
-        cookie.setMaxAge(30000);
-        response.addCookie(cookie);
+//        Cookie cookie = new Cookie("pageindex",pageindex.toString());
+//        cookie.setMaxAge(30000);
+//        response.addCookie(cookie);
 
 //        先从session取出保存的信息
         if (name !=null && !name.equals("")){
@@ -85,7 +87,7 @@ public class CustomerController{
         if (address !=null && !address.equals("")){
             address=address.trim();
         }
-
+//        po=(CustomerPo)request.getSession().getAttribute("solr");
         if (sub){
 //            如果有权限
              po = new CustomerPo(name,address,tel,belongs,cfrom,pageindex,group);
@@ -99,24 +101,26 @@ public class CustomerController{
         PageInfo<CustomerPo> infos = null;
         if (flag==1){
 //            客户列表
-            mv= new ModelAndView("/client/client-list");
+            mv= new ModelAndView("client/client-list");
         }else if (flag==2){
 //            休眠公海
             po.setGroup(-1);
             po.setBelongs(-1);
-            mv= new ModelAndView("/client/client-sleep");
+            mv= new ModelAndView("client/client-sleep");
         }else if (flag==3){
 //            合作中
             po.setRate(2);
-            mv= new ModelAndView("/client/client-partner");
+            mv= new ModelAndView("client/client-partner");
         }else if (flag==4){
 //            暂停下线
             po.setRate(3);
-            mv= new ModelAndView("/client/client-pause");
+            mv= new ModelAndView("client/client-pause");
         }
         infos = service.listCustomers(po);
         mv.addObject("datas",infos);
         mv.addObject("solr",(CustomerPo)request.getSession().getAttribute("solr"));
+        long l1 = System.currentTimeMillis();
+        System.out.println(l-l1+",,,,,,,,,,,,,,,,,,,,,,,,,,");
         return mv;
     }
 
@@ -175,7 +179,7 @@ public class CustomerController{
     public ModelAndView tail(@PathVariable Long customer_id){
         CustomerPo po = new CustomerPo();
         po.setId(customer_id);
-        ModelAndView mv= new ModelAndView("/client/client-tail-add");
+        ModelAndView mv= new ModelAndView("client/client-tail-add");
         CustomerPo customer = service.findCustomerById(customer_id);
         mv.addObject("customer",customer);
         mv.addObject("cumtomerid",customer_id);

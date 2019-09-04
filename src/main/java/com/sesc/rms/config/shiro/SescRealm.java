@@ -13,6 +13,7 @@ import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class SescRealm extends AuthorizingRealm {
     Logger LOGGER = LoggerFactory.getLogger(SescRealm.class);
     @Autowired
+    @Lazy
     private UserService service;
 
     @Override

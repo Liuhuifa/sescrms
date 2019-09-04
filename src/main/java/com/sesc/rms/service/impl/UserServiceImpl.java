@@ -83,10 +83,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result listUserByRoleId(Integer rid,String uname,Integer pageindex) throws Exception{
-        PageHelper.startPage(pageindex,6);
-        List<SysUserPo> sysUserPos = dao.listUserByRoleId(rid,uname);
-        sysUserPos.stream().forEach(item-> System.out.println(item));
-        return Result.success(new PageInfo<SysUserPo>(sysUserPos));
+        List<SysUserPo> sysUserPos = null;
+        if (pageindex>0){
+            PageHelper.startPage(pageindex,6);
+            sysUserPos = dao.listUserByRoleId(rid,uname);
+            return Result.success(new PageInfo<SysUserPo>(sysUserPos));
+        }else{
+            sysUserPos = dao.listUserByRoleId(rid,uname);
+            return Result.success(sysUserPos);
+        }
+
     }
 
     @Override

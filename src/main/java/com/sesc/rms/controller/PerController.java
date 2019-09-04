@@ -28,7 +28,7 @@ public class PerController {
         Map<String,Object> maps = new HashMap<>();
         maps.put("data",sysPerPos);
         maps.put("status",1);
-        return new ModelAndView("/per/per_list",maps);
+        return new ModelAndView("per/per_list",maps);
     }
 //    角色查询拥有的权限
     @GetMapping("listPers1")

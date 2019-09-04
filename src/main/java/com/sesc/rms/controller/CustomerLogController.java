@@ -52,7 +52,7 @@ public class CustomerLogController {
     @GetMapping("tail-info/{logid}")
     public ModelAndView toTailInfo(@PathVariable Long logid){
         List<CustomerLogPo> customerLogPos = service.listById(logid);
-        ModelAndView mv =new ModelAndView("/client/tail-info");
+        ModelAndView mv =new ModelAndView("client/tail-info");
         mv.addObject("datas",customerLogPos);
         return mv;
     }
