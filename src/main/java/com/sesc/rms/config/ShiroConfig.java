@@ -51,7 +51,7 @@ public class ShiroConfig{
         bean.setSecurityManager(securityManager());
         bean.setLoginUrl("/login");
         bean.setSuccessUrl("/index");
-        bean.setUnauthorizedUrl("/500");
+//        bean.setUnauthorizedUrl("/500");
 
 //        添加过滤器
 //        Map<String, Filter> map = new HashMap<>();
@@ -62,6 +62,7 @@ public class ShiroConfig{
         Map<String,String> filters = new HashMap<>();
         filters.put("/index","authc");
         filters.put("/index.html","authc");
+        filters.put("/user/info","authc");
         filters.put("/user_list","authc");
         filters.put("/user_list.html","authc");
         filters.put("/user-add","authc");

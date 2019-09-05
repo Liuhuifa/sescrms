@@ -125,6 +125,47 @@
             </if>
     </select>
 
+<!--  个人信息查询  -->
+    <resultMap id="user-info" type="com.sesc.rms.po.SysUserPo">
+        <id column="uid" property="uid"></id>
+        <result column="realName" property="realName"></result>
+        <result column="uname" property="uname"></result>
+        <result column="password" property="password"></result>
+        <result column="phone" property="phone"></result>
+        <result column="email" property="email"></result>
+    </resultMap>
+    <select id="findByUid" resultMap="user-info">
+        select uid,realName,uname,password,phone,email
+        from sys_user
+        where uid=#{uid}
+    </select>
+<!--修改用户信息-->
+    <update id="modifyByUser" parameterType="com.sesc.rms.po.SysUserPo">
+        update sys_user
+        <set>
+            <if test="realName != null and realName !=''">
+                realName=#{realName},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone=#{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email=#{email},
+            </if>
+            <if test="password != null and password !=''">
+                password = #{password},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where uid=#{uid}
+    </update>
+
+
 <!--删除用户-->
     <delete id="del">
         delete from sys_user where uid=#{uid}

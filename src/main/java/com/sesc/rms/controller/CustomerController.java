@@ -54,7 +54,6 @@ public class CustomerController{
                                       @RequestParam(required = false,defaultValue = "1") Integer flag,
                                       HttpServletRequest request,
                                       HttpServletResponse response) {
-        long l = System.currentTimeMillis();
         CustomerPo po=null;
         ModelAndView mv=null;
         Subject subject = SecurityUtils.getSubject();
@@ -119,8 +118,6 @@ public class CustomerController{
         infos = service.listCustomers(po);
         mv.addObject("datas",infos);
         mv.addObject("solr",(CustomerPo)request.getSession().getAttribute("solr"));
-        long l1 = System.currentTimeMillis();
-        System.out.println(l-l1+",,,,,,,,,,,,,,,,,,,,,,,,,,");
         return mv;
     }
 

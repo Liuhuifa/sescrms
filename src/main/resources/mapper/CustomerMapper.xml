@@ -54,6 +54,9 @@
                         <if test="belongs != null and belongs != -3">
                             and mc.belongs=#{belongs}
                         </if>
+                        <if test="belongs != null and belongs == -3">
+                            and mc.belongs>0
+                        </if>
                     </when>
                     <when test="group == -1 or group == 0">
                         and mc.belongs=#{group}

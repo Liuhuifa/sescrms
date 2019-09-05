@@ -31,4 +31,17 @@ public class PageController {
     public String userAdd(){
         return "user-add";
     }
+//    修改密码
+    @GetMapping("modifyp")
+    public String modify(){
+        return "user/modify";
+    }
+    @GetMapping("/500")
+    public String error(){
+        return "error/500";
+    }
+    @GetMapping("/404")
+    public String error1(){
+        return "error/404";
+    }
 }

@@ -19,4 +19,19 @@ public interface UserService {
     Result listUserByRoleId(Integer rid,String uname,Integer pageindex) throws Exception;
 
     Result del(Integer uid);
+
+    /**
+     * 个人信息
+     * @param uid
+     * @return
+     */
+    SysUserPo findByUid(Integer uid);
+
+    /**
+     * 修改用户信息
+     * @param po
+     * @return
+     */
+    Result modifyByUser(SysUserPo po);
+
 }

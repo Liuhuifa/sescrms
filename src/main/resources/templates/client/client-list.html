@@ -273,13 +273,22 @@
             <input type="hidden" name="flag" value="1"/>
 
             <input type="submit" class="btn btn-danger btn-primary" id="submit" value="查询">
-
+            <input type="reset"
+                   class="btn btn-danger btn-warning" id="reset" value="重置">
             <input shiro:hasPermission="customer-add" type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">
         </form>
-
+        <form id="hidden-form">
+            <input type="hidden" name="group" style="margin: 0px" th:value="${solr.group}"/>
+            <input type="hidden" name="name" style="margin: 0px" th:value="${solr.name}"/>
+            <input type="hidden" name="tel" style="margin: 0px" th:value="${solr.tel}"/>
+            <input type="hidden" name="cfrom" style="margin: 0px" th:value="${solr.cfrom}"/>
+            <input type="hidden" name="address" style="margin: 0px" th:value="${solr.address}"/>
+            <input type="hidden" name="belongs" style="margin: 0px" th:value="${solr.belongs}"/>
+            <input type="hidden" name="flag" value="1"/>
+        </form>
         <script>
             $(function () {
-                $("[name='group']").on("change",function () {
+                $("#solr-form [name='group']").on("change",function () {
                     let group = $(this).val();
                     $("[name='belongs']").remove()
                     $("#uname").remove()
@@ -287,13 +296,25 @@
                 });
 
                 let group = [[${solr.group}]] ==null?(-2):[[${solr.group}]];
-                if (group) {
-                    $("[name='group']").children("[value='"+group+"']").attr("selected","selected")
+                if (group>-3) {
+                    $("#solr-form [name='group']").children("[value='"+group+"']").attr("selected","selected")
+
                     if (group == 1) {
                         let belongs = [[${solr.belongs}]];
                         addelem(1,belongs);
                     }
                 }
+                $("#reset").on("click",function () {
+                    $("[name='belongs']").remove()
+                    $("#uname").remove()
+                    $("#solr-form [name='group']").find('option').each((index,res)=>{
+                        $(res).removeAttr('selected')
+                    })
+                    $("#solr-form [name='name']").val('')
+                    $("#solr-form [name='tel']").val('')
+                    $("#solr-form [name='cfrom']").val('')
+                    $("#solr-form [name='address']").val('')
+                })
             });
             function addelem(group,belongs) {
                 let elem='';
@@ -307,7 +328,6 @@
                             elem+="<label id='uname' class=\"control-label\" style=\"display: inline-block\">坐席:</label>";
                             elem+='<select name="belongs" style="margin: 0px">';
                             elem+='<option value="-3" selected>全部</option>';
-                            console.log(response)
                             $.each(response.data,function (i, item) {
                                 if (belongs == item.uid) {
                                     elem+='<option value="'+item.uid+'" selected>'+item.realName+'</option>'
@@ -316,7 +336,7 @@
                                 }
                             })
                             elem+='</select>';
-                            $("[name='group']").after(elem);
+                            $("#solr-form [name='group']").after(elem);
                         }
                     })
                 }

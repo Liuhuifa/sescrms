@@ -273,7 +273,13 @@
 
 <!--            <input type="button" class="btn btn-danger btn-secondary" id="add-customer" value="添加">-->
         </form>
-
+        <form id="hidden-form">
+            <input type="hidden" name="name" style="margin: 0px" th:value="${solr.name}"/>
+            <input type="hidden" name="tel" style="margin: 0px" th:value="${solr.tel}"/>
+            <input type="hidden" name="cfrom" style="margin: 0px" th:value="${solr.cfrom}"/>
+            <input type="hidden" name="address" style="margin: 0px" th:value="${solr.address}"/>
+            <input type="hidden" name="flag" value="2"/>
+        </form>
         <script>
             $(function () {
                 $("[name='group']").on("change",function () {
@@ -312,7 +318,7 @@
                                 }
                             })
                             elem+='</select>';
-                            $("[name='group']").after(elem);
+                            $("#solr-form [name='group']").after(elem);
                         }
                     })
                 }

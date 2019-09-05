@@ -11,8 +11,10 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -102,6 +104,24 @@ public class UserServiceImpl implements UserService {
             return Result.success();
         }else{
             return Result.fail("删除失败");
+        }
+    }
+
+    @Override
+    public SysUserPo findByUid(Integer uid) {
+        SysUserPo userPo = dao.findByUid(uid);
+        return userPo;
+    }
+
+    @Override
+    @Transactional
+    public Result modifyByUser(SysUserPo po) {
+        po.setUpdateTime(new Date());
+        int result = dao.modifyByUser(po);
+        if (result>0){
+            return Result.success();
+        }else{
+            return Result.fail("修改失败");
         }
     }
 }

@@ -37,8 +37,8 @@ $(function () {
     $(".pagination ul li").on("click",function () {
         let pageNum = $(this).attr("value");
         // let flag = $(this).parents(".pagination").children('[name="page"]').val();
-        let data = $("#solr-form").serialize();
-        console.log(data)
+        let data = $("#hidden-form").serialize();
+        // console.log(data)
         window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
     });
 //    未查看信息条数查询

@@ -23,4 +23,18 @@ public interface UserDao {
                                      @Param("uname") String uname);
 
     int del(@Param("uid")Integer uid);//删除用户
+
+    /**
+     * 个人信息
+     * @param uid
+     * @return
+     */
+    SysUserPo findByUid(@Param("uid")Integer uid);
+
+    /**
+     * 修改用户信息
+     * @param po
+     * @return
+     */
+    int modifyByUser(SysUserPo po);
 }
