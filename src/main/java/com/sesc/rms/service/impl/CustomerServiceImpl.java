@@ -114,9 +114,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Result selectLookCount(Integer id) {
+        Result res = new Result();
         int result = mapper.selectLookCount(id);
         if (result>=0){
-            return Result.success(result);
+            res.setTotal(result);
+            return res;
         }else{
             return Result.fail("服务器GG了可能");
         }

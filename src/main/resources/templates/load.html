@@ -1,11 +1,13 @@
-
-<div id="wrapper">
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<body>
+<div th:fragment="header">
     <div id="topbar">
 
         <div class="container">
 
-            <a href="javascript:;" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+            <a href="javascript:void(0)" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
                 <i class="icon-cog"></i>
             </a>
 
@@ -13,49 +15,18 @@
 
                 <ul>
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             查看网站
                             <b class="caret"></b>
                         </a>
-
-                        <!--					<ul class="dropdown-menu pull-right">-->
-                        <!--						<li><a href="javascript:;">查看网站1</a></li>-->
-                        <!--						<li><a href="javascript:;">查看网站2</a></li>-->
-                        <!--						<li class="dropdown-submenu">-->
-                        <!--		                  <a tabindex="-1" href="#">下拉菜单</a>-->
-                        <!--		                  <ul class="dropdown-menu">-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
-                        <!--		                  </ul>-->
-                        <!--		                </li>-->
-                        <!--					</ul> -->
                     </li>
                 </ul>
 
                 <ul class="pull-right">
-                    <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
+                    <li><a href="/login"><i class="icon-user"></i><span id="realName"></span></a></li>
                     <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
-                    <li class="dropdown">
-                        <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">
-                            设置
-                            <b class="caret"></b>
-                        </a>
 
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:;">设置 #1</a></li>
-                            <li><a href="javascript:;">设置 #2</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">下拉菜单</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#">菜单1</a></li>
-                                    <li><a tabindex="-1" href="#">菜单2</a></li>
-                                    <li><a tabindex="-1" href="#">菜单3</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="login.html">退出</a></li>
+                    <li><a href="/login">退出</a></li>
                 </ul>
 
             </div> <!-- /#top-nav -->
@@ -64,22 +35,19 @@
 
     </div> <!-- /#topbar -->
 
-
-
-
     <div id="header">
 
         <div class="container">
 
-            <a href="./index.html" class="brand">首页</a>
+            <a href="/index.html" class="brand">首页</a>
 
-            <a href="javascript:;" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <a href="javascript:void(0)" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <i class="icon-reorder"></i>
             </a>
 
             <div class="nav-collapse">
                 <ul id="main-nav" class="nav pull-right">
-                    <li class="nav-icon active">
+                    <li class="nav-icon">
                         <a href="/index">
                             <i class="icon-home"></i>
                             <span>首页</span>
@@ -87,7 +55,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-th"></i>
                             <span>客户管理</span>
                             <b class="caret"></b>
@@ -98,45 +66,35 @@
                             <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
                             <li id="partner"><a href="javascript:void(0)">合作中</a></li>
                             <li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
-                            <li><a href="./bonus.html">其他组件</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">下拉菜单</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#">菜单1</a></li>
-                                    <li><a tabindex="-1" href="#">菜单2</a></li>
-                                    <li><a tabindex="-1" href="#">菜单3</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-copy"></i>
                             <span>系统管理</span>
                             <b class="caret"></b>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:;" id="user">用户管理</a></li>
-                            <li><a href="javascript:;" id="role">角色管理</a></li>
-                            <li><a href="javascript:;" id="permission">权限管理</a></li>
+                            <li><a href="javascript:void(0)" id="user">用户管理</a></li>
+                            <li><a href="javascript:void(0)" id="role">角色管理</a></li>
+                            <li><a href="javascript:void(0)" id="permission">权限管理</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-external-link"></i>
                             <span>其他</span>
                             <b class="caret"></b>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="./login.html">登录</a></li>
-                            <li><a href="./signup.html">注册</a></li>
-                            <li><a href="./error.html">错误</a></li>
-                            <li><a href="./skins.html">主题</a></li>
-                            <li><a href="./sticky.html">完美的底部</a></li>
+                            <li><a href="/login">登录</a></li>
+                            <li><a href="/user/logout">退出</a></li>
+                            <li><a href="/user/info">个人信息</a></li>
+                            <li><a href="/modifyp">修改密码</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -146,64 +104,6 @@
         </div> <!-- /.container -->
 
     </div> <!-- /#header -->
-
-
-
-
-    <div id="masthead">
-
-        <div class="container">
-
-            <div class="masthead-pad">
-
-                <div class="masthead-text">
-
-                </div> <!-- /.masthead-text -->
-
-            </div>
-
-        </div> <!-- /.container -->
-
-    </div> <!-- /#masthead -->
-
-
-</div> <!-- /#wrapper -->
-
-
-
-
-<!--<div id="footer">-->
-
-<!--    <div class="container">-->
-
-<!--        <div class="row">-->
-
-<!--            <div class="span6">-->
-<!--                (c) 2012 all rights reserved.-->
-<!--            </div> &lt;!&ndash; /span6 &ndash;&gt;-->
-
-<!--            <div id="builtby" class="span6">-->
-<!--                &lt;!&ndash;				<a href="#">Built by <a href="http://www.5imoban.net" target="_blank">我爱模板网</a></a>				&ndash;&gt;-->
-<!--            </div> &lt;!&ndash; /.span6 &ndash;&gt;-->
-
-<!--        </div> &lt;!&ndash; /row &ndash;&gt;-->
-
-<!--    </div> &lt;!&ndash; /container &ndash;&gt;-->
-
-<!--</div> &lt;!&ndash; /#footer &ndash;&gt;-->
-
-<script>
-
-    $(function () {
-
-        Theme.init ();
-
-    });
-
-    $(function () {
-        $("#user").on("click",function () {
-            console.log("123")
-            window.location.href=url+"/user_list";
-        })
-    })
-</script>
+</div>
+</body>
+</html>

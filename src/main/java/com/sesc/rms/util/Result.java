@@ -1,25 +1,25 @@
 
 package com.sesc.rms.util;
 
-public class Result {
+public class Result<T> {
 	private static final int SUCCESS_CODE = 1;
 	private static final int FAIL_CODE = 0;
 	
 	private int code;
 	private String message;
-	private Object data;
+	private T data;
 	private long total; //数据条数
 
 	public Result() {
 	}
 
-	private Result(int code, String message, Object data) {
+	private Result(int code, String message, T data) {
 		this.code = code;
 		this.message = message;
 		this.data = data;
 	}
 
-	private Result(int code, String message, Object data, long total) {
+	private Result(int code, String message, T data, long total) {
 		this.code = code;
 		this.message = message;
 		this.data = data;
@@ -62,7 +62,7 @@ public class Result {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

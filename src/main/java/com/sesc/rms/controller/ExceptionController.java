@@ -9,6 +9,6 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public String error(Exception e){
-        return "redirect:/500";
+        return "redirect:/error/500";
     }
 }

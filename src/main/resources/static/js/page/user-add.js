@@ -47,52 +47,52 @@ $(function () {
         }
 
     })
-    //    手机号验证
-    $("#phone").blur(function () {
-        $(this).siblings(".clean").remove();
-        $(this).siblings(".error").remove();
-        $(this).parents(".control-group").attr("class","control-group");
-        var phone=$("#phone").val();
-        var phoneReg=/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9])|(17[0,5-9]))\d{8}$/;
-        if (phone) {
-            var flag=phoneReg.test(phone);
-            if (flag) {
-                boo=true;
-                $(this).parents(".control-group").attr("class","control-group success");
-            }else {
-                boo=false;
-                $(this).parents(".control-group").attr("class","control-group error");
-                $(this).after("<div class='error'>" +
-                    "<span class='error'>手机号输入不合法</span>" +
-                    "</div>");
-            }
-            $(this).after("<div class=\"clean\"></div>\n")
-        }
-
-    })
-    //    邮箱验证
-    $("#email").blur(function () {
-        $(this).siblings(".clean").remove();
-        $(this).siblings(".error").remove();
-        $(this).parents(".control-group").attr("class","control-group");
-        var email=$("#email").val();
-        var emailReg=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-        if (email) {
-            var flag=emailReg.test(email);
-            if (flag) {
-                boo=true;
-                $(this).parents(".control-group").attr("class","control-group success");
-            }else {
-                boo=false;
-                $(this).parents(".control-group").attr("class","control-group error");
-                $(this).after("<div class='error'>" +
-                    "<span class='error'>邮箱输入不合法</span>" +
-                    "</div>");
-            }
-            $(this).after("<div class=\"clean\"></div>\n")
-        }
-
-    })
+    // //    手机号验证
+    // $("#phone").blur(function () {
+    //     $(this).siblings(".clean").remove();
+    //     $(this).siblings(".error").remove();
+    //     $(this).parents(".control-group").attr("class","control-group");
+    //     var phone=$("#phone").val();
+    //     var phoneReg=/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9])|(17[0,5-9]))\d{8}$/;
+    //     if (phone) {
+    //         var flag=phoneReg.test(phone);
+    //         if (flag) {
+    //             boo=true;
+    //             $(this).parents(".control-group").attr("class","control-group success");
+    //         }else {
+    //             boo=false;
+    //             $(this).parents(".control-group").attr("class","control-group error");
+    //             $(this).after("<div class='error'>" +
+    //                 "<span class='error'>手机号输入不合法</span>" +
+    //                 "</div>");
+    //         }
+    //         $(this).after("<div class=\"clean\"></div>\n")
+    //     }
+    //
+    // })
+    // //    邮箱验证
+    // $("#email").blur(function () {
+    //     $(this).siblings(".clean").remove();
+    //     $(this).siblings(".error").remove();
+    //     $(this).parents(".control-group").attr("class","control-group");
+    //     var email=$("#email").val();
+    //     var emailReg=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    //     if (email) {
+    //         var flag=emailReg.test(email);
+    //         if (flag) {
+    //             boo=true;
+    //             $(this).parents(".control-group").attr("class","control-group success");
+    //         }else {
+    //             boo=false;
+    //             $(this).parents(".control-group").attr("class","control-group error");
+    //             $(this).after("<div class='error'>" +
+    //                 "<span class='error'>邮箱输入不合法</span>" +
+    //                 "</div>");
+    //         }
+    //         $(this).after("<div class=\"clean\"></div>\n")
+    //     }
+    //
+    // })
 
 //   点击提交
 
@@ -105,32 +105,73 @@ $(function () {
                 "warning"
             )
         }else{
-        //    提交代码
-            var data = $("#contact-form").serialize();
-            console.log(data)
+        //    提交
+        //     var data = $("#contact-form").serialize();
+            let data = {};
+            data.realName = $("#realName").val();
+
+            data.uname = $("#name").val();
+            data.password = $("#password").val();
+
+
+            // let email = $("#phone").val();
+            // if (email) {
+            //     data.email = email
+            // }
+            // let phone = $("#phone").val();
+            // if (phone) {
+            //     data.phone = phone;
+            // }
+            let rids = [];
+            //    获取选择的角色
+            $(".controls .ui-choose li").each((i,item)=>{
+                var data =  $(item).attr('class')
+                if (data == 'selected') {
+                    rids.push(item.dataset.value)
+                }
+            })
+            if (rids.length <= 0) {
+                $(".controls .ui-choose li").each((i,item)=>{
+                    var data =  $(item).text();
+                    if (data == '市场专员') {
+                        rids.push(item.dataset.value)
+                    }
+                })
+            }
+            data.rids=rids
             $.ajax({
                 url:url+"/user/addUser",
                 type:"post",
                 data:data,
+                traditional: true,
                 dataType:"json",
                 success:function (response) {
-                    Swal.fire({
-                        title: '提示!',
-                        text: "是否返回用户列表!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: '是的!',
-                        cancelButtonText:'继续添加'
-                    }).then((result) => {
-                        console.log(result.value);
-                        if(result.value){
-                            window.location.href=document.referrer;//返回并刷新
-                        }else{
-                            window.location.reload();
-                        }
-                    });
+                    if (response.code == 1) {
+                        Swal.fire({
+                            title: '提示!',
+                            text: "是否返回用户列表!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '是的!',
+                            cancelButtonText:'继续添加'
+                        }).then((result) => {
+                            console.log(result.value);
+                            if(result.value){
+                                window.location.href=document.referrer;//返回并刷新
+                            }else{
+                                window.location.reload();
+                            }
+                        });
+                    }else{
+                        Swal.fire(
+                            '提示',
+                            '添加失败了,请重试!!!',
+                            'error'
+                        )
+                    }
+
                 }
             })
         }

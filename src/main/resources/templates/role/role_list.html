@@ -31,155 +31,7 @@
 <body>
 
 <div id="wrapper">
-
-    <div id="topbar">
-
-        <div class="container">
-
-            <a href="javascript:;" id="menu-trigger" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
-                <i class="icon-cog"></i>
-            </a>
-
-            <div id="top-nav">
-
-                <ul>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            查看网站
-                            <b class="caret"></b>
-                        </a>
-
-                        <!--					<ul class="dropdown-menu pull-right">-->
-                        <!--						<li><a href="javascript:;">查看网站1</a></li>-->
-                        <!--						<li><a href="javascript:;">查看网站2</a></li>-->
-                        <!--						<li class="dropdown-submenu">-->
-                        <!--		                  <a tabindex="-1" href="#">下拉菜单</a>-->
-                        <!--		                  <ul class="dropdown-menu">-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
-                        <!--		                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
-                        <!--		                  </ul>-->
-                        <!--		                </li>-->
-                        <!--					</ul> -->
-                    </li>
-                </ul>
-
-                <ul class="pull-right">
-                    <li><a href="/login"><i class="icon-user"></i> [[${#session.getAttribute('user').getRealName()}]]</a></li>
-                    <li><a href="/customer/list?pageindex=1&flag=1"><span class="badge badge-primary"></span> 新消息</a></li>
-<!--                    <li class="dropdown">-->
-<!--                        <a href="./pages/settings.html" class="dropdown-toggle" data-toggle="dropdown">-->
-<!--                            设置-->
-<!--                            <b class="caret"></b>-->
-<!--                        </a>-->
-
-<!--                        <ul class="dropdown-menu pull-right">-->
-<!--                            <li><a href="javascript:;">设置 #1</a></li>-->
-<!--                            <li><a href="javascript:;">设置 #2</a></li>-->
-<!--                            <li class="dropdown-submenu">-->
-<!--                                <a tabindex="-1" href="#">下拉菜单</a>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
-<!--                                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
-<!--                                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
-<!--                                </ul>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-                    <li><a href="/login">退出</a></li>
-                </ul>
-
-            </div> <!-- /#top-nav -->
-
-        </div> <!-- /.container -->
-
-    </div> <!-- /#topbar -->
-
-
-
-
-    <div id="header">
-
-        <div class="container">
-
-            <a href="./index.html" class="brand">首页</a>
-
-            <a href="javascript:;" class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <i class="icon-reorder"></i>
-            </a>
-
-            <div class="nav-collapse">
-                <ul id="main-nav" class="nav pull-right">
-                    <li class="nav-icon">
-                        <a href="/index">
-                            <i class="icon-home"></i>
-                            <span>首页</span>
-                        </a>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-th"></i>
-                            <span>客户管理</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li id="customers"><a href="javascript:void(0)">客户列表</a></li>
-                            <li id="sleep"><a href="javascript:void(0)">休眠公海</a></li>
-                            <li id="partner"><a href="javascript:void(0)">合作中</a></li>
-                            <li id="pause"><a href="javascript:void(0)">暂停下线</a></li>
-<!--                            <li><a href="./bonus.html">其他组件</a></li>-->
-<!--                            <li class="dropdown-submenu">-->
-<!--                                <a tabindex="-1" href="#">下拉菜单</a>-->
-<!--                                <ul class="dropdown-menu">-->
-<!--                                    <li><a tabindex="-1" href="#">菜单1</a></li>-->
-<!--                                    <li><a tabindex="-1" href="#">菜单2</a></li>-->
-<!--                                    <li><a tabindex="-1" href="#">菜单3</a></li>-->
-<!--                                </ul>-->
-<!--                            </li>-->
-                        </ul>
-                    </li>
-
-                    <li class="dropdown active" shiro:hasPermission="per-list">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-copy"></i>
-                            <span>系统管理</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;" id="user">用户管理</a></li>
-                            <li><a href="javascript:;" id="role">角色管理</a></li>
-                            <li><a href="javascript:;" id="permission">权限管理</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-external-link"></i>
-                            <span>其他</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="./login.html">登录</a></li>
-                            <li><a href="./signup.html">注册</a></li>
-                            <li><a href="./error.html">错误</a></li>
-                            <li><a href="./skins.html">主题</a></li>
-                            <li><a href="./sticky.html">完美的底部</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </div> <!-- /.nav-collapse -->
-
-        </div> <!-- /.container -->
-
-    </div> <!-- /#header -->
-
-
-
+    [( ~{ load :: header } )]
 
     <div id="masthead">
 
@@ -198,7 +50,7 @@
     </div> <!-- /#masthead -->
 
         <section shiro:hasPermission="role-create" id="buttons">
-            <a href="javascript:;" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>
+            <a href="javascript:void(0)" class="btn btn-inverse btn-primary" onclick="role_add()">添加角色</a>
         </section>
 
 
@@ -220,8 +72,8 @@
                 <th th:text="${data.createTime}"></th>
                 <th th:text="${data.updateTime}"></th>
                 <th>
-                    <a shiro:hasPermission="role-per" href="javascript:;" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a>
-                    <a shiro:hasPermission="role-del" href="javascript:;" class="btn btn-small btn-warning roleRemove" th:value="${data.rid}">删除角色</a>
+                    <a shiro:hasPermission="role-per" href="javascript:void(0)" class="btn btn-small btn-secondary roleaddper" th:value="${data.rid}">角色授权</a>
+                    <a shiro:hasPermission="role-del" href="javascript:void(0)" class="btn btn-small btn-warning roleRemove" th:value="${data.rid}">删除角色</a>
                 </th>
             </tr>
             </tbody>
@@ -232,11 +84,11 @@
     <section id="paginations">
         <div class="pagination">
             <ul>
-                <li th:if="${!info.isFirstPage}" th:value="${info.prePage}"><a href="javascript:;">上一页</a></li>
+                <li th:if="${!info.isFirstPage}" th:value="${info.prePage}"><a href="javascript:void(0)">上一页</a></li>
                 <li th:each="item,loopStatus:${info.navigatepageNums}" th:class="${item==info.pageNum?'active':''}" th:value="${item}">
-                    <a href="javascript:;" th:text="${item}"></a>
+                    <a href="javascript:void(0)" th:text="${item}"></a>
                 </li>
-                <li th:value="${info.nextPage}"  th:if="${!info.isLastPage}" id="next-page"><a href="javascript:;">下一页</a></li>
+                <li th:value="${info.nextPage}"  th:if="${!info.isLastPage}" id="next-page"><a href="javascript:void(0)">下一页</a></li>
             </ul>
         </div>
 
@@ -308,8 +160,8 @@
 <script src="/static//js/plugins/flot/jquery.flot.tooltip.min.js"></script>
 <script src="/static//js/plugins/flot/jquery.flot.resize.js"></script>
 
-<script src="/static/js/demos/charts/line.js"></script>
-<script src="/static/js/demos/charts/donut.js"></script>
+<!--<script src="/static/js/demos/charts/line.js"></script>-->
+<!--<script src="/static/js/demos/charts/donut.js"></script>-->
 <script src="/static/js/common/common.js"></script>
 <script src="/static/js/page/role_list.js"></script>
 <script src="/static/js/page/role-add.js"></script>
@@ -320,6 +172,11 @@
 
     $(function () {
         Theme.init ();
+        $("#main-nav>li").each((i,item)=>{
+            if (i == 2) {
+                $(item).attr('class','dropdown active')
+            }
+        })
     });
 </script>
 

@@ -14,7 +14,6 @@ $(function () {
         $("#uc_03 li").each(function (i,item) {
             if ($(this).attr("class") == 'selected') {
                 var pid = $(this).attr("value");
-                console.log(pid)
                 pids[i]=pid;
             }
         })

@@ -1,6 +1,8 @@
 package com.sesc.rms.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.sesc.rms.po.SysUserPo;
+import com.sesc.rms.service.inter.SysRoleService;
 import com.sesc.rms.service.inter.UserService;
 import com.sesc.rms.util.Result;
 import org.apache.shiro.SecurityUtils;
@@ -53,17 +55,26 @@ public class UserController {
         }
     }
 
-    @PostMapping("listUser")
-    @ResponseBody
-    public Object listUser(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageindex,
+    @GetMapping("listUser")
+    public ModelAndView listUser(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageindex,
                            @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pagesize){
-        return service.listUser(pageindex, pagesize);
+        PageInfo<SysUserPo> sysUserPoPageInfo = service.listUser(pageindex, pagesize);
+        ModelAndView mv = new ModelAndView("user_list");
+        mv.addObject("datas",sysUserPoPageInfo);
+        return mv;
     }
+
+    /**
+     * 添加用户
+     * @param po
+     * @param rids
+     * @return
+     */
     @PostMapping("addUser")
     @ResponseBody
     @RequiresPermissions("user-create")
-    public Object addUser(SysUserPo po){
-        return service.addUser(po);
+    public Object addUser(SysUserPo po,Integer [] rids){
+        return service.addUser(po,rids);
     }
 
     /**
@@ -156,6 +167,7 @@ public class UserController {
         po.setPassword(md5.toString());
         return service.modifyByUser(po);
     }
+
 
     /**
      * 登出

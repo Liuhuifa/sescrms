@@ -265,13 +265,25 @@ public class CustomerController{
 //        return mv;
 //    }
 
+    /**
+     * 查看用户为操作客户的数量
+     * @param request
+     * @return
+     */
     @GetMapping("countLook")
     @ResponseBody
     public Result selectLookCount(HttpServletRequest request){
         SysUserPo user = (SysUserPo)request.getSession().getAttribute("user");
-        return service.selectLookCount(user.getUid());
+        Result result = service.selectLookCount(user.getUid());
+        result.setData(user.getRealName());
+        return result;
     }
 
+    /**
+     * 修改用户未操作客户的数量
+     * @param cid
+     * @return
+     */
     @PostMapping("updateLook")
     @ResponseBody
     public Result update(@RequestParam("cid") Long cid){

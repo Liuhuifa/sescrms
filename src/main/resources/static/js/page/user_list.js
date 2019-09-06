@@ -3,7 +3,7 @@ $(function () {
 
     Theme.init ();
     //刷新用户列表
-    list_user(1,1);
+    // list_user(1,1);
 });
 
 $(function () {
@@ -69,8 +69,11 @@ function user_add() {
     window.location.href=url+"/user-add";
 }
 //查看角色弹出模态框
-function seerole(uid) {
+function seerole(e) {
     $("#myModal .modal-body ul li").remove();
+
+    let uid = e.parentElement.parentElement.dataset.key
+
     $.ajax({
         url:url+"/role/listRoles",
         type:"post",
@@ -94,8 +97,8 @@ function seerole(uid) {
     })
 }
 //用户授权
-function giverole(uid) {
-    $("#myModal1").modal("show");
+function giverole(e) {
+    let uid = e.parentElement.parentElement.dataset.key
     $("#myModal1 .modal-body #authorized ul li").remove();
     $("#myModal1 .modal-body #authorize ul li").remove();
     $.ajax({
@@ -120,8 +123,13 @@ function giverole(uid) {
                     li2+='<li id="authorize'+item.rid+'"+'+item.rid+'>'+item.rname+'<a href="javascript:;" onclick="addroleforuser('+item.rid+','+uid+',\''+item.rname+'\')">添加</a></li>'
                 })
                 $("#myModal1 .modal-body #authorize ul").append(li2)
+                $("#myModal1").modal("show");
             }else{
-
+                Swal.fire(
+                    '提示',
+                    '列表获取失败',
+                    'error'
+                );
             }
 
         }
@@ -183,7 +191,8 @@ function removeroleforuser(rid, uid,rname) {
 }
 
 //删除用户
-function del(uid,e) {
+function del(e) {
+    let uid = e.parentElement.parentElement.dataset.key
     Swal.fire({
         title: '提示',
         text:'你确定要删除该用户吗?',

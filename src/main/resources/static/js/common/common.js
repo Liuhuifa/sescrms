@@ -6,7 +6,7 @@ url="http://192.168.1.57:8888";
 $(function () {
     //跳转用户列表页面
     $("#user").on("click",function () {
-        window.location.href=url+"/user_list.html";
+        window.location.href=url+"/user/listUser";
     })
 //    跳转角色列表页面
     $("#role").on("click",function () {
@@ -41,6 +41,19 @@ $(function () {
         // console.log(data)
         window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
     });
+
+    $("#tzpage button").on("click",function () {
+        // let page = $("#tzpage input").val();
+        // let endPage = $("#end-page").attr('value');
+        // if (page<1){
+        //     $("#tzpage input").val(1);
+        // }else if (page > endPage) {
+        //     $("#tzpage input").val(endPage);
+        // }
+    })
+
+
+
 //    未查看信息条数查询
     $.ajax({
         url:'/customer/countLook',
@@ -48,8 +61,17 @@ $(function () {
         data:{},
         dataType:'json',
         success:function (response) {
-            $('.pull-right .badge-primary').text(response.data)
+            console.log(response)
+            $('.pull-right .badge-primary').text(response.total)
+            $('#realName').text(response.data);
         }
+    })
+
+    /**
+     * 返回按钮
+     */
+    $("#go-back").on('click',function () {
+        window.location.href=document.referrer;
     })
 })
 
@@ -371,3 +393,35 @@ function delAny(customerArray) {
 
     })
 }
+
+/**
+ * 监听键盘事件
+ */
+$(function () {
+
+    $("#tzpage input").keyup(function (event) {
+        let page = $("#tzpage input").val();
+        let endPage = $("#end-page").parent('li').attr('value');
+        if (event.keyCode == 48 || event.keyCode == 49 ||
+            event.keyCode == 50 || event.keyCode == 51 ||
+            event.keyCode == 52 || event.keyCode == 53 ||
+            event.keyCode == 54 || event.keyCode == 55 ||
+            event.keyCode == 56 || event.keyCode == 57 ||
+            event.keyCode == 96 || event.keyCode == 97 ||
+            event.keyCode == 98 || event.keyCode == 99 ||
+            event.keyCode == 100 || event.keyCode == 101 ||
+            event.keyCode == 102 || event.keyCode == 103 ||
+            event.keyCode == 104 || event.keyCode == 105
+        ){
+
+            if (page<1){
+                $("#tzpage input").val(1);
+            }
+            if (Number(page) > Number(endPage)) {
+
+                $("#tzpage input").val(endPage);
+            }
+        }
+
+    })
+})

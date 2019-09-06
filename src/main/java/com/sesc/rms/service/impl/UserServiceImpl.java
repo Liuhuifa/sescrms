@@ -2,8 +2,10 @@ package com.sesc.rms.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sesc.rms.dao.SysUserRoleMapper;
 import com.sesc.rms.dao.UserDao;
 import com.sesc.rms.po.SysUserPo;
+import com.sesc.rms.po.SysUserRolePo;
 import com.sesc.rms.service.inter.UserService;
 import com.sesc.rms.util.MD5Util;
 import com.sesc.rms.util.Result;
@@ -11,10 +13,14 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +28,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao dao;
+
+    @Resource
+    private SysUserRoleMapper mapper;
+
     @Override
     public SysUserPo login(String uname) {
         try {
@@ -55,20 +65,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(SysUserPo po) {
-        try{
-            Date date = new Date();
-            Long time = date.getTime();
-            po.setSalt(time.toString());
-            ByteSource bytes = ByteSource.Util.bytes(time.toString());
-            SimpleHash md5 = new SimpleHash("MD5", po.getPassword(), bytes, 99);
-            po.setPassword(md5.toString());
-            int result = dao.addUser(po);
-            return result;
-        }catch (Exception e){
-            e.printStackTrace();
-            return 500;
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    public Result addUser(SysUserPo po,Integer [] rids) {
+
+        Date date = new Date();
+        Long time = date.getTime();
+        po.setSalt(time.toString());
+        ByteSource bytes = ByteSource.Util.bytes(time.toString());
+        SimpleHash md5 = new SimpleHash("MD5", po.getPassword(), bytes, 99);
+        po.setPassword(md5.toString());
+        int result = dao.addUser(po);
+
+        if (result>0){
+            List<SysUserRolePo> list = new ArrayList<>();
+            for (int i=0; i<rids.length; i++){
+                SysUserRolePo rpo =new SysUserRolePo();
+                rpo.setSysUserId(po.getUid());
+                rpo.setSysRoleId(rids[i]);
+                list.add(rpo);
+            }
+            int ur = mapper.addAny(list);
+            if (ur>0){
+                return Result.success();
+            }
         }
+        return Result.fail("添加失败");
     }
 
     @Override
