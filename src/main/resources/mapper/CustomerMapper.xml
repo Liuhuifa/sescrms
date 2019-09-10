@@ -13,22 +13,7 @@
     -->
     <select id="listCustomers" resultType="com.sesc.rms.po.CustomerPo">
         SELECT
-            mc.id,
-            mc.`name`,
-            mc.address,
-            mc.qq,
-            mc.tel,
-            mc.email,
-            mc.belongs,
-            mc.time,
-            mc.look,
-            mc.restatus,
-            mc.caim,
-            mc.cfrom,
-            mc.rate,
-            su.uid,
-            su.uname,
-            su.realName
+            mc.id, mc.`name`, mc.address, mc.qq, mc.tel, mc.email, mc.belongs, mc.time, mc.look, mc.restatus, mc.caim, mc.cfrom, mc.rate, su.uid, su.uname, su.realName
         FROM
             ml_customer AS mc
             LEFT JOIN sys_user AS su ON mc.belongs = su.uid
@@ -236,7 +221,7 @@
     </select>
 <!--查看指定用户下未读消息数量-->
     <select id="selectLookCount" resultType="int">
-        SELECT count(1) from ml_customer where look=0 and belongs=#{id}
+        SELECT count(1) from ml_customer where belongs=#{id} and look=0
     </select>
 
 <!--  修改某个客户信息  -->

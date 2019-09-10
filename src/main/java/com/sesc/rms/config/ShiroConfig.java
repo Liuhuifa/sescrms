@@ -6,6 +6,7 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -69,12 +70,14 @@ public class ShiroConfig{
         filters.put("/user/listUser","authc");
         filters.put("/user-add.html","authc");
 
+
         filters.put("/role/**","authc");
         filters.put("/per/**","authc");
         filters.put("/customer/**","authc");
         filters.put("/user/login","anon");
         filters.put("/user/login.html","anon");
         filters.put("/static/**","anon");
+        filters.put("/update/*","anon");
         bean.setFilterChainDefinitionMap(filters);
 
         return bean;
@@ -107,5 +110,11 @@ public class ShiroConfig{
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
         LifecycleBeanPostProcessor processor = new LifecycleBeanPostProcessor();
         return processor;
+    }
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        return authorizationAttributeSourceAdvisor;
     }
 }

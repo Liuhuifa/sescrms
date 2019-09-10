@@ -237,7 +237,7 @@
 <!--        </section>-->
 
 
-    <section id="tables">
+    <section id="tables" class="table-hover">
         <table class="table table-bordered table-striped table-highlight">
             <thead>
             <tr>
@@ -305,7 +305,8 @@
         <div class="pagination">
             <input type="hidden" name="page" value="1"/>
             <div id="tzpage" style="">
-                <input value="1" type="number" style="width: 30px;height: 20px" name="mypage"
+                <span style="font-size: 16px;margin-right: 5px;">跳到第</span>
+                <input th:value="${datas.pageNum}" type="number" style="width: 40px;height: 20px" name="mypage" placeholder="1"
                        onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
                 <button class="btn btn-small btn-success" style="">跳转</button>
             </div>

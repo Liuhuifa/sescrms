@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.sesc.rms.po.SysRolePo;
 import com.sesc.rms.service.inter.SysRoleService;
 import com.sesc.rms.util.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class RoleController {
      * @return
      */
     @GetMapping("listRoles1")
+    @RequiresPermissions("system-manage")
     public ModelAndView listRoles1(@RequestParam(name = "pageindex",required = false,defaultValue = "1")Integer pageindex,
                                   @RequestParam(name = "pagesize",required = false,defaultValue = "15")Integer pagesize){
         PageInfo<SysRolePo> info = service.listRoles(pageindex, pagesize, null);

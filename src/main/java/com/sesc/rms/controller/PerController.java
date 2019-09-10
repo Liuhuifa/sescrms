@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.sesc.rms.po.SysPerPo;
 import com.sesc.rms.service.inter.SysPerService;
 import com.sesc.rms.util.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class PerController {
 
 //    跳转权限列表页面
     @GetMapping("listPers")
+    @RequiresPermissions("system-manage")
     public ModelAndView listPers(@RequestParam(name = "pageindex",required = false,defaultValue = "1") Integer pageindex,
                                  @RequestParam(name = "pagesize",required = false,defaultValue = "15") Integer pagesize,
                                  @RequestParam(name = "flag",required = false)Integer flag){

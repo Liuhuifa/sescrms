@@ -56,6 +56,7 @@ public class UserController {
     }
 
     @GetMapping("listUser")
+    @RequiresPermissions("system-manage")
     public ModelAndView listUser(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageindex,
                            @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pagesize){
         PageInfo<SysUserPo> sysUserPoPageInfo = service.listUser(pageindex, pagesize);

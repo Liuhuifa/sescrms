@@ -42,14 +42,24 @@ $(function () {
         window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
     });
 
+    //根据输入页码跳转
     $("#tzpage button").on("click",function () {
-        // let page = $("#tzpage input").val();
-        // let endPage = $("#end-page").attr('value');
-        // if (page<1){
-        //     $("#tzpage input").val(1);
-        // }else if (page > endPage) {
-        //     $("#tzpage input").val(endPage);
-        // }
+        let pageNum = $("#tzpage input").val();
+        let data = $("#hidden-form").serialize();
+        window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
+
+    });
+
+    $("#tzpage input").focus(function () {
+        $(this).select();
+        $(this).on("keyup",function (event) {
+            console.log(123)
+            if (event.keyCode == 13) {
+                let pageNum = $("#tzpage input").val();
+                let data = $("#hidden-form").serialize();
+                window.location.href=url+"/customer/list?pageindex="+pageNum+"&"+data;
+            }
+        })
     })
 
 
@@ -414,7 +424,7 @@ $(function () {
             event.keyCode == 104 || event.keyCode == 105
         ){
 
-            if (page<1){
+            if (parseInt(page)<1){
                 $("#tzpage input").val(1);
             }
             if (Number(page) > Number(endPage)) {

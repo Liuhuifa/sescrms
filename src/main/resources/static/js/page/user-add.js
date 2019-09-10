@@ -108,8 +108,7 @@ $(function () {
         //    提交
         //     var data = $("#contact-form").serialize();
             let data = {};
-            data.realName = $("#realName").val();
-
+            data.realName = $("#contact-form #realName").val();
             data.uname = $("#name").val();
             data.password = $("#password").val();
 

@@ -9,6 +9,7 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public String error(Exception e){
+        System.out.println(e.getMessage());
         return "redirect:/error/500";
     }
 }
