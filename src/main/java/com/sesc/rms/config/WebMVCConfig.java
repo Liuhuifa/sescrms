@@ -1,14 +1,12 @@
 package com.sesc.rms.config;
 
+import com.sesc.rms.interceptor.LoginInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.filter.OrderedHiddenHttpMethodFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class WebMVCConfig extends WebMvcConfigurationSupport {
@@ -32,5 +30,10 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
 //    @ConditionalOnMissingBean(HiddenHttpMethodFilter.class)
 //    public OrderedHiddenHttpMethodFilter hiddenHttpMethodFilter(){
 //        return new OrderedHiddenHttpMethodFilter();
+//    }
+
+//    @Override
+//    protected void addInterceptors(InterceptorRegistry registry) {
+////        registry.addInterceptor(new LoginInterceptor());
 //    }
 }

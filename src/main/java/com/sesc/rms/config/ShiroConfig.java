@@ -4,11 +4,20 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.sesc.rms.config.shiro.SescRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +52,8 @@ public class ShiroConfig{
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(sescRealm());
         securityManager.setCacheManager(ehCacheManager());
+        securityManager.setSessionManager(sessionManager());
+        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
     }
 
@@ -93,6 +104,52 @@ public class ShiroConfig{
     public EhCacheManager ehCacheManager(){
         EhCacheManager manager = new EhCacheManager();
         manager.setCacheManagerConfigFile("classpath:ehcache.xml");
+        return manager;
+    }
+
+    @Bean
+    public SessionManager sessionManager(){
+        DefaultWebSessionManager manager = new DefaultWebSessionManager();
+        manager.setSessionIdCookieEnabled(true);
+        manager.setSessionDAO(sessionDAO());
+        manager.setSessionIdCookie(simpleCookie());
+        manager.setCacheManager(ehCacheManager());
+        return manager;
+    }
+    @Bean
+    public SessionDAO sessionDAO(){
+        EnterpriseCacheSessionDAO dao = new EnterpriseCacheSessionDAO();
+        dao.setSessionIdGenerator(sessionIdGenerator());
+        dao.setCacheManager(ehCacheManager());
+        dao.setActiveSessionsCacheName("shiro-activeSessionCache");
+        return dao;
+    }
+
+    @Bean
+    public SessionIdGenerator sessionIdGenerator(){
+        JavaUuidSessionIdGenerator generator = new JavaUuidSessionIdGenerator();
+        return generator;
+    }
+
+//    session cookie
+    @Bean
+    public SimpleCookie simpleCookie(){
+        SimpleCookie cookie = new SimpleCookie("sid");
+        cookie.setMaxAge(-1);
+        cookie.setHttpOnly(true);
+        return cookie;
+    }
+//    rememberMe cookie
+    public SimpleCookie rembSimpleCookie(){
+        SimpleCookie cookie = new SimpleCookie("sRemember");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(30*24*60*60);
+        return cookie;
+    }
+    @Bean
+    public RememberMeManager rememberMeManager(){
+        CookieRememberMeManager manager = new CookieRememberMeManager();
+        manager.setCookie(rembSimpleCookie());
         return manager;
     }
     /**

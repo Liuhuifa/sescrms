@@ -3,20 +3,24 @@ $(function () {
     //验证名字
     $("#name").on("blur",function () {
         boo = nameReg()
+        console.log('name:'+boo)
     });
     //验证地址是否填写
     $("#address").on("blur",function () {
         boo = addressReg();
+        console.log('address:'+boo)
     });
 
 
     //验证电话和手机号
     $("#tel").on("blur",function () {
         boo = telReg();
+        console.log('tel:'+boo)
     });
     // 验证企业名称
     $("#cfrom").on("blur",function () {
         boo = cfromReg();
+        console.log('cfrom:'+boo)
     });
 
     $("#customer-add").on("click",function () {
@@ -62,16 +66,19 @@ function telReg() {
     const telReg=/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
     let boo;
     let flag;
+    console.log(tel)
     $("#tel").siblings(".error").remove();
     if (tel) {
         //先验证手机
         boo = phoneReg.test(tel);
         // 再验证电话
         flag = telReg.test(tel);
+
         if (flag == true || boo == true) {
             $.ajax({
                 url:url+"/customer/findOneByCustomer",
                 type:"post",
+                async:false,
                 data:{
                     tel:tel
                 },
@@ -138,7 +145,6 @@ function cfromReg() {
 
 function handleCilck(boo) {
     if (boo) {
-        console.log(boo)
         var name= $("#name").val();
         var address =$("#address").val();
         var tel = $("#tel").val();

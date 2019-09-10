@@ -59,7 +59,7 @@
 			<div class="login-actions">
 				
 				<span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
+					<input id="Field" name="rememberMe" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
 					<label class="choice" for="Field">保持登录</label>
 				</span>
 									
@@ -86,15 +86,6 @@
 </div> <!-- /account-container -->
 
 
-<!-- Text Under Box -->
-<!--<div class="login-extra">-->
-<!--	还没账号? <a href="./signup.html">注册</a><br/>-->
-<!--	忘记 <a href="#">密码</a>-->
-<!--</div> &lt;!&ndash; /login-extra &ndash;&gt;-->
-
-
-
-
 <script th:src="@{/static/js/libs/jquery-3.4.1.min.js}"></script>
 <script src="/static/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
@@ -116,7 +107,7 @@
 		$("#login").on("click",function () {
 			var username=$("#username").val();
 			var password=$("#password").val();
-
+			let rememberMe = $("[name='rememberMe']")[0].checked
 			if (!username) {
 				Swal.fire(
 					"提示",
@@ -138,12 +129,31 @@
 					type:"post",
 					data:{
 						username:username,
-						password:password
+						password:password,
+						rememberMe:rememberMe
 					},
 					success:function (json) {
 						if (json == 200) {
-							alert("登录成功")
-							window.location.href=url+"/index.html";
+							Swal.fire({
+								title:'登陆成功!!!',
+								html:'<strong></strong>秒后跳转到首页',
+								timer:4000,
+								onOpen:()=>{
+									Swal.showLoading();
+									let timer1 = 4;
+									timerInterval = setInterval(() => {
+										timer1--;
+										Swal.getContent().querySelector('strong').textContent = timer1;
+									},1000)
+								},
+								onClose: () => {
+									clearInterval(timerInterval)
+								}
+							}).then((result)=>{
+								if (result.dismiss == Swal.DismissReason.timer) {
+									window.location.href=url+"/index.html";
+								}
+							})
 						}else if (json == 0) {
 							//用户不存在
                             Swal.fire(

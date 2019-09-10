@@ -32,9 +32,11 @@ public class UserController {
 
     @PostMapping("login")
     @ResponseBody
-    public Object login(HttpServletRequest request,String username,String password){
+    public Object login(HttpServletRequest request,String username,String password,boolean rememberMe){
         Subject subject = SecurityUtils.getSubject();
+
         UsernamePasswordToken token = new UsernamePasswordToken(username.trim(),password.trim());
+        token.setRememberMe(rememberMe);
         try {
             subject.login(token);
             SysUserPo user = service.login(username);

@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/static/css/application.css">
 
     <link rel="stylesheet" href="/static/css/pages/client-tail-add.css"/>
-    <script src="/static/js/libs/jquery-1.7.2.min.js"></script>
+    <script src="/static/js/libs/jquery-3.4.1.min.js"></script>
     <script src="/static/js/libs/jquery.cookie.js"></script>
     <style>
 
@@ -257,12 +257,6 @@
                 Swal.fire(
                     "提示",
                     "交流内容必须填写",
-                    "error"
-                )
-            }else if (!trim(question)) {
-                Swal.fire(
-                    "提示",
-                    "客户问题必须填写",
                     "error"
                 )
             }else if (caim == 0) {
